@@ -12,7 +12,7 @@ int main(int argc, char* argv[]) {
     }
     char *algo_name = argv[1];
     int m = atoi(argv[2]);
-    int t = atof(argv[3]);
+    float t = atof(argv[3]);
     bool full_output = atoi(argv[4]);
     char *output_file = argv[5];
     if (m <= 0 && t <= 0) {
@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    FILE *fp = init_output_file(output_file, n, (full_output) ? 1 : m);
+    FILE *fp = init_output_file(output_file, n, (full_output) ? 1 : m, t);
     if (fp == NULL) {
         printf("Unable to open output file.\n");
         return 1;
