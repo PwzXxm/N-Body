@@ -6,13 +6,15 @@
 void print_usage();
 
 int main(int argc, char* argv[]) {
-    if (argc != 4) {
+    if (argc != 6) {
         print_usage();
         return 1;
     }
     char *algo_name = argv[1];
     int m = atoi(argv[2]);
     int t = atof(argv[3]);
+    bool full_output = atoi(argv[4]);
+    char *output_file = argv[5];
     if (m <= 0 && t <= 0) {
         print_usage();
         return 1;
@@ -31,8 +33,17 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    FILE *fp = init_output_file(output_file, n, (full_output) ? 1 : m);
+    if (fp == NULL) {
+        printf("Unable to open output file.\n");
+        return 1;
+    }
+
+    output_particle_pos(n, parts, fp);
 
 
+
+    fclose(fp);
     free(parts);
     return 0;
 }
@@ -41,6 +52,6 @@ int main(int argc, char* argv[]) {
 
 void print_usage() {
     printf("Wrong arguments\n");
-    printf("Usage: nbody <algorithm name> <num of steps> <time of each step>\n");
+    printf("Usage: nbody <algorithm name> <num of steps> <time of each step> <full output> <output file>\n");
     printf("Example: nbody seq_naive 100 0.01\n");
 }

@@ -19,3 +19,6 @@ typedef struct particle {
 // output file pointer
 // whether output data for all steps
 void (*algorithm_fun_ptr)(int, int, float, particle_t[], FILE*, bool);
+
+FILE* init_output_file(const char *output_file, int n, int m);
+void output_particle_pos(int n, particle_t parts[], FILE* fp);
