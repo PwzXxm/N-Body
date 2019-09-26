@@ -8,7 +8,7 @@ typedef struct coord {
 } coord_t;
 
 typedef struct particle {
-    coord_t pos, speed;
+    coord_t pos, v;
     float weight;
 } particle_t;
 
