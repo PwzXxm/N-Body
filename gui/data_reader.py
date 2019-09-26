@@ -52,14 +52,14 @@ class InputDataReader():
     def get_weights(self) -> List[float]:
         return self._w
 
-reader = OutputDataReader("./../tmp.out")
-print(reader.n)
-print(reader.m)
-print(reader.s_time)
-print(reader.get_one_step())
+# reader = OutputDataReader("./../tmp.out")
+# print(reader.n)
+# print(reader.m)
+# print(reader.s_time)
+# print(reader.get_one_step())
 
-reader = InputDataReader("./../tmp.in")
-print(reader.n)
-print(reader.get_init_pos())
-print(reader.get_weights())
+# reader = InputDataReader("./../tmp.in")
+# print(reader.n)
+# print(reader.get_init_pos())
+# print(reader.get_weights())
 

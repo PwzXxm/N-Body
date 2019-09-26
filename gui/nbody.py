@@ -2,13 +2,14 @@ import arcade
 import collections
 import random
 import timeit
+import sys
+import data_reader
 
 G_SCREEN_WIDTH = 1000
 G_SCREEN_HEIGHT = 650
 G_SCREEN_TITLE = "N-Body Simulation"
 G_FPS_LIMIT = 60
 G_SHOW_STAT = True
-G_PARTICLE_COLOR = (0, 255, 187, 200)
 
 
 
@@ -29,8 +30,8 @@ class AvgTimeCounter():
 
 
 class Particle(arcade.Sprite):
-    def __init__(self) -> None:
-        super().__init__(filename='p.png', scale=0.2)
+    def __init__(self, x: float, y: float, scale: float) -> None:
+        super().__init__(filename='p.png', center_x=x, center_y=y, scale=scale)
         self.alpha = 200
 
 
@@ -46,24 +47,28 @@ class MainWindow(arcade.Window):
         self.particle_list = None
         self.set_update_rate(1 / G_FPS_LIMIT)
         self.start_timer = 0
+        self.in_reader = None
+        self.out_reader = None
 
         if G_SHOW_STAT:
             self.stat_fps = AvgTimeCounter()
             self.stat_update = AvgTimeCounter()
             self.stat_draw = AvgTimeCounter()
 
-    def setup(self) -> None:
+    def setup(self, in_reader: data_reader.InputDataReader, out_reader: data_reader.OutputDataReader) -> None:
         """ Set up the game here. Call this function to restart the game. """
         arcade.set_background_color(arcade.csscolor.BLACK)
 
+        self.in_reader = in_reader
+        self.out_reader = out_reader
+
         self.particle_list = arcade.SpriteList(use_spatial_hash=False)
 
-        for _ in range(4000):
-            self.particle_list.append(Particle())
+        for (pos, w) in zip(in_reader.get_init_pos(), in_reader.get_weights()):
+            self.particle_list.append(Particle(pos[0], pos[1], w))
         
         p: Particle
         for p in self.particle_list:
-            p.set_position(random.randint(0, G_SCREEN_WIDTH), random.randint(0, G_SCREEN_HEIGHT))
             p.change_x = random.uniform(-1, 1)
             p.change_y = random.uniform(-1, 1)
 
@@ -116,8 +121,14 @@ class MainWindow(arcade.Window):
             self.stat_draw.tick(timeit.default_timer() - start_time)
 
 def main() -> None:
+    in_reader = data_reader.InputDataReader(sys.argv[1])
+    out_reader = data_reader.OutputDataReader(sys.argv[2])
+
+    if in_reader.n != out_reader.n:
+        raise Exception("data files do not match")
+    
     window = MainWindow()
-    window.setup()
+    window.setup(in_reader, out_reader)
     arcade.run()
 
 if __name__ == "__main__":

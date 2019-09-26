@@ -42,7 +42,6 @@ int main(int argc, char* argv[]) {
     output_particle_pos(n, parts, fp);
 
 
-
     fclose(fp);
     free(parts);
     return 0;
