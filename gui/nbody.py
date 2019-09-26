@@ -28,6 +28,11 @@ class AvgTimeCounter():
             return total_time / len(self.times)
 
 
+class Particle(arcade.Sprite):
+    def __init__(self) -> None:
+        super().__init__(filename='p.png', scale=0.2)
+        self.alpha = 200
+
 
 class MainWindow(arcade.Window):
     """
@@ -40,6 +45,7 @@ class MainWindow(arcade.Window):
         super().__init__(G_SCREEN_WIDTH, G_SCREEN_HEIGHT, G_SCREEN_TITLE)
         self.particle_list = None
         self.set_update_rate(1 / G_FPS_LIMIT)
+        self.start_timer = 0
 
         if G_SHOW_STAT:
             self.stat_fps = AvgTimeCounter()
@@ -50,9 +56,19 @@ class MainWindow(arcade.Window):
         """ Set up the game here. Call this function to restart the game. """
         arcade.set_background_color(arcade.csscolor.BLACK)
 
-        # test
-        # self.particle_list = [[random.randint(0, G_SCREEN_WIDTH), random.randint(0, G_SCREEN_HEIGHT)] for _ in range(100) ]
-    
+        self.particle_list = arcade.SpriteList(use_spatial_hash=False)
+
+        for _ in range(4000):
+            self.particle_list.append(Particle())
+        
+        p: Particle
+        for p in self.particle_list:
+            p.set_position(random.randint(0, G_SCREEN_WIDTH), random.randint(0, G_SCREEN_HEIGHT))
+            p.change_x = random.uniform(-1, 1)
+            p.change_y = random.uniform(-1, 1)
+
+        self.start_timer = timeit.default_timer()
+
 
     def update(self, delta_time: float) -> None:
         """
@@ -65,7 +81,12 @@ class MainWindow(arcade.Window):
             start_time = timeit.default_timer()
             self.stat_fps.tick(delta_time)
         # update
-        
+        if timeit.default_timer() - self.start_timer > 4:
+            p: Particle
+            for p in self.particle_list:
+                x = p.center_x + p.change_x * delta_time * 40
+                y = p.center_y + p.change_y * delta_time * 40
+                p.set_position(x, y)
 
         # ------
         if G_SHOW_STAT:
@@ -81,7 +102,8 @@ class MainWindow(arcade.Window):
             start_time = timeit.default_timer()
         arcade.start_render()
         # draw
-        
+
+        self.particle_list.draw()    
 
         # ------
         if G_SHOW_STAT:
