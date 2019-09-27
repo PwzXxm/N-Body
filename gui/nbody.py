@@ -1,3 +1,4 @@
+from typing import *
 import arcade
 import collections
 import random
@@ -28,11 +29,37 @@ class AvgTimeCounter():
         else:
             return total_time / len(self.times)
 
-
 class Particle(arcade.Sprite):
     def __init__(self, x: float, y: float, scale: float) -> None:
         super().__init__(filename='p.png', center_x=x, center_y=y, scale=scale)
         self.alpha = 200
+
+class ScaleHelper():
+    W_MIN_SCALE = 0.2
+    W_MAX_SCALE = 0.8
+    P_EMPTY_RANGE = 0.1
+
+    def __init__(self, in_reader: data_reader.InputDataReader) -> None:
+        # weight
+        ws = in_reader.get_weights()
+        self.w_min = min(ws)
+        self.w_range = max(ws) - min(ws)
+
+        # position
+        pos = in_reader.get_init_pos()
+        max_x_abs = max(map(lambda x: abs(x[0]), pos))
+        max_y_abs = max(map(lambda x: abs(x[1]), pos))
+        x_scale = G_SCREEN_WIDTH / (max_x_abs * 2)
+        y_scale = G_SCREEN_HEIGHT / (max_y_abs * 2)
+        self.pos_scale = min(x_scale, y_scale)
+        self.pos_scale *= (1 - self.P_EMPTY_RANGE)
+
+    
+    def scale_weight(self, w: float) -> float:
+        return (w - self.w_min) * (self.W_MAX_SCALE - self.W_MIN_SCALE) / self.w_range + self.W_MIN_SCALE
+
+    def scale_pos(self, pos: Tuple[float, float]) -> Tuple[float, float]:
+        return (pos[0] * self.pos_scale, pos[1] * self.pos_scale)
 
 
 class MainWindow(arcade.Window):
@@ -49,6 +76,7 @@ class MainWindow(arcade.Window):
         self.start_timer = 0
         self.in_reader = None
         self.out_reader = None
+        self.scale_helper: ScaleHelper = None
 
         if G_SHOW_STAT:
             self.stat_fps = AvgTimeCounter()
@@ -57,14 +85,20 @@ class MainWindow(arcade.Window):
 
     def setup(self, in_reader: data_reader.InputDataReader, out_reader: data_reader.OutputDataReader) -> None:
         """ Set up the game here. Call this function to restart the game. """
+        # make (0, 0) the center point
+        arcade.set_viewport(-G_SCREEN_WIDTH//2, G_SCREEN_WIDTH//2, -G_SCREEN_HEIGHT//2, G_SCREEN_HEIGHT//2)
         arcade.set_background_color(arcade.csscolor.BLACK)
 
         self.in_reader = in_reader
         self.out_reader = out_reader
+        
+        self.scale_helper = ScaleHelper(in_reader)
 
         self.particle_list = arcade.SpriteList(use_spatial_hash=False)
 
         for (pos, w) in zip(in_reader.get_init_pos(), in_reader.get_weights()):
+            w = self.scale_helper.scale_weight(w)
+            pos = self.scale_helper.scale_pos(pos)
             self.particle_list.append(Particle(pos[0], pos[1], w))
         
         p: Particle
@@ -113,10 +147,14 @@ class MainWindow(arcade.Window):
         # ------
         if G_SHOW_STAT:
             f_time = self.stat_fps.get_avg()
+            x = 20 - G_SCREEN_WIDTH // 2
+            y = G_SCREEN_HEIGHT // 2 - 30
             if f_time != 0:
-                arcade.draw_text( "fps: {}".format(int(1 / f_time)), 20, G_SCREEN_HEIGHT - 30, arcade.color.WHITE, 16)
-            arcade.draw_text("update: {:.3f}".format(self.stat_update.get_avg()), 20, G_SCREEN_HEIGHT - 50, arcade.color.WHITE, 16)
-            arcade.draw_text("draw: {:.3f}".format(self.stat_draw.get_avg()), 20, G_SCREEN_HEIGHT - 70, arcade.color.WHITE, 16)
+                arcade.draw_text( "fps: {}".format(int(1 / f_time)), x, y, arcade.color.WHITE, 16)
+            y -= 20
+            arcade.draw_text("update: {:.3f}".format(self.stat_update.get_avg()), x, y, arcade.color.WHITE, 16)
+            y -= 20
+            arcade.draw_text("draw: {:.3f}".format(self.stat_draw.get_avg()), x, y, arcade.color.WHITE, 16)
             
             self.stat_draw.tick(timeit.default_timer() - start_time)
 
