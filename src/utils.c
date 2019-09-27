@@ -1,5 +1,8 @@
+#include <math.h>
+
 #include "utils.h"
 
+#define GRAV 6.6742E-11
 
 const int magic_number = 9036;
 
@@ -19,4 +22,14 @@ void output_particle_pos(int n, particle_t parts[], FILE* fp) {
         fwrite(&parts[i].pos.x, sizeof(float), 1, fp);
         fwrite(&parts[i].pos.y, sizeof(float), 1, fp);
     }
+}
+
+// return force on particle 1
+vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2) {
+    float dis = sqrtf(powf(pos1.x - pos2.x, 2) + powf(pos1.y - pos2.y, 2));
+    float f = (GRAV * m1 * m2) / powf(dis, 2);
+    vector_t fv;
+    fv.x = f * (pos2.x - pos1.x) / dis;
+    fv.y = f * (pos2.y - pos1.y) / dis;
+    return fv;
 }

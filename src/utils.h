@@ -23,4 +23,4 @@ void (*algorithm_fun_ptr)(int, int, float, particle_t[], FILE*, bool);
 FILE* init_output_file(const char *output_file, int n, int m, float s_time);
 void output_particle_pos(int n, particle_t parts[], FILE* fp);
 
-
+vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2);
