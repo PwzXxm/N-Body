@@ -1,6 +1,6 @@
 CC = gcc
 MPICC = mpicc
-CFLAGS = -Wall -O3 -std=c99
+CFLAGS = -Wall -O3 -std=c99 -MMD
 OPENMPFLAGS = -fopenmp
 
 ifeq ($(shell uname), Darwin)
@@ -22,4 +22,6 @@ nbody: $(OBJS)
 	$(CC) $(CFLAGS) $(OPENMPFLAGS) -o $@ $(OBJS)
 
 clean:
-	$(RM) -f ./src/*.o ./nbody
+	$(RM) -f ./src/*.o ./src/*.d ./nbody
+
+-include $(OBJS:.o=.d)
