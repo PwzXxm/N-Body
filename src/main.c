@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "utils.h"
-#include "seq_quad_tree.h"
+// #include "seq_quad_tree.h"
 
 void print_usage();
 
@@ -46,14 +46,14 @@ int main(int argc, char* argv[]) {
     }
 
     if (strcmp(algo_name, SEQ_QUAD_TREE) == 0) {
-        algorithm_fun_ptr = &qt_sim;
+        // algorithm_fun_ptr = &qt_sim;
     } else {
         printf("Unsupported algorithm\n");
         print_usage();
         return 1;
     }
 
-    (*algorithm_fun_ptr)(m, n, t, parts, fp, full_output);
+    // (*algorithm_fun_ptr)(m, n, t, parts, fp, full_output);
 
     output_particle_pos(n, parts, fp);
 
