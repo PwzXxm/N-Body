@@ -40,8 +40,8 @@ class ScaleHelper():
     P_EMPTY_RANGE = 0.1
 
     def __init__(self, in_reader: data_reader.InputDataReader) -> None:
-        # weight
-        ws = in_reader.get_weights()
+        # mass
+        ws = in_reader.get_masses()
         self.w_min = min(ws)
         self.w_range = max(ws) - min(ws)
 
@@ -55,7 +55,7 @@ class ScaleHelper():
         self.pos_scale *= (1 - self.P_EMPTY_RANGE)
 
     
-    def scale_weight(self, w: float) -> float:
+    def scale_mass(self, w: float) -> float:
         return (w - self.w_min) * (self.W_MAX_SCALE - self.W_MIN_SCALE) / self.w_range + self.W_MIN_SCALE
 
     def scale_pos(self, pos: Tuple[float, float]) -> Tuple[float, float]:
@@ -96,8 +96,8 @@ class MainWindow(arcade.Window):
 
         self.particle_list = arcade.SpriteList(use_spatial_hash=False)
 
-        for (pos, w) in zip(in_reader.get_init_pos(), in_reader.get_weights()):
-            w = self.scale_helper.scale_weight(w)
+        for (pos, w) in zip(in_reader.get_init_pos(), in_reader.get_masses()):
+            w = self.scale_helper.scale_mass(w)
             pos = self.scale_helper.scale_pos(pos)
             self.particle_list.append(Particle(pos[0], pos[1], w))
         

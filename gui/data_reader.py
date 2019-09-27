@@ -49,7 +49,7 @@ class InputDataReader():
     def get_init_pos(self) -> List[Tuple[float, float]]:
         return self._pos
 
-    def get_weights(self) -> List[float]:
+    def get_masses(self) -> List[float]:
         return self._w
 
 # reader = OutputDataReader("./../tmp.out")
@@ -61,5 +61,5 @@ class InputDataReader():
 # reader = InputDataReader("./../tmp.in")
 # print(reader.n)
 # print(reader.get_init_pos())
-# print(reader.get_weights())
+# print(reader.get_masses())
 

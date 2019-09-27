@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     
     for (int i = 0; i < n; ++i) {
         scanf("%f %f %f %f %f", &parts[i].pos.x, &parts[i].pos.y, 
-                    &parts[i].v.x, &parts[i].v.y, &parts[i].weight);
+                    &parts[i].v.x, &parts[i].v.y, &parts[i].mass);
     }
     if (n <= 0) {
         printf("Wrong input.\n");

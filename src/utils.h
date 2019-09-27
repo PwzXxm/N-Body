@@ -9,7 +9,7 @@ typedef struct coord {
 
 typedef struct particle {
     vector_t pos, v;
-    float weight;
+    float mass;
 } particle_t;
 
 // num of particles
