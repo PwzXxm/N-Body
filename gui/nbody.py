@@ -57,7 +57,11 @@ class MainWindow(arcade.Window):
 
     def setup(self, in_reader: data_reader.InputDataReader, out_reader: data_reader.OutputDataReader) -> None:
         """ Set up the game here. Call this function to restart the game. """
+        # make (0, 0) the center point
+        arcade.set_viewport(-G_SCREEN_WIDTH//2, G_SCREEN_WIDTH//2, -G_SCREEN_HEIGHT//2, G_SCREEN_HEIGHT//2)
         arcade.set_background_color(arcade.csscolor.BLACK)
+
+
 
         self.in_reader = in_reader
         self.out_reader = out_reader
@@ -113,10 +117,14 @@ class MainWindow(arcade.Window):
         # ------
         if G_SHOW_STAT:
             f_time = self.stat_fps.get_avg()
+            x = 20 - G_SCREEN_WIDTH // 2
+            y = G_SCREEN_HEIGHT // 2 - 30
             if f_time != 0:
-                arcade.draw_text( "fps: {}".format(int(1 / f_time)), 20, G_SCREEN_HEIGHT - 30, arcade.color.WHITE, 16)
-            arcade.draw_text("update: {:.3f}".format(self.stat_update.get_avg()), 20, G_SCREEN_HEIGHT - 50, arcade.color.WHITE, 16)
-            arcade.draw_text("draw: {:.3f}".format(self.stat_draw.get_avg()), 20, G_SCREEN_HEIGHT - 70, arcade.color.WHITE, 16)
+                arcade.draw_text( "fps: {}".format(int(1 / f_time)), x, y, arcade.color.WHITE, 16)
+            y -= 20
+            arcade.draw_text("update: {:.3f}".format(self.stat_update.get_avg()), x, y, arcade.color.WHITE, 16)
+            y -= 20
+            arcade.draw_text("draw: {:.3f}".format(self.stat_draw.get_avg()), x, y, arcade.color.WHITE, 16)
             
             self.stat_draw.tick(timeit.default_timer() - start_time)
 
