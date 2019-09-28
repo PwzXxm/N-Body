@@ -26,7 +26,7 @@ class OutputDataReader():
         return struct.unpack("f", data)[0]
     
     def has_data(self):
-        return self.cur_m < self.m
+        return self.cur_m <= self.m
 
     def get_one_step(self) -> List[Tuple[float, float]]:
         if not self.has_data():
