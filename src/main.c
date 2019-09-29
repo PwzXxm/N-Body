@@ -11,10 +11,6 @@ void print_usage();
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
 static const char SEQ_NAIVE[] = "seq_naive";
 
-// Unit:
-//      10^5 kg
-//      10^10 m
-
 int main(int argc, char* argv[]) {
     if (argc != 6) {
         printf("Wrong arguments\n");

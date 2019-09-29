@@ -1,7 +1,11 @@
 import random
 
 def generate_data(n: int) -> None:
+    # Unit:
+    #  10^5 kg
+    #  10^10 m
     print(n)
+    print(0.66742)
     for _ in range(n):
         px = random.uniform(-100, 100)
         py = random.uniform(-100, 100)
