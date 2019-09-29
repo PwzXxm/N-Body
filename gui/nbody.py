@@ -7,7 +7,7 @@ import sys
 import data_reader
 
 G_SCREEN_WIDTH = 1000
-G_SCREEN_HEIGHT = 650
+G_SCREEN_HEIGHT = 1000
 G_SCREEN_TITLE = "N-Body Simulation"
 G_FPS_LIMIT = 24
 G_SHOW_STAT = True
@@ -34,20 +34,28 @@ class Particle(arcade.Sprite):
         self.alpha = 200
 
 class ScaleHelper():
-    W_MIN_SCALE = 0.2
-    W_MAX_SCALE = 0.8
+    M_MIN_SCALE = 0.2
+    M_MAX_SCALE = 0.8
     P_EMPTY_RANGE = 0.1
 
     def __init__(self, in_reader: data_reader.InputDataReader) -> None:
         # mass
-        ws = in_reader.get_masses()
-        self.w_min = min(ws)
-        self.w_range = max(ws) - min(ws)
+        ms = in_reader.get_masses()
+        m_min = min(ms)
+        m_max = max(ms)
+        if m_min == m_max:
+            m_min -= 1
+            m_max += 1
+        self.m_min = m_min
+        self.w_range = m_max - m_min
 
         # position
         pos = in_reader.get_init_pos()
         max_x_abs = max(map(lambda x: abs(x[0]), pos))
+        max_x_abs = max(max_x_abs, 0.1)
         max_y_abs = max(map(lambda x: abs(x[1]), pos))
+        max_y_abs = max(max_y_abs, 0.1)
+
         x_scale = G_SCREEN_WIDTH / (max_x_abs * 2)
         y_scale = G_SCREEN_HEIGHT / (max_y_abs * 2)
         self.pos_scale = min(x_scale, y_scale)
@@ -55,7 +63,7 @@ class ScaleHelper():
 
     
     def scale_mass(self, w: float) -> float:
-        return (w - self.w_min) * (self.W_MAX_SCALE - self.W_MIN_SCALE) / self.w_range + self.W_MIN_SCALE
+        return (w - self.m_min) * (self.M_MAX_SCALE - self.M_MIN_SCALE) / self.w_range + self.M_MIN_SCALE
 
     def scale_pos(self, pos: Tuple[float, float]) -> Tuple[float, float]:
         return (pos[0] * self.pos_scale, pos[1] * self.pos_scale)
