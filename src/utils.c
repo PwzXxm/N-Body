@@ -2,8 +2,6 @@
 
 #include "utils.h"
 
-#define GRAV_T_1E10 6.6742E-1
-
 static const int MAGIC_NUMBER = 9036;
 
 FILE* init_output_file(const char *output_file, int n, int m, float s_time) {
@@ -25,9 +23,9 @@ void output_particle_pos(int n, particle_t parts[], FILE* fp) {
 }
 
 // return force on particle 1
-vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2) {
+vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2, float grav) {
     float dis = sqrtf(powf(pos1.x - pos2.x, 2) + powf(pos1.y - pos2.y, 2));
-    float f = (GRAV_T_1E10 * m1 * m2) / powf(dis, 2);
+    float f = (grav * m1 * m2) / powf(dis, 2);
     vector_t fv;
     fv.x = f * (pos2.x - pos1.x) / dis;
     fv.y = f * (pos2.y - pos1.y) / dis;

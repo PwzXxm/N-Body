@@ -39,18 +39,19 @@ class InputDataReader():
     def __init__(self, input_file: str) -> None:
         with open(input_file, "r") as f:
             self.n = int(f.readline())
+            self.grav = int(f.readline())
             self._pos = []
-            self._w = []
+            self._m = []
             for _ in range(self.n):
-                (x, y, _, _, w) = map(float, f.readline().split())
+                (x, y, _, _, m) = map(float, f.readline().split())
                 self._pos.append((x, y))
-                self._w.append(w)
+                self._m.append(m)
 
     def get_init_pos(self) -> List[Tuple[float, float]]:
         return self._pos
 
     def get_masses(self) -> List[float]:
-        return self._w
+        return self._m
 
 # reader = OutputDataReader("./../tmp.out")
 # print(reader.n)

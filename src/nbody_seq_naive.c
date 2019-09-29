@@ -2,7 +2,7 @@
 
 #include "nbody_seq_naive.h"
 
-void nbody_seq_naive(int n, int m, float dt, particle_t parts[], FILE* fp, bool full_output) {
+void nbody_seq_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
 
     vector_t *acc = (vector_t *) malloc(sizeof(vector_t) * n);
 
@@ -18,7 +18,7 @@ void nbody_seq_naive(int n, int m, float dt, particle_t parts[], FILE* fp, bool 
         // update acc pair by pair to save half calculations
         for (int i = 0; i < n; ++i) {
             for (int j = i+1; j < n; ++j) {
-                vector_t f = force_between_particle(parts[i].pos, parts[j].pos, parts[i].mass, parts[j].mass);
+                vector_t f = force_between_particle(parts[i].pos, parts[j].pos, parts[i].mass, parts[j].mass, grav);
                 // printf("fx = %f, fy = %f \n", f.x, f.y);
                 acc[i].x += f.x / parts[i].mass;
                 acc[i].y += f.y / parts[i].mass;

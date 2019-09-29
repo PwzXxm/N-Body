@@ -33,7 +33,9 @@ int main(int argc, char* argv[]) {
     }
 
     int n = -1;
+    float grav;
     scanf("%d", &n);
+    scanf("%f", &grav);
     particle_t *parts = (particle_t *) malloc(sizeof(particle_t) * n);
     
     for (int i = 0; i < n; ++i) {
@@ -61,7 +63,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    (*algorithm_fun_ptr)(n, m, t, parts, fp, full_output);
+    (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
 
     output_particle_pos(n, parts, fp);
 
