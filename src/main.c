@@ -4,10 +4,12 @@
 
 #include "utils.h"
 #include "seq_quad_tree.h"
+#include "nbody_seq_naive.h"
 
 void print_usage();
 
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
+static const char SEQ_NAIVE[] = "seq_naive";
 
 int main(int argc, char* argv[]) {
     if (argc != 6) {
@@ -27,7 +29,9 @@ int main(int argc, char* argv[]) {
     }
 
     int n = -1;
+    float grav;
     scanf("%d", &n);
+    scanf("%f", &grav);
     particle_t *parts = (particle_t *) malloc(sizeof(particle_t) * n);
     
     for (int i = 0; i < n; ++i) {
@@ -39,7 +43,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    FILE *fp = init_output_file(output_file, n, (full_output) ? 1 : m, t);
+    FILE *fp = init_output_file(output_file, n, (full_output) ? m : 1, t);
     if (fp == NULL) {
         printf("Unable to open output file.\n");
         return 1;
@@ -47,13 +51,16 @@ int main(int argc, char* argv[]) {
 
     if (strcmp(algo_name, SEQ_QUAD_TREE) == 0) {
         algorithm_fun_ptr = &qt_sim;
+        // algorithm_fun_ptr = &qt_sim;
+    } else if (strcmp(algo_name, SEQ_NAIVE) == 0) {
+        algorithm_fun_ptr = &nbody_seq_naive;
     } else {
         printf("Unsupported algorithm\n");
         print_usage();
         return 1;
     }
 
-    (*algorithm_fun_ptr)(n, m, t, parts, fp, full_output);
+    (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
 
     output_particle_pos(n, parts, fp);
 
@@ -70,4 +77,5 @@ void print_usage() {
     printf("Example: nbody seq_naive 100 0.01\n");
     printf("Supported algorithms:\n");
     printf("\tseq_quad_tree\n");
+    printf("\tseq_naive\n");
 }

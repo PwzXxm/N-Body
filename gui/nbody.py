@@ -7,11 +7,10 @@ import sys
 import data_reader
 
 G_SCREEN_WIDTH = 1000
-G_SCREEN_HEIGHT = 650
+G_SCREEN_HEIGHT = 1000
 G_SCREEN_TITLE = "N-Body Simulation"
-G_FPS_LIMIT = 60
+G_FPS_LIMIT = 24
 G_SHOW_STAT = True
-
 
 
 
@@ -35,20 +34,28 @@ class Particle(arcade.Sprite):
         self.alpha = 200
 
 class ScaleHelper():
-    W_MIN_SCALE = 0.2
-    W_MAX_SCALE = 0.8
+    M_MIN_SCALE = 0.2
+    M_MAX_SCALE = 0.8
     P_EMPTY_RANGE = 0.1
 
     def __init__(self, in_reader: data_reader.InputDataReader) -> None:
         # mass
-        ws = in_reader.get_masses()
-        self.w_min = min(ws)
-        self.w_range = max(ws) - min(ws)
+        ms = in_reader.get_masses()
+        m_min = min(ms)
+        m_max = max(ms)
+        if m_min == m_max:
+            m_min -= 1
+            m_max += 1
+        self.m_min = m_min
+        self.w_range = m_max - m_min
 
         # position
         pos = in_reader.get_init_pos()
         max_x_abs = max(map(lambda x: abs(x[0]), pos))
+        max_x_abs = max(max_x_abs, 0.1)
         max_y_abs = max(map(lambda x: abs(x[1]), pos))
+        max_y_abs = max(max_y_abs, 0.1)
+
         x_scale = G_SCREEN_WIDTH / (max_x_abs * 2)
         y_scale = G_SCREEN_HEIGHT / (max_y_abs * 2)
         self.pos_scale = min(x_scale, y_scale)
@@ -56,7 +63,7 @@ class ScaleHelper():
 
     
     def scale_mass(self, w: float) -> float:
-        return (w - self.w_min) * (self.W_MAX_SCALE - self.W_MIN_SCALE) / self.w_range + self.W_MIN_SCALE
+        return (w - self.m_min) * (self.M_MAX_SCALE - self.M_MIN_SCALE) / self.w_range + self.M_MIN_SCALE
 
     def scale_pos(self, pos: Tuple[float, float]) -> Tuple[float, float]:
         return (pos[0] * self.pos_scale, pos[1] * self.pos_scale)
@@ -72,11 +79,12 @@ class MainWindow(arcade.Window):
         # Call the parent class and set up the window
         super().__init__(G_SCREEN_WIDTH, G_SCREEN_HEIGHT, G_SCREEN_TITLE)
         self.particle_list = None
-        self.set_update_rate(1 / G_FPS_LIMIT)
+        self.set_update_rate(1 / (G_FPS_LIMIT + 1))
         self.start_timer = 0
         self.in_reader = None
-        self.out_reader = None
+        self.out_reader: data_reader.OutputDataReader = None
         self.scale_helper: ScaleHelper = None
+        self.playing = False
 
         if G_SHOW_STAT:
             self.stat_fps = AvgTimeCounter()
@@ -107,6 +115,7 @@ class MainWindow(arcade.Window):
             p.change_y = random.uniform(-1, 1)
 
         self.start_timer = timeit.default_timer()
+        self.playing = False
 
 
     def update(self, delta_time: float) -> None:
@@ -120,12 +129,20 @@ class MainWindow(arcade.Window):
             start_time = timeit.default_timer()
             self.stat_fps.tick(delta_time)
         # update
-        if timeit.default_timer() - self.start_timer > 4:
-            p: Particle
-            for p in self.particle_list:
-                x = p.center_x + p.change_x * delta_time * 40
-                y = p.center_y + p.change_y * delta_time * 40
-                p.set_position(x, y)
+        if self.start_timer != None and timeit.default_timer() - self.start_timer > 4:
+            print("start playing")
+            self.playing = True
+            self.start_timer = None
+
+        if self.playing:
+            if self.out_reader.has_data():
+                p: Particle
+                for (p, pos) in zip(self.particle_list, self.out_reader.get_one_step()):
+                    pos = self.scale_helper.scale_pos(pos)
+                    p.set_position(pos[0], pos[1])
+            else:
+                self.playing = False
+                print("stop playing")
 
         # ------
         if G_SHOW_STAT:
@@ -155,7 +172,9 @@ class MainWindow(arcade.Window):
             arcade.draw_text("update: {:.3f}".format(self.stat_update.get_avg()), x, y, arcade.color.WHITE, 16)
             y -= 20
             arcade.draw_text("draw: {:.3f}".format(self.stat_draw.get_avg()), x, y, arcade.color.WHITE, 16)
-            
+            y -= 20
+            arcade.draw_text("frame: {}".format(self.out_reader.cur_m), x, y, arcade.color.WHITE, 16)
+
             self.stat_draw.tick(timeit.default_timer() - start_time)
 
 def main() -> None:
@@ -165,6 +184,8 @@ def main() -> None:
     if in_reader.n != out_reader.n:
         raise Exception("data files do not match")
     
+    print("Total record:", out_reader.m)
+
     window = MainWindow()
     window.setup(in_reader, out_reader)
     arcade.run()

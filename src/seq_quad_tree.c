@@ -1,6 +1,6 @@
 #include "seq_quad_tree.h"
 
-void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, FILE *f_out, bool is_full_out) {
+void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
     float boundary = qt_find_boundary(n_particle, particles);
 
     qt_node_t *root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary*2);

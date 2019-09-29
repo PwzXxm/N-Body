@@ -29,7 +29,7 @@ typedef struct qt_node {
     struct qt_node **children;
 } qt_node_t;
 
-void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, FILE *f_out, bool is_full_out);
+void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, float grav, FILE *f_out, bool is_full_out);
 
 void qt_init(qt_node_t *root);
 
