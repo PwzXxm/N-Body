@@ -5,12 +5,14 @@
 #include "utils.h"
 #include "math.h"
 
+// #define DEBUG
+
 // theta = width/distance
 
 static const int CHILDREN_CNT = 4;
 static const float SCALE_FACTOR = 1.5f;
 static const int dx[] = {0, 1, 0, 1};
-static const int dy[] = {0, 0, 1, 1};
+static const int dy[] = {0, 0, -1, -1};
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -39,5 +41,6 @@ qt_node_t *qt_new_node(vector_t pos, float width);
 
 float qt_find_boundary(int n_particle, particle_t *particles);
 
+void qt_print_tree(qt_node_t *root, int level);
 
 
