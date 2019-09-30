@@ -4,7 +4,7 @@ import collections
 import random
 import timeit
 import sys
-import data_reader
+import utils.data_reader as data_reader
 
 G_SCREEN_WIDTH = 1000
 G_SCREEN_HEIGHT = 1000
@@ -30,7 +30,7 @@ class AvgTimeCounter():
 
 class Particle(arcade.Sprite):
     def __init__(self, x: float, y: float, scale: float) -> None:
-        super().__init__(filename='p.png', center_x=x, center_y=y, scale=scale)
+        super().__init__(filename='./utils/p.png', center_x=x, center_y=y, scale=scale)
         self.alpha = 200
 
 class ScaleHelper():
