@@ -7,18 +7,21 @@
 
 // #define DEBUG
 
-// theta = width/distance
-
 static const int CHILDREN_CNT = 4;
 static const float SCALE_FACTOR = 1.5f;
-static const int dx[] = {0, 1, 0, 1};
-static const int dy[] = {0, 0, -1, -1};
+static const int DX[] = {0, 1, 0, 1};
+static const int DY[] = {0, 0, -1, -1};
+static const float THETA = 1.0f;
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
-typedef struct qt_node {
-    vector_t mass_pos;
+typedef struct qt_mass {
+    vector_t pos;
     float mass;
+} qt_mass_t;
+
+typedef struct qt_node {
+    qt_mass_t mass_info;
 
     vector_t min_pos;
     float width;
@@ -43,4 +46,9 @@ float qt_find_boundary(int n_particle, particle_t *particles);
 
 void qt_print_tree(qt_node_t *root, int level);
 
+qt_mass_t qt_compute_mass(qt_node_t *root);
+
+vector_t qt_compute_force(particle_t *particle, qt_node_t *root, float grav);
+
+float qt_dist(vector_t a, vector_t b);
 

@@ -3,8 +3,11 @@
 void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
     float boundary = qt_find_boundary(n_particle, particles);
 
-    qt_node_t *root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary*2);
+    qt_node_t *root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary * 2);
+    vector_t *forces = (vector_t *)malloc(sizeof(vector_t) * n_particle);
+    vector_t *acc = (vector_t *)malloc(sizeof(vector_t) * n_particle);
 
+    // tree construction
     for (int i = 0; i < n_particle; i++) {
         qt_insert(&particles[i], root);
 
@@ -13,16 +16,40 @@ void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles,
         qt_print_tree(root, 0);
 #endif
     }
+
+    // compute centre mass and total mass at each node
+    qt_compute_mass(root);
+
+#ifdef DEBUG
+    printf("Computed mass: \n");
+    qt_print_tree(root, 0);
+#endif
+
+    for (int i = 0; i < n_particle; i++) {
+        forces[i] = qt_compute_force(&particles[i], root, grav);
+    }
+
+#ifdef DEBUG
+    printf("Forces:\n");
+    for (int i = 0; i < n_particle; i++) {
+        printf("%d: %f\n", i, forces[i]);
+    }
+    qt_print_tree(root, 0);
+#endif
+
 }
 
 void qt_init(qt_node_t *root) {}
 
 void qt_insert(particle_t *p, qt_node_t *node) {
-
-    if (node == NULL) return ;
+    if (node == NULL) return;
 
 #ifdef DEBUG
-    printf("... trying to insert p at (%f, %f) into node with min_pos (%f, %f) ...\n", p->pos.x, p->pos.y, node->min_pos.x, node->min_pos.y);
+    printf("... trying to insert p at (%f, %f) into node with min_pos (%f, %f) ...\n",
+           p->pos.x,
+           p->pos.y,
+           node->min_pos.x,
+           node->min_pos.y);
 #endif
 
     if (node->particle == NULL) {
@@ -44,8 +71,8 @@ void qt_insert(particle_t *p, qt_node_t *node) {
         for (int i = 0; i < CHILDREN_CNT; i++) {
             node->children[i] = qt_new_node(
                 (vector_t){
-                    .x = node->min_pos.x + dx[i] * w_2,
-                    .y = node->min_pos.y + dy[i] * w_2,
+                    .x = node->min_pos.x + DX[i] * w_2,
+                    .y = node->min_pos.y + DY[i] * w_2,
                 },
                 w_2);
         }
@@ -115,17 +142,17 @@ float qt_find_boundary(int n_particle, particle_t *particles) {
         maxi = MAX(maxi, MAX(x, y));
     }
 
-    return maxi*SCALE_FACTOR;
+    return maxi * SCALE_FACTOR;
 }
 
 void qt_print_tree(qt_node_t *root, int level) {
-    const char* const BLOCK_DIR[] = {"tl", "tr", "bl", "br"};
+    const char *const BLOCK_DIR[] = {"tl", "tr", "bl", "br"};
 
     if (root != NULL) {
         printf("Node level: %d\n", level);
         printf("\tmin_pos x, y, width: %f, %f, %f\n", root->min_pos.x, root->min_pos.y, root->width);
-        printf("\tmass: %f\n", root->mass);
-        printf("\tmass_pos x, y: %f, %f\n", root->mass_pos.x, root->mass_pos.y);
+        printf("\tmass: %f\n", root->mass_info.mass);
+        printf("\tmass_pos x, y: %f, %f\n", root->mass_info.pos.x, root->mass_info.pos.y);
 
         if (root->particle != NULL) {
             printf("\tparticle x, y: %f, %f\n", root->particle->pos.x, root->particle->pos.y);
@@ -134,7 +161,7 @@ void qt_print_tree(qt_node_t *root, int level) {
         if (root->children != NULL) {
             printf("\tchildren:\n\t\t");
             for (int i = 0; i < CHILDREN_CNT; i++) {
-                printf("%s: %d; ", BLOCK_DIR[i], (root->children[i]==NULL ? 0 : 1));
+                printf("%s: %d; ", BLOCK_DIR[i], (root->children[i] == NULL ? 0 : 1));
             }
             printf("\n");
             printf("==============================\n");
@@ -142,7 +169,7 @@ void qt_print_tree(qt_node_t *root, int level) {
             for (int i = 0; i < CHILDREN_CNT; i++) {
                 if (root->children[i] != NULL) {
                     printf("Go down to %s\n", BLOCK_DIR[i]);
-                    qt_print_tree(root->children[i], level+1);
+                    qt_print_tree(root->children[i], level + 1);
                 }
             }
         } else {
@@ -150,3 +177,65 @@ void qt_print_tree(qt_node_t *root, int level) {
         }
     }
 }
+
+qt_mass_t qt_compute_mass(qt_node_t *root) {
+    float sum_mass = 0.0f;
+    vector_t cm_pos = {.x = 0.0f, .y = 0.0f};
+
+    if (root->particle != NULL) {
+        // contains one particle
+        sum_mass = root->particle->mass;
+        cm_pos = root->particle->pos;
+    } else {
+        if (root->children != NULL) {
+            // intermediate node
+            qt_mass_t *masses = (qt_mass_t *)malloc(sizeof(qt_mass_t) * CHILDREN_CNT);
+
+            for (int i = 0; i < CHILDREN_CNT; i++) {
+                masses[i] = qt_compute_mass(root->children[i]);
+                sum_mass += masses[i].mass;
+                cm_pos.x += (masses[i].mass * masses[i].pos.x);
+                cm_pos.y += (masses[i].mass * masses[i].pos.y);
+            }
+
+            cm_pos.x /= sum_mass;
+            cm_pos.y /= sum_mass;
+
+            free(masses);
+        }
+    }
+
+    root->mass_info.mass = sum_mass;
+    root->mass_info.pos = cm_pos;
+
+    return (qt_mass_t){.mass = sum_mass, .pos = cm_pos};
+}
+
+vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
+    vector_t f = {.x = 0.0f, .y = 0.0f};
+
+    if (root->particle != NULL) {
+        // leaf node
+        return force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
+    } else {
+        // intermediate node
+
+        if (root->children == NULL) {
+            fprintf(stderr, "The children do not exist during computing forces\n");
+        }
+
+        if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
+            return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
+        } else {
+            for (int i = 0; i < CHILDREN_CNT; i++) {
+                vector_t temp = qt_compute_force(p, root->children[i], grav);
+                f.x += temp.x;
+                f.y += temp.y;
+            }
+
+            return f;
+        }
+    }
+}
+
+inline float qt_dist(vector_t a, vector_t b) { return sqrt(pow(a.x - b.x, 2) + (a.y - b.y, 2)); }
