@@ -39,7 +39,7 @@ class InputDataReader():
     def __init__(self, input_file: str) -> None:
         with open(input_file, "r") as f:
             self.n = int(f.readline())
-            self.grav = int(f.readline())
+            self.grav = float(f.readline())
             self._pos = []
             self._m = []
             for _ in range(self.n):
