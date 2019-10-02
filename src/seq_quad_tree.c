@@ -1,42 +1,86 @@
 #include "seq_quad_tree.h"
 
-void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
+void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
     float boundary = qt_find_boundary(n_particle, particles);
 
-    qt_node_t *root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary * 2);
+    qt_node_t *root;
     vector_t *forces = (vector_t *)malloc(sizeof(vector_t) * n_particle);
     vector_t *acc = (vector_t *)malloc(sizeof(vector_t) * n_particle);
 
     // tree construction
-    for (int i = 0; i < n_particle; i++) {
-        qt_insert(&particles[i], root);
+    for (int step = 0; step < n_steps; step++) {
+        root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary * 2);
 
 #ifdef DEBUG
-        printf("Iteration: %d\n", i);
-        qt_print_tree(root, 0);
+        printf("step: %d\n", step);
 #endif
-    }
-
-    // compute centre mass and total mass at each node
-    qt_compute_mass(root);
+        
+        // initialization
+        for(int i = 0; i < n_particle; i++) {
+            forces[i].x = 0.0f;
+            forces[i].y = 0.0f;
+            acc[i].x = 0.0f;
+            acc[i].y = 0.0f;
+        }
 
 #ifdef DEBUG
-    printf("Computed mass: \n");
-    qt_print_tree(root, 0);
+        printf("******************************\n");
+        printf("* Construct Tree             *\n");
+        printf("******************************\n");
 #endif
-
-    for (int i = 0; i < n_particle; i++) {
-        forces[i] = qt_compute_force(&particles[i], root, grav);
-    }
+        for (int i = 0; i < n_particle; i++) {
+            qt_insert(&particles[i], root);
 
 #ifdef DEBUG
-    printf("Forces:\n");
-    for (int i = 0; i < n_particle; i++) {
-        printf("%d: %f\n", i, forces[i]);
-    }
-    qt_print_tree(root, 0);
+            // printf("Iteration: %d\n", i);
+            // qt_print_tree(root, 0);
+#endif
+        }
+
+        // compute centre mass and total mass at each node
+        qt_compute_mass(root);
+
+#ifdef DEBUG
+        printf("******************************\n");
+        printf("* Compute mass               *\n");
+        printf("******************************\n");
+        // qt_print_tree(root, 0);
 #endif
 
+        for (int i = 0; i < n_particle; i++) {
+            forces[i] = qt_compute_force(&particles[i], root, grav);
+            acc[i].x += forces[i].x / particles[i].mass;
+            acc[i].y += forces[i].y / particles[i].mass;
+            particles[i].v.x += acc[i].x * dt;
+            particles[i].v.y += acc[i].y * dt;
+            particles[i].pos.x += particles[i].v.x * dt;
+            particles[i].pos.y += particles[i].v.y * dt;
+        }
+
+#ifdef DEBUG
+        printf("Forces:\n");
+        for (int i = 0; i < n_particle; i++) {
+            printf("%d: %f\n", i, forces[i]);
+        }
+
+        printf("Particles:\n");
+        for (int i = 0; i < n_particle; i++) {
+            printf("%d: %f\n", i, particles[i].pos.x);
+        }
+
+        // qt_print_tree(root, 0);
+        break;
+#endif
+
+        qt_free_tree(root);
+
+        if (step == (n_steps - 1) || is_full_out) {
+            output_particle_pos(n_particle, particles, f_out);
+        }
+    }
+
+    free(forces);
+    free(acc);
 }
 
 void qt_init(qt_node_t *root) {}
@@ -216,26 +260,48 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
 
     if (root->particle != NULL) {
         // leaf node
+#ifndef DEBUG
         return force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
+#else
+        vector_t temp = force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
+        printf("Compute forces between ((pos), mass): ((%f, %f), %f) and ((%f, %f), %f); result: (%f, %f)\n",
+            p->pos.x, p->pos.y, p->mass,
+            root->particle->pos.x, root->particle->pos.y, root->particle->mass,
+            temp.x, temp.y
+        );
+        return temp;
+#endif
     } else {
         // intermediate node
 
-        if (root->children == NULL) {
-            fprintf(stderr, "The children do not exist during computing forces\n");
-        }
-
-        if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
-            return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
-        } else {
-            for (int i = 0; i < CHILDREN_CNT; i++) {
-                vector_t temp = qt_compute_force(p, root->children[i], grav);
-                f.x += temp.x;
-                f.y += temp.y;
+        if (root->children != NULL) {
+            if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
+                return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
+            } else {
+                for (int i = 0; i < CHILDREN_CNT; i++) {
+                    vector_t temp = qt_compute_force(p, root->children[i], grav);
+                    f.x += temp.x;
+                    f.y += temp.y;
+                }
             }
-
-            return f;
         }
     }
+
+    return f;
 }
 
-inline float qt_dist(vector_t a, vector_t b) { return sqrt(pow(a.x - b.x, 2) + (a.y - b.y, 2)); }
+inline float qt_dist(vector_t a, vector_t b) { return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)); }
+
+void qt_free_tree(qt_node_t *root) {
+    if (root == NULL) return;
+
+    if (root->children != NULL) {
+        for (int i = 0; i < CHILDREN_CNT; i++) {
+            qt_free_tree(root->children[i]);
+        }
+
+        free(root->children);
+    }
+
+    free(root);
+}

@@ -52,3 +52,4 @@ vector_t qt_compute_force(particle_t *particle, qt_node_t *root, float grav);
 
 float qt_dist(vector_t a, vector_t b);
 
+void qt_free_tree(qt_node_t *root);
