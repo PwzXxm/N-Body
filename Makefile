@@ -1,5 +1,4 @@
-CC = gcc
-MPICC = mpicc
+CC = mpicc
 CFLAGS = -Wall -O3 -std=c99 -MMD
 OPENMPFLAGS = -fopenmp
 
@@ -9,6 +8,7 @@ ifeq ($(shell uname), Darwin)
 	CFLAGS += -Wno-format
 endif
 
+CFLAGS += $(OPENMPFLAGS)
 
 RM = /bin/rm
 
@@ -18,7 +18,7 @@ OBJS = $(subst .c,.o,$(SRCS))
 all: nbody
 
 nbody: $(OBJS)
-	$(MPICC) $(CFLAGS) $(OPENMPFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -lomp -o $@ $(OBJS)
 
 clean:
 	$(RM) -f ./src/*.o ./src/*.d ./nbody

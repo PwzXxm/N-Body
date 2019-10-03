@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <mpi.h>
+#include <omp.h>
 
 #include "nbody_naive.h"
 
@@ -7,6 +8,10 @@ void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float gr
     int m_size, m_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &m_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+
+    if (m_rank == ROOT_NODE) {
+        printf("MPI_size: %d, OPENMP_threads: %d", m_size, omp_get_max_threads());
+    }
 
     vector_t *pos_arr = (vector_t *) malloc(sizeof(vector_t) * n);
     for (int i = 0; i < n; i++) {
@@ -43,11 +48,14 @@ void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float gr
     // compute
     for (int m_i = 0; m_i < m; ++m_i) {
         // reset acceleration
+        #pragma omp parallel for 
         for (int i = 0; i < local_n; ++i) {
             local_acc[i].x = 0;
             local_acc[i].y = 0;
         }
+
         // compute acceleration
+        #pragma omp parallel for 
         for (int i = 0; i < local_n; ++i) {
             int global_i = i + local_l;
             for (int j = 0; j < n; ++j) {
@@ -61,6 +69,7 @@ void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float gr
         
 
         // update velocity & position
+        #pragma omp parallel for 
         for (int i = 0; i < local_n; ++i) {
             int global_i = i + local_l;
             // printf("%d\n", global_i);
