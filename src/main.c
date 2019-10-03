@@ -12,6 +12,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank);
 
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
 static const char SEQ_NAIVE[] = "seq_naive";
+static const char MPI_OPENMP_NAIVE[] = "mpi_openmp_naive";
 
 int main(int argc, char* argv[]) {
     MPI_Init(&argc, &argv);
@@ -49,6 +50,8 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         // algorithm_fun_ptr = &qt_sim;
     } else if (strcmp(algo_name, SEQ_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_seq_naive;
+    } else if (strcmp(algo_name, MPI_OPENMP_NAIVE) == 0) {
+        algorithm_fun_ptr = &nbody_mpi_openmp_naive;
     } else {
         if (m_rank == ROOT_NODE) print_usage("Unsupported algorithm\n");
         return 1;
