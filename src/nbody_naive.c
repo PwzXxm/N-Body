@@ -1,8 +1,14 @@
 #include <stdlib.h>
+#include <mpi.h>
 
-#include "nbody_seq_naive.h"
+#include "nbody_naive.h"
 
 void nbody_seq_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
+
+    int m_size, m_rank;
+    MPI_Comm_size(MPI_COMM_WORLD, &m_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+    if (m_rank != ROOT_NODE) return;
 
     vector_t *acc = (vector_t *) malloc(sizeof(vector_t) * n);
 

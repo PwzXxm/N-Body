@@ -18,8 +18,7 @@ OBJS = $(subst .c,.o,$(SRCS))
 all: nbody
 
 nbody: $(OBJS)
-	# $(MPICC) $(CFLAGS) $(OPENMPFLAGS) -o $@ $(OBJS)
-	$(CC) $(CFLAGS) $(OPENMPFLAGS) -o $@ $(OBJS)
+	$(MPICC) $(CFLAGS) $(OPENMPFLAGS) -o $@ $(OBJS)
 
 clean:
 	$(RM) -f ./src/*.o ./src/*.d ./nbody

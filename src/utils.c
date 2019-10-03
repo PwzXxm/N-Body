@@ -1,8 +1,40 @@
 #include <math.h>
+#include <stddef.h>
 
 #include "utils.h"
 
 static const int MAGIC_NUMBER = 9036;
+
+void init_MPI_datatype() {
+    // vector_t
+    {
+        const int nitems = 2;
+        int block_lengths[] = {1, 1};
+        MPI_Datatype types[] = {MPI_FLOAT, MPI_FLOAT};
+        MPI_Aint offsets[nitems];
+        offsets[0] = offsetof(vector_t, x);
+        offsets[1] = offsetof(vector_t, y);
+        MPI_Type_create_struct(nitems, block_lengths, offsets, types, &mpi_vector_t);
+        MPI_Type_commit(&mpi_vector_t);
+    }
+    // mpi_particle_t
+    {
+        const int nitems = 3;
+        int block_lengths[] = {1, 1, 1};
+        MPI_Datatype types[] = {mpi_vector_t, mpi_vector_t, MPI_FLOAT};
+        MPI_Aint offsets[nitems];
+        offsets[0] = offsetof(particle_t, pos);
+        offsets[1] = offsetof(particle_t, v);
+        offsets[2] = offsetof(particle_t, mass);
+        MPI_Type_create_struct(nitems, block_lengths, offsets, types, &mpi_particle_t);
+        MPI_Type_commit(&mpi_particle_t);
+    }
+}
+
+void free_MPI_datatype() {
+    MPI_Type_free(&mpi_particle_t);
+    MPI_Type_free(&mpi_vector_t);
+}
 
 FILE* init_output_file(const char *output_file, int n, int m, float s_time) {
     FILE* fp = fopen(output_file, "w");
@@ -19,6 +51,13 @@ void output_particle_pos(int n, particle_t parts[], FILE* fp) {
     for (int i = 0; i < n; ++i) {
         fwrite(&parts[i].pos.x, sizeof(float), 1, fp);
         fwrite(&parts[i].pos.y, sizeof(float), 1, fp);
+    }
+}
+
+void output_particle_pos_v(int n, vector_t positions[], FILE* fp) {
+    for (int i = 0; i < n; ++i) {
+        fwrite(&positions[i].x, sizeof(float), 1, fp);
+        fwrite(&positions[i].y, sizeof(float), 1, fp);
     }
 }
 
