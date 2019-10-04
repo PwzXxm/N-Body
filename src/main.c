@@ -4,7 +4,7 @@
 #include <mpi.h>
 
 #include "utils.h"
-// #include "seq_quad_tree.h"
+#include "seq_quad_tree.h"
 #include "nbody_naive.h"
 
 #ifdef WITH_CUDA
@@ -59,7 +59,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     }
 
     if (strcmp(algo_name, SEQ_QUAD_TREE) == 0) {
-        // algorithm_fun_ptr = &qt_sim;
+        algorithm_fun_ptr = &qt_sim;
     } else if (strcmp(algo_name, SEQ_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_seq_naive;
     } else if (strcmp(algo_name, MPI_OPENMP_NAIVE) == 0) {
