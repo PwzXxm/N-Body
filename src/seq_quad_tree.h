@@ -11,7 +11,7 @@ static const int CHILDREN_CNT = 4;
 static const float SCALE_FACTOR = 1.5f;
 static const int DX[] = {0, 1, 0, 1};
 static const int DY[] = {0, 0, -1, -1};
-static const float THETA = 1.0f;
+static const float THETA = 0.6;
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -53,3 +53,5 @@ vector_t qt_compute_force(particle_t *particle, qt_node_t *root, float grav);
 float qt_dist(vector_t a, vector_t b);
 
 void qt_free_tree(qt_node_t *root);
+
+bool qt_is_out_of_boundary(particle_t p, float boundary);
