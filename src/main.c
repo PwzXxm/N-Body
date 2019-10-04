@@ -7,6 +7,12 @@
 // #include "seq_quad_tree.h"
 #include "nbody_naive.h"
 
+#ifdef WITH_CUDA
+#include "nbody_cuda.h"
+
+static const char CUDA_SINGLE_NAIVE[] = "cuda_single_naive";
+#endif
+
 void print_usage(const char msg[]);
 int run_task(int argc, char* argv[], int m_size, int m_rank);
 
@@ -30,6 +36,12 @@ int main(int argc, char* argv[]) {
 }
 
 int run_task(int argc, char* argv[], int m_size, int m_rank) {
+    #ifdef WITH_CUDA
+    if (m_rank == ROOT_NODE) {
+        printf("CUDA Enabled \n");
+    }
+    #endif
+
     // parse arguments
     if (argc != 6) {
         if (m_rank == ROOT_NODE) print_usage("Wrong arguments\n");
@@ -52,6 +64,10 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         algorithm_fun_ptr = &nbody_seq_naive;
     } else if (strcmp(algo_name, MPI_OPENMP_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_mpi_openmp_naive;
+    #ifdef WITH_CUDA
+    } else if (strcmp(algo_name, CUDA_SINGLE_NAIVE) == 0) {
+        algorithm_fun_ptr = &nbody_cuda_single_naive;
+    #endif
     } else {
         if (m_rank == ROOT_NODE) print_usage("Unsupported algorithm\n");
         return 1;

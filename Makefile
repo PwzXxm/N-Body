@@ -4,6 +4,8 @@ OPENMPFLAGS = -fopenmp
 OPENMPL = 
 LM =
 
+nbody-with-cuda: CFLAGS += -DWITH_CUDA
+
 ifeq ($(shell uname), Darwin)
 	# for apple's clang
 	OPENMPFLAGS = -Xpreprocessor -fopenmp
@@ -28,7 +30,13 @@ all: nbody
 nbody: $(OBJS)
 	$(CC) $(CFLAGS) $(OPENMPL) -o $@ $(OBJS) $(LM)
 
+nbody-with-cuda: $(OBJS) cuda
+	mpic++ $(CFLAGS) $(OPENMPL) -o $@ $(OBJS) ./src/cuda.o $(LM) -lcudart -L/usr/local/cuda-10.1/lib64/
+
+cuda: ./src/cuda.cu
+	nvcc -c ./src/cuda.cu -o ./src/cuda.o
+
 clean:
-	$(RM) -f ./src/*.o ./src/*.d ./nbody
+	$(RM) -f ./src/*.o ./src/*.d ./nbody ./nbody-with-cuda
 
 -include $(OBJS:.o=.d)
