@@ -34,7 +34,7 @@ nbody-with-cuda: $(OBJS) cuda
 	mpic++ $(CFLAGS) $(OPENMPL) -o $@ $(OBJS) ./src/cuda.o $(LM) -lcudart -L/usr/local/cuda-10.1/lib64/
 
 cuda: ./src/cuda.cu
-	nvcc -c ./src/cuda.cu -o ./src/cuda.o
+	nvcc -c ./src/cuda.cu -o ./src/cuda.o -I/usr/lib/mpich/include -L/usr/lib/mpich/lib
 
 clean:
 	$(RM) -f ./src/*.o ./src/*.d ./nbody ./nbody-with-cuda

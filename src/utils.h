@@ -32,7 +32,16 @@ void free_MPI_datatype();
 
 
 FILE* init_output_file(const char *output_file, int n, int m, float s_time);
+
+// for cuda
+#ifdef __cplusplus 
+extern "C" 
+#endif
 void output_particle_pos(int n, particle_t parts[], FILE* fp);
 void output_particle_pos_v(int n, vector_t positions[], FILE* fp);
 
+// for cuda
+#ifdef __cplusplus 
+extern "C" 
+#endif
 vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2, float grav);
