@@ -100,13 +100,23 @@ extern "C" void __nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[
 
     for (int m_i = 0; m_i < m; ++m_i) {
 
-        // compute_acceleration<<<threadsPerGrid, threadsPerBlock>>>
-        //             (d_acc_arr, d_v_arr, d_pos_arr, d_m_arr, n, grav);
+        compute_acceleration_local<<<threadsPerGrid, threadsPerBlock>>>
+                (d_local_acc_arr, d_pos_arr, d_m_arr, n, local_n, local_l, grav);
 
-        // update_velocity_position<<<threadsPerGrid, threadsPerBlock>>>
-        //             (d_acc_arr, d_v_arr, d_pos_arr, d_m_arr, n, dt);
+        update_velocity_position_local<<<threadsPerGrid, threadsPerBlock>>>
+                (d_local_acc_arr, d_local_v_arr, d_pos_arr, d_m_arr, n, local_n, local_l, dt);
 
-
+        // only sync the changed part
+        vector_t *local_pos_arr = pos_arr + local_l;
+        vector_t *d_local_pos_arr = d_pos_arr + local_l;
+        cudaMemcpy(local_pos_arr, d_local_pos_arr, sizeof(vector_t) * local_n, cudaMemcpyDeviceToHost);
+        // broadcast pos_arr
+        for (int i = 0; i < m_size; ++i) {
+            int l = interval_of_nodes[i];
+            int r = interval_of_nodes[i + 1];
+            MPI_Bcast(pos_arr + l, r - l, mpi_vector_t, i, MPI_COMM_WORLD);
+        }
+        cudaMemcpy(d_pos_arr, pos_arr, sizeof(vector_t) * n, cudaMemcpyHostToDevice);
 
         // last step or full output mode
         if ((m_rank == ROOT_NODE) && (m_i == (m - 1) || full_output)) {

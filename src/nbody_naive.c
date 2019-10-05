@@ -79,18 +79,12 @@ void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float gr
             pos_arr[global_i].y += local_v[i].y * dt;
         }
 
-        // pos_arr[0].x = 0;
-        // pos_arr[1].x = 0;
-        // pos_arr[m_rank].x = 1;
-        // // broadcast pos_arr
-        // printf("r = %d, 0 = %f, 1 = %f \n", m_rank, pos_arr[0].x, pos_arr[1].x);
+        // broadcast pos_arr
         for (int i = 0; i < m_size; ++i) {
             int l = interval_of_nodes[i];
             int r = interval_of_nodes[i + 1];
             MPI_Bcast(pos_arr + l, r - l, mpi_vector_t, i, MPI_COMM_WORLD);
         }
-        // printf("r = %d, 0 = %f, 1 = %f \n", m_rank, pos_arr[0].x, pos_arr[1].x);
-        // return;
 
         // last step or full output mode
         if ((m_rank == ROOT_NODE) && (m_i == (m - 1) || full_output)) {

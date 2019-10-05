@@ -11,6 +11,7 @@
 #include "nbody_cuda.h"
 
 static const char CUDA_SINGLE_NAIVE[] = "cuda_single_naive";
+static const char CUDA_MPI_NAIVE[] = "cuda_mpi_naive";
 #endif
 
 void print_usage(const char msg[]);
@@ -67,6 +68,8 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     #ifdef WITH_CUDA
     } else if (strcmp(algo_name, CUDA_SINGLE_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_cuda_single_naive;
+    } else if (strcmp(algo_name, CUDA_MPI_NAIVE) == 0) {
+        algorithm_fun_ptr = &nbody_cuda_mpi_naive;
     #endif
     } else {
         if (m_rank == ROOT_NODE) print_usage("Unsupported algorithm\n");
