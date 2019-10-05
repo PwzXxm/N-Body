@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <time.h>
+#include <sys/time.h>
 #include <mpi.h>
 
 #include "utils.h"
@@ -17,6 +17,7 @@ static const char CUDA_MPI_NAIVE[] = "cuda_mpi_naive";
 
 void print_usage(const char msg[]);
 int run_task(int argc, char* argv[], int m_size, int m_rank);
+uint64_t GetTimeStamp();
 
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
 static const char SEQ_NAIVE[] = "seq_naive";
@@ -123,11 +124,11 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         }
     }
 
-    clock_t begin = clock();
+    uint64_t start = GetTimeStamp();
     (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
     
     if (m_rank == ROOT_NODE) {
-        double time_spent = (double)(clock() - begin) / CLOCKS_PER_SEC;
+        double time_spent = (long double)(GetTimeStamp() - start) / 1000000;
         printf("Time used: %f sec\n", time_spent);
     }
 
@@ -138,6 +139,11 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     return 0;
 }
 
+uint64_t GetTimeStamp() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * (uint64_t)1000000 + tv.tv_usec;
+}
 
 void print_usage(const char msg[]) {
     puts(msg);
