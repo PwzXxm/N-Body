@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include <mpi.h>
 
 #include "utils.h"
@@ -109,7 +110,14 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         }
     }
 
+    clock_t begin = clock();
     (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
+    
+    if (m_rank == ROOT_NODE) {
+        double time_spent = (double)(clock() - begin) / CLOCKS_PER_SEC;
+        printf("Time used: %f\n", time_spent);
+    }
+
 
     if (m_rank == ROOT_NODE) fclose(fp);
     free(parts);
@@ -119,10 +127,13 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
 
 
 void print_usage(const char msg[]) {
-    printf(msg);
+    puts(msg);
     printf("Usage: nbody <algorithm name> <num of steps> <time of each step> <full output> <output file>\n");
     printf("Example: nbody seq_naive 100 0.01\n");
     printf("Supported algorithms:\n");
     printf("\tseq_quad_tree\n");
     printf("\tseq_naive\n");
+    printf("\tmpi_openmp_naive\n");
+    printf("\tcuda_single_naive\n");
+    printf("\tcuda_mpi_naive\n");
 }

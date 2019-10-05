@@ -14,7 +14,7 @@ ifeq ($(shell uname), Darwin)
 endif
 
 ifeq ($(shell uname), Linux)
-	CFLAGS += -Wno-unused-result -Wno-format-security
+	CFLAGS += -Wno-unused-result
 	LM = -lm
 endif
 
