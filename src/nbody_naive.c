@@ -10,7 +10,7 @@ void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float gr
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
 
     if (m_rank == ROOT_NODE) {
-        printf("MPI_size: %d, OPENMP_threads: %d", m_size, omp_get_max_threads());
+        printf("MPI_size: %d, OPENMP_threads: %d\n", m_size, omp_get_max_threads());
     }
 
     vector_t *pos_arr = (vector_t *) malloc(sizeof(vector_t) * n);
