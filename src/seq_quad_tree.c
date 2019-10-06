@@ -284,8 +284,7 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
         // intermediate node
 
         if (root->children != NULL) {
-            // if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
-            if (false) {
+            if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
                 return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
             } else {
                 for (int i = 0; i < CHILDREN_CNT; i++) {

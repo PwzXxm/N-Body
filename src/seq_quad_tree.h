@@ -11,7 +11,7 @@ static const int CHILDREN_CNT = 4;
 static const float SCALE_FACTOR = 1.5f;
 static const int DX[] = {0, 1, 0, 1};
 static const int DY[] = {0, 0, -1, -1};
-static const float THETA = 0.6;
+static const float THETA = 0.6f;
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
