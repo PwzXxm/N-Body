@@ -5,7 +5,6 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
 
     qt_node_t *root;
     vector_t *acc = (vector_t *)malloc(sizeof(vector_t) * n_particle);
-    bool *boundary_flags = (bool *)malloc(sizeof(bool) * n_particle);
 
     // tree construction
     for (int step = 0; step < n_steps; step++) {
@@ -14,12 +13,11 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
 #ifdef DEBUG
         printf("step: %d\n", step);
 #endif
-        
+
         // initialization
-        for(int i = 0; i < n_particle; i++) {
+        for (int i = 0; i < n_particle; i++) {
             acc[i].x = 0.0f;
             acc[i].y = 0.0f;
-            boundary_flags[i] = false;
         }
 
 #ifdef DEBUG
@@ -28,13 +26,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         printf("******************************\n");
 #endif
         for (int i = 0; i < n_particle; i++) {
-            if (qt_is_out_of_boundary(particles[i], boundary)) {
-                boundary_flags[i] = true;
-            }
-
-            if (!boundary_flags[i]) {
-                qt_insert(&particles[i], root);
-            }
+            qt_insert(&particles[i], root);
 
 #ifdef DEBUG
             // printf("Iteration: %d\n", i);
@@ -53,23 +45,20 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
 #endif
 
         for (int i = 0; i < n_particle; i++) {
-            if (!boundary_flags[i]) {
-                vector_t forces = qt_compute_force(&particles[i], root, grav);
-                acc[i].x += forces.x / particles[i].mass;
-                acc[i].y += forces.y / particles[i].mass;
-            }
+            vector_t forces = qt_compute_force(&particles[i], root, grav);
+            acc[i].x += forces.x / particles[i].mass;
+            acc[i].y += forces.y / particles[i].mass;
         }
 
         for (int i = 0; i < n_particle; i++) {
-            if (!boundary_flags[i]) {
-                particles[i].v.x += acc[i].x * dt;
-                particles[i].v.y += acc[i].y * dt;
-                particles[i].pos.x += particles[i].v.x * dt;
-                particles[i].pos.y += particles[i].v.y * dt;
-            }
+            particles[i].v.x += acc[i].x * dt;
+            particles[i].v.y += acc[i].y * dt;
+            particles[i].pos.x += particles[i].v.x * dt;
+            particles[i].pos.y += particles[i].v.y * dt;
+
+            boundary = MAX(boundary, MAX(fabs(particles[i].pos.x), fabs(particles[i].pos.y)));
         }
-
-
+        boundary += 1.0f;
 
 #ifdef DEBUG
         printf("Particles:\n");
@@ -89,7 +78,6 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
     }
 
     free(acc);
-    free(boundary_flags);
 }
 
 void qt_init(qt_node_t *root) {}
@@ -195,7 +183,7 @@ float qt_find_boundary(int n_particle, particle_t *particles) {
         maxi = MAX(maxi, MAX(x, y));
     }
 
-    return maxi * SCALE_FACTOR;
+    return maxi * SCALE_FACTOR + 1.0f;
 }
 
 void qt_print_tree(qt_node_t *root, int level) {
@@ -274,10 +262,14 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
 #else
         vector_t temp = force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
         printf("Compute forces between ((pos), mass): ((%f, %f), %f) and ((%f, %f), %f); result: (%f, %f)\n",
-            p->pos.x, p->pos.y, p->mass,
-            root->particle->pos.x, root->particle->pos.y, root->particle->mass,
-            temp.x, temp.y
-        );
+               p->pos.x,
+               p->pos.y,
+               p->mass,
+               root->particle->pos.x,
+               root->particle->pos.y,
+               root->particle->mass,
+               temp.x,
+               temp.y);
         return temp;
 #endif
     } else {
@@ -299,7 +291,7 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
     return f;
 }
 
-inline float qt_dist(vector_t a, vector_t b) { return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2)); }
+inline float qt_dist(vector_t a, vector_t b) { return sqrtf(powf(a.x - b.x, 2) + powf(a.y - b.y, 2)); }
 
 void qt_free_tree(qt_node_t *root) {
     if (root == NULL) return;
@@ -316,10 +308,5 @@ void qt_free_tree(qt_node_t *root) {
 }
 
 inline bool qt_is_out_of_boundary(particle_t p, float boundary) {
-    return (
-        p.pos.x < -boundary ||
-        p.pos.x > boundary ||
-        p.pos.y < -boundary ||
-        p.pos.y > boundary
-    );
+    return (p.pos.x < -boundary || p.pos.x > boundary || p.pos.y < -boundary || p.pos.y > boundary);
 }
