@@ -6,7 +6,7 @@
 #include "utils.h"
 #include "math.h"
 
-// #define DEBUG
+// #define QT_SEQ_DEBUG
 
 static const int QT_CHILDREN_CNT = 4;
 static const float QT_SCALE_FACTOR = 1.5f;
