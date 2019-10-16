@@ -1,4 +1,6 @@
 #pragma once
+
+#include "quad_tree_comm.h"
 #include "stdlib.h"
 #include "float.h"
 #include "stdio.h"
@@ -7,11 +9,12 @@
 
 // #define DEBUG
 
-static const int CHILDREN_CNT = 4;
-static const float SCALE_FACTOR = 1.5f;
-static const int DX[] = {0, 1, 0, 1};
-static const int DY[] = {0, 0, -1, -1};
-static const float THETA = 0.6f;
+static const int QT_CHILDREN_CNT = 4;
+static const float QT_SCALE_FACTOR = 1.5f;
+static const float QT_THETA = 0.6f;
+
+static const int QT_DX[] = {0, 1, 0, 1};
+static const int QT_DY[] = {0, 0, -1, -1};
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
