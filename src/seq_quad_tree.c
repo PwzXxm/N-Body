@@ -10,7 +10,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
     for (int step = 0; step < n_steps; step++) {
         root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary * 2);
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
         printf("step: %d\n", step);
 #endif
 
@@ -20,7 +20,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
             acc[i].y = 0.0f;
         }
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
         printf("******************************\n");
         printf("* Construct Tree             *\n");
         printf("******************************\n");
@@ -28,7 +28,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         for (int i = 0; i < n_particle; i++) {
             qt_insert(&particles[i], root);
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
             // printf("Iteration: %d\n", i);
             // qt_print_tree(root, 0);
 #endif
@@ -37,7 +37,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         // compute centre mass and total mass at each node
         qt_compute_mass(root);
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
         printf("******************************\n");
         printf("* Compute mass               *\n");
         printf("******************************\n");
@@ -60,7 +60,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         }
         boundary += 1.0f;
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
         printf("Particles:\n");
         for (int i = 0; i < n_particle; i++) {
             printf("%d: %f\n", i, particles[i].pos.x);
@@ -85,7 +85,7 @@ void qt_init(qt_node_t *root) {}
 void qt_insert(particle_t *p, qt_node_t *node) {
     if (node == NULL) return;
 
-#ifdef DEBUG
+#ifdef QT_SEQ_DEBUG
     printf("... trying to insert p at (%f, %f) into node with min_pos (%f, %f) ...\n",
            p->pos.x,
            p->pos.y,
@@ -257,7 +257,7 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
 
     if (root->particle != NULL) {
         // leaf node
-#ifndef DEBUG
+#ifndef QT_SEQ_DEBUG
         return force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
 #else
         vector_t temp = force_between_particle(p->pos, root->particle->pos, p->mass, root->particle->mass, grav);
@@ -308,5 +308,14 @@ void qt_free_tree(qt_node_t *root) {
 }
 
 inline bool qt_is_out_of_boundary(particle_t p, float boundary) {
+<<<<<<< HEAD
     return (p.pos.x < -boundary || p.pos.x > boundary || p.pos.y < -boundary || p.pos.y > boundary);
+=======
+    return (
+        p.pos.x < -boundary ||
+        p.pos.x >= boundary ||
+        p.pos.y < -boundary ||
+        p.pos.y >= boundary
+    );
+>>>>>>> Parallel-quad-tree
 }
