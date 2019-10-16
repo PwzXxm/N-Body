@@ -101,19 +101,19 @@ void qt_insert(particle_t *p, qt_node_t *node) {
         } else {
             // intermediate node, traverse down
             int index = qt_find_ind(p, node);
-            qt_insert(p, index == CHILDREN_CNT ? NULL : node->children[index]);
+            qt_insert(p, index == QT_CHILDREN_CNT ? NULL : node->children[index]);
         }
     } else {
         // already has a particle in the node, move the particle into children
-        node->children = (qt_node_t **)malloc(sizeof(qt_node_t *) * CHILDREN_CNT);
+        node->children = (qt_node_t **)malloc(sizeof(qt_node_t *) * QT_CHILDREN_CNT);
 
         float w_2 = node->width / 2;
 
-        for (int i = 0; i < CHILDREN_CNT; i++) {
+        for (int i = 0; i < QT_CHILDREN_CNT; i++) {
             node->children[i] = qt_new_node(
                 (vector_t){
-                    .x = node->min_pos.x + DX[i] * w_2,
-                    .y = node->min_pos.y + DY[i] * w_2,
+                    .x = node->min_pos.x + QT_DX[i] * w_2,
+                    .y = node->min_pos.y + QT_DY[i] * w_2,
                 },
                 w_2);
         }
@@ -121,10 +121,10 @@ void qt_insert(particle_t *p, qt_node_t *node) {
         particle_t *tmp_particle = node->particle;
         node->particle = NULL;
         int index = qt_find_ind(tmp_particle, node);
-        qt_insert(tmp_particle, index == CHILDREN_CNT ? NULL : node->children[index]);
+        qt_insert(tmp_particle, index == QT_CHILDREN_CNT ? NULL : node->children[index]);
 
         index = qt_find_ind(p, node);
-        qt_insert(p, index == CHILDREN_CNT ? NULL : node->children[index]);
+        qt_insert(p, index == QT_CHILDREN_CNT ? NULL : node->children[index]);
     }
 }
 
@@ -183,7 +183,7 @@ float qt_find_boundary(int n_particle, particle_t *particles) {
         maxi = MAX(maxi, MAX(x, y));
     }
 
-    return maxi * SCALE_FACTOR + 1.0f;
+    return maxi * QT_SCALE_FACTOR;
 }
 
 void qt_print_tree(qt_node_t *root, int level) {
@@ -201,13 +201,13 @@ void qt_print_tree(qt_node_t *root, int level) {
 
         if (root->children != NULL) {
             printf("\tchildren:\n\t\t");
-            for (int i = 0; i < CHILDREN_CNT; i++) {
+            for (int i = 0; i < QT_CHILDREN_CNT; i++) {
                 printf("%s: %d; ", BLOCK_DIR[i], (root->children[i] == NULL ? 0 : 1));
             }
             printf("\n");
             printf("==============================\n");
 
-            for (int i = 0; i < CHILDREN_CNT; i++) {
+            for (int i = 0; i < QT_CHILDREN_CNT; i++) {
                 if (root->children[i] != NULL) {
                     printf("Go down to %s\n", BLOCK_DIR[i]);
                     qt_print_tree(root->children[i], level + 1);
@@ -230,9 +230,9 @@ qt_mass_t qt_compute_mass(qt_node_t *root) {
     } else {
         if (root->children != NULL) {
             // intermediate node
-            qt_mass_t *masses = (qt_mass_t *)malloc(sizeof(qt_mass_t) * CHILDREN_CNT);
+            qt_mass_t *masses = (qt_mass_t *)malloc(sizeof(qt_mass_t) * QT_CHILDREN_CNT);
 
-            for (int i = 0; i < CHILDREN_CNT; i++) {
+            for (int i = 0; i < QT_CHILDREN_CNT; i++) {
                 masses[i] = qt_compute_mass(root->children[i]);
                 sum_mass += masses[i].mass;
                 cm_pos.x += (masses[i].mass * masses[i].pos.x);
@@ -276,10 +276,10 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
         // intermediate node
 
         if (root->children != NULL) {
-            if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < THETA) {
+            if ((root->width / qt_dist(root->mass_info.pos, p->pos)) < QT_THETA) {
                 return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
             } else {
-                for (int i = 0; i < CHILDREN_CNT; i++) {
+                for (int i = 0; i < QT_CHILDREN_CNT; i++) {
                     vector_t temp = qt_compute_force(p, root->children[i], grav);
                     f.x += temp.x;
                     f.y += temp.y;
@@ -297,7 +297,7 @@ void qt_free_tree(qt_node_t *root) {
     if (root == NULL) return;
 
     if (root->children != NULL) {
-        for (int i = 0; i < CHILDREN_CNT; i++) {
+        for (int i = 0; i < QT_CHILDREN_CNT; i++) {
             qt_free_tree(root->children[i]);
         }
 
