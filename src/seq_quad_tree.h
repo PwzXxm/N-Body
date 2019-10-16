@@ -1,6 +1,5 @@
 #pragma once
 
-#include "quad_tree_comm.h"
 #include "stdlib.h"
 #include "float.h"
 #include "stdio.h"
