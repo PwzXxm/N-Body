@@ -74,3 +74,13 @@ vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2
     fv.y = f * (pos2.y - pos1.y) / dis;
     return fv;
 }
+
+uint64_t GetTimeStamp() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * (uint64_t)1000000 + tv.tv_usec;
+}
+
+long double GetTimeSpentInSeconds(uint64_t start) {
+    return (long double)((GetTimeStamp() - start) / 1000000.0f);
+}

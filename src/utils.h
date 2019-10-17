@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <mpi.h>
+#include <sys/time.h>
+#include <inttypes.h>
 
 #define ROOT_NODE 0
 
@@ -41,3 +43,7 @@ extern "C"
 void output_particle_pos_v(int n, vector_t positions[], FILE* fp);
 
 vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2, float grav);
+
+uint64_t GetTimeStamp();
+
+long double GetTimeSpentInSeconds(uint64_t start);
