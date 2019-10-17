@@ -46,4 +46,4 @@ vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2
 
 uint64_t GetTimeStamp();
 
-long double GetTimeSpentInSeconds(uint64_t start);
+double GetTimeSpentInSeconds(uint64_t start);

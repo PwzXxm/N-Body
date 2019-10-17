@@ -81,6 +81,6 @@ uint64_t GetTimeStamp() {
     return tv.tv_sec * (uint64_t)1000000 + tv.tv_usec;
 }
 
-long double GetTimeSpentInSeconds(uint64_t start) {
-    return (long double)((GetTimeStamp() - start) / 1000000.0f);
+double GetTimeSpentInSeconds(uint64_t start) {
+    return (double)((GetTimeStamp() - start) / 1000000.0f);
 }

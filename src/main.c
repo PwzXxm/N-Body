@@ -133,7 +133,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
     
     if (m_rank == ROOT_NODE) {
-        printf("Time used: %f sec\n", (double)GetTimeSpentInSeconds(start));
+        printf("Time used: %f sec\n", GetTimeSpentInSeconds(start));
     }
 
 
