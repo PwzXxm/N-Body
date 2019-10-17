@@ -26,7 +26,7 @@ typedef struct qt_node {
     qt_mass_t mass_info;
 
     vector_t min_pos;
-    float width;
+    float x_len, y_len;
 
     particle_t *particle;
 
@@ -42,7 +42,7 @@ void qt_insert(particle_t *particle, qt_node_t *node);
 
 size_t qt_find_ind(particle_t *p, qt_node_t *node);
 
-qt_node_t *qt_new_node(vector_t pos, float width);
+qt_node_t *qt_new_node(vector_t pos, float x_len, float y_len);
 
 float qt_find_boundary(int n_particle, particle_t *particles);
 
