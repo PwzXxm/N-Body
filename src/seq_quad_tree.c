@@ -303,7 +303,7 @@ void qt_reset_tree(qt_array_t *bh_tree) {
     bh_tree->size = 0;
 }
 
-inline bool qt_is_out_of_boundary(particle_t *p, float boundary) {
+bool qt_is_out_of_boundary(particle_t *p, float boundary) {
     // printf("--- %f < %f\n", p->pos.x, -boundary);
     // printf("--- %f >= %f\n", p->pos.x, boundary);
     // printf("--- %f < %f\n", p->pos.y, -boundary);
