@@ -15,11 +15,11 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
 
     /* balance load using ORB */
     uint64_t start;
-    start = GetTimeStamp();
+    // start = GetTimeStamp();
     int work_rank_assign = 0;
 
-    // int orb_lvl = 0;
     int orb_lvl = (int)pow(2, ceil(log2(m_size)))-1;
+    // int orb_lvl = 4;
     if (m_rank == ROOT_NODE) {
         printf("Using ORB level: %d\n", orb_lvl);
     }
@@ -52,15 +52,15 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
     orb_root->r = p_cnt-1;
     qt_ORB_with_level(orb_root, ps, ps_idx, 0, p_cnt-1, 0, orb_lvl, &work_rank_assign, m_size);
 
-    qt_print_ORB_tree(orb_root, 0);
+    // qt_print_ORB_tree(orb_root, 0);
 
-    printf("rank %d: Load balancing: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
+    // printf("rank %d: Load balancing: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
 
     /* construct quad tree (BH) on each node */
-    start = GetTimeStamp();
+    // start = GetTimeStamp();
+    qt_p_construct_BH(ps, ps_idx, orb_root, m_rank);
+    // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
 
-
-    printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
     // send/recv tree
 
     // compute force
@@ -219,7 +219,10 @@ qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
     node->len.y = y_len;
 
     node->end_node = false;
+
     node->work_rank = 0;
+    node->qt_node = NULL;
+
     node->l = node->r = 0;
 
     node->left = NULL;
@@ -235,7 +238,9 @@ void qt_free_ORB_tree(qt_ORB_node_t *root) {
     if (root == NULL) return;
     if (root->left != NULL) qt_free_ORB_tree(root->left);
     if (root->right != NULL) qt_free_ORB_tree(root->right);
+    if (root->qt_node != NULL) qt_free_tree(root->qt_node);
     free (root);
+    root = NULL;
 }
 
 void qt_print_ORB_tree(qt_ORB_node_t *root, int d) {
@@ -265,4 +270,21 @@ void qt_test_find_medium(particle_t *ps, int n) {
     for (int i = 0; i < n; i++) {
         printf("%d: %f\n", idx[i], ps[idx[i]].pos.x);
     }
+}
+
+void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) {
+    if (node == NULL) return ;
+    if (node->end_node && node->work_rank == rank) {
+        // construct local BH
+        node->qt_node = qt_new_node(node->min_pos, node->len);
+
+        for (int i = node->l; i <= node->r; i++) {
+            qt_insert(&ps[idx[i]], node->qt_node);
+        }
+    } else {
+        qt_p_construct_BH(ps, idx, node->left, rank);
+        qt_p_construct_BH(ps, idx, node->right, rank);
+    }
+}
+
 }

@@ -18,6 +18,7 @@ typedef struct qt_ORB_node {
     int l, r;
 
     struct qt_ORB_node *left, *right;
+    qt_node_t *qt_node;
 } qt_ORB_node_t;
 
 void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out);
@@ -37,3 +38,5 @@ void qt_free_ORB_tree(qt_ORB_node_t *root);
 void qt_print_ORB_tree(qt_ORB_node_t *root, int d);
 
 void qt_test_find_medium(particle_t *ps, int n);
+
+void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *orb_root, int rank);
