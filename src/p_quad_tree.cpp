@@ -1,4 +1,4 @@
-#include "p_quad_tree.h"
+#include "p_quad_tree.hpp"
 
 void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out) {
     int m_size, m_rank;
@@ -261,7 +261,7 @@ void qt_test_find_medium(particle_t *ps, int n) {
     
     n = 5;
 
-    printf("offset of y: %d\n", offsetof(vector_t, y));
+    printf("offset of y: %lu\n", offsetof(vector_t, y));
     vector_t v = {.x = 1.6f, .y = -2.4f};
     printf("====== %f\n", *(float *)(((char *)&(v))+4));
 

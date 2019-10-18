@@ -1,9 +1,12 @@
 #include <math.h>
 #include <stddef.h>
 
-#include "utils.h"
+#include "utils.hpp"
 
 static const int MAGIC_NUMBER = 9036;
+
+MPI_Datatype mpi_vector_t;
+MPI_Datatype mpi_particle_t;
 
 void init_MPI_datatype() {
     // vector_t

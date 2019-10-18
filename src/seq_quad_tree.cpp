@@ -1,4 +1,4 @@
-#include "seq_quad_tree.h"
+#include "seq_quad_tree.hpp"
 
 void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
     float boundary = qt_find_boundary(n_particle, particles);
@@ -257,7 +257,7 @@ qt_mass_t qt_compute_mass(particle_t *ps, qt_array_t *bh_tree, int node_idx) {
     root->mass_info.mass = sum_mass;
     root->mass_info.pos = cm_pos;
 
-    return (qt_mass_t){.mass = sum_mass, .pos = cm_pos};
+    return (qt_mass_t){.pos = cm_pos, .mass = sum_mass};
 }
 
 vector_t qt_compute_force(particle_t *ps, int p_idx, qt_array_t *bh_tree, int node_idx, float grav) {

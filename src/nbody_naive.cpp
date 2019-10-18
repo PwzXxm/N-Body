@@ -2,7 +2,7 @@
 #include <mpi.h>
 #include <omp.h>
 
-#include "nbody_naive.h"
+#include "nbody_naive.hpp"
 
 void nbody_mpi_openmp_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
     int m_size, m_rank;
