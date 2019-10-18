@@ -11,7 +11,7 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
     //     return ;
     // }
 
-    float boundary = qt_find_boundary(n_particle, ps);
+    const float boundary = qt_find_boundary(n_particle, ps);
 
     /* balance load using ORB */
     uint64_t start;
@@ -32,9 +32,13 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
         exit(1);
     }
 
+    // counter for how many particles within the boundary
+    int p_cnt = 0;
     for (int i = 0; i < n_particle; i++) {
-        ps_idx[i] = i;
-        printf("%d: \t%f\t%f\n", i, ps[i].pos.x, ps[i].pos.y);
+        if (!qt_is_out_of_boundary(&(ps[i]), boundary)) {
+            printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
+            ps_idx[p_cnt++] = i;
+        }
     }
 
     // for (int i = 0; i < n_particle; i++) {
@@ -45,8 +49,8 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
 
     qt_ORB_node_t *orb_root = qt_new_ORB_node(-boundary, boundary, boundary*2, boundary*2);
     orb_root->l = 0;
-    orb_root->r = n_particle-1;
-    qt_ORB_with_level(orb_root, ps, ps_idx, 0, n_particle-1, 0, orb_lvl, &work_rank_assign, m_size);
+    orb_root->r = p_cnt-1;
+    qt_ORB_with_level(orb_root, ps, ps_idx, 0, p_cnt-1, 0, orb_lvl, &work_rank_assign, m_size);
 
     qt_print_ORB_tree(orb_root, 0);
 
