@@ -1,37 +1,26 @@
-CC = mpicc
-CFLAGS = -Wall -O3 -std=c99 -MMD
-OPENMPFLAGS = -fopenmp
-OPENMPL = 
-LM =
+CXX = mpic++
+CXXFLAGS = -Wall -std=c++11 -O3 -MMD -fopenmp
+LDFLAGS =
 
-nbody-with-cuda: CFLAGS += -DWITH_CUDA
-
-ifeq ($(shell uname), Darwin)
-	# for apple's clang
-	OPENMPFLAGS = -Xpreprocessor -fopenmp
-	OPENMPL = -lomp
-	CFLAGS += -Wno-format
-endif
+nbody-with-cuda: CXXFLAGS += -DWITH_CUDA
 
 ifeq ($(shell uname), Linux)
-	CFLAGS += -Wno-unused-result
-	LM = -lm
+	CXXFLAGS += -Wno-unused-result
+	LDFLAGS += -lm
 endif
-
-CFLAGS += $(OPENMPFLAGS)
 
 RM = /bin/rm
 
-SRCS = $(wildcard ./src/*.c)
-OBJS = $(subst .c,.o,$(SRCS))
+SRCS = $(wildcard ./src/*.cpp)
+OBJS = $(subst .cpp,.o,$(SRCS))
 
 all: nbody
 
 nbody: $(OBJS)
-	$(CC) $(CFLAGS) $(OPENMPL) -o $@ $(OBJS) $(LM)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LM)
 
 nbody-with-cuda: $(OBJS) cuda
-	mpic++ $(CFLAGS) $(OPENMPL) -o $@ $(OBJS) ./src/cuda.o $(LM) -lcudart -L/usr/local/cuda-10.1/lib64/
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) ./src/cuda.o $(LM) -lcudart -L/usr/local/cuda-10.1/lib64/
 
 cuda: ./src/cuda.cu
 	nvcc -c ./src/cuda.cu -o ./src/cuda.o -I/usr/lib/mpich/include -L/usr/lib/mpich/lib

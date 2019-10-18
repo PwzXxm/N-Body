@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "utils.h"
+#include "utils.hpp"
+#include "nbody_cuda.hpp"
 
 __global__ void compute_acceleration_local(vector_t *d_l_acc_arr, vector_t *d_pos_arr, 
                     float *d_m_arr, int n, int local_n, int offset, float grav) {
@@ -44,7 +45,7 @@ __global__ void update_velocity_position_local(vector_t *d_l_acc_arr, vector_t *
 // nbody_cuda_mpi_naive
 // ===============================================================================
 
-extern "C" void __nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
+void nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
     int m_size, m_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &m_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
@@ -140,7 +141,7 @@ extern "C" void __nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[
 // nbody_cuda_single_naive
 // ===============================================================================
 
-extern "C" void __nbody_cuda_single_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
+void nbody_cuda_single_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
     int m_size, m_rank;
     MPI_Comm_size(MPI_COMM_WORLD, &m_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);

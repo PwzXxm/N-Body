@@ -1,15 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 #include <sys/time.h>
 #include <mpi.h>
 
-#include "utils.h"
-#include "seq_quad_tree.h"
-#include "nbody_naive.h"
+#include "utils.hpp"
+#include "seq_quad_tree.hpp"
+#include "nbody_naive.hpp"
 
 #ifdef WITH_CUDA
-#include "nbody_cuda.h"
+#include "nbody_cuda.hpp"
 
 static const char CUDA_SINGLE_NAIVE[] = "cuda_single_naive";
 static const char CUDA_MPI_NAIVE[] = "cuda_mpi_naive";
@@ -63,6 +64,8 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         if (m_rank == ROOT_NODE) print_usage("Invalid step or time interval\n");
         return 1;
     }
+
+    algorithm_fun_ptr_t algorithm_fun_ptr = NULL;
 
     if (strcmp(algo_name, SEQ_QUAD_TREE) == 0) {
         algorithm_fun_ptr = &qt_sim;
@@ -125,6 +128,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     }
 
     uint64_t start = GetTimeStamp();
+    
     (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
     
     if (m_rank == ROOT_NODE) {
