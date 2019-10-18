@@ -229,8 +229,6 @@ qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
     node->left = NULL;
     node->right = NULL;
 
-    qt_array_init(&(node->bh_tree), INIT_CAPACITY);
-
     return node;
 }
 
@@ -278,15 +276,14 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
     if (node == NULL) return ;
     if (node->end_node && node->work_rank == rank) {
         // construct local BH
-        qt_array_t *bh_tree = &(node->bh_tree);
-        int root_node = qt_array_append(bh_tree, node->min_pos, node->len);
+        int root_node = qt_vec_append(node->tree_vec, node->min_pos, node->len);
 
         for (int i = node->l; i <= node->r; i++) {
-            qt_insert(ps, idx[i], bh_tree, root_node);
+            qt_insert(ps, idx[i], node->tree_vec, root_node);
         }
 
         // compute mass for the tree
-        qt_compute_mass(ps, bh_tree, root_node);
+        qt_compute_mass(ps, node->tree_vec, root_node);
     } else {
         qt_p_construct_BH(ps, idx, node->left, rank);
         qt_p_construct_BH(ps, idx, node->right, rank);
