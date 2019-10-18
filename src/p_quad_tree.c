@@ -195,7 +195,7 @@ float qt_quick_select(particle_t *ps, int *idx, int l, int r, size_t offset, int
  * Get x/y coordinate from the array using index
  */
 inline float qt_ps_idx_to_xy(particle_t *ps, int i, size_t offset) {
-    return *(float *)(((void *)&(ps[i].pos))+offset);
+    return *(float *)(((char *)&(ps[i].pos))+offset);
 }
 
 /*
@@ -263,7 +263,7 @@ void qt_test_find_medium(particle_t *ps, int n) {
 
     printf("offset of y: %d\n", offsetof(vector_t, y));
     vector_t v = {.x = 1.6f, .y = -2.4f};
-    printf("====== %f\n", *(float *)(((void *)&(v))+4));
+    printf("====== %f\n", *(float *)(((char *)&(v))+4));
 
 
     float ans = qt_quick_select(ps, idx, 0, 4, offsetof(vector_t, y), (n&1)?(n+1)/2:n/2);
