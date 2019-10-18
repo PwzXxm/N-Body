@@ -38,6 +38,10 @@ void free_MPI_datatype_qt() {
 
 
 void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
+    int m_size, m_rank;
+    MPI_Comm_size(MPI_COMM_WORLD, &m_size);
+    MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+
     float boundary = qt_find_boundary(n_particle, particles);
 
     int root_idx;
@@ -109,8 +113,6 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
             }
         }
 
-
-
 #ifdef QT_SEQ_DEBUG
         printf("Particles:\n");
         for (int i = 0; i < n_particle; i++) {
@@ -121,8 +123,10 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         // break;
 #endif
 
-        if (step == (n_steps - 1) || is_full_out) {
-            output_particle_pos(n_particle, particles, f_out);
+        if (m_rank == ROOT_NODE) {
+            if (step == (n_steps - 1) || is_full_out) {
+                output_particle_pos(n_particle, particles, f_out);
+            }
         }
 
         tree_vec.clear();
