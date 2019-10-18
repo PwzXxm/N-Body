@@ -9,7 +9,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
 
     // tree construction
     for (int step = 0; step < n_steps; step++) {
-        root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, boundary*2, boundary*2);
+        root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, (vector_t){.x = boundary*2, .y = boundary*2});
 
 #ifdef QT_SEQ_DEBUG
         printf("step: %d\n", step);
@@ -119,8 +119,8 @@ void qt_insert(particle_t *p, qt_node_t *node) {
         // already has a particle in the node, move the particle into children
         node->children = (qt_node_t **)malloc(sizeof(qt_node_t *) * QT_CHILDREN_CNT);
 
-        float xl_2 = node->x_len / 2;
-        float yl_2 = node->y_len / 2;
+        float xl_2 = (node->len.x) / 2;
+        float yl_2 = (node->len.y) / 2;
 
         for (int i = 0; i < QT_CHILDREN_CNT; i++) {
             node->children[i] = qt_new_node(
@@ -128,8 +128,11 @@ void qt_insert(particle_t *p, qt_node_t *node) {
                     .x = node->min_pos.x + QT_DX[i] * xl_2,
                     .y = node->min_pos.y + QT_DY[i] * yl_2,
                 },
-                xl_2,
-                yl_2);
+                (vector_t) {
+                    .x = xl_2,
+                    .y = yl_2,
+                }
+                );
         }
 
         particle_t *tmp_particle = node->particle;
@@ -148,8 +151,8 @@ size_t qt_find_ind(particle_t *p, qt_node_t *node) {
         exit(1);
     }
 
-    float mid_x = node->min_pos.x + (node->x_len/2);
-    float mid_y = node->min_pos.y - (node->y_len/2);
+    float mid_x = node->min_pos.x + ((node->len.x)/2);
+    float mid_y = node->min_pos.y - ((node->len.y)/2);
 
     if (p->pos.y > mid_y && p->pos.y <= node->min_pos.y) {
         if (p->pos.x < mid_x && p->pos.x >= node->min_pos.x) {
@@ -175,12 +178,11 @@ size_t qt_find_ind(particle_t *p, qt_node_t *node) {
     }
 }
 
-qt_node_t *qt_new_node(vector_t pos, float xl, float yl) {
+qt_node_t *qt_new_node(vector_t pos, vector_t len) {
     qt_node_t *node = (qt_node_t *)malloc(sizeof(qt_node_t));
 
     node->min_pos = pos;
-    node->x_len = xl;
-    node->y_len = yl;
+    node->len = len;
 
     node->particle = NULL;
     node->children = NULL;
@@ -205,7 +207,7 @@ void qt_print_tree(qt_node_t *root, int level) {
 
     if (root != NULL) {
         printf("Node level: %d\n", level);
-        printf("\tmin_pos x, y, x_len, y_len: %f, %f, %f, %f\n", root->min_pos.x, root->min_pos.y, root->x_len, root->y_len);
+        printf("\tmin_pos x, y, x_len, y_len: %f, %f, %f, %f\n", root->min_pos.x, root->min_pos.y, root->len.x, root->len.y);
         printf("\tmass: %f\n", root->mass_info.mass);
         printf("\tmass_pos x, y: %f, %f\n", root->mass_info.pos.x, root->mass_info.pos.y);
 
@@ -286,7 +288,7 @@ vector_t qt_compute_force(particle_t *p, qt_node_t *root, float grav) {
         // intermediate node
 
         if (root->children != NULL) {
-            if ((((root->x_len + root->y_len)/2.0f) / qt_dist(root->mass_info.pos, p->pos)) < QT_THETA) {
+            if ((((root->len.x + root->len.y)/2.0f) / qt_dist(root->mass_info.pos, p->pos)) < QT_THETA) {
                 return force_between_particle(p->pos, root->mass_info.pos, p->mass, root->mass_info.mass, grav);
             } else {
                 for (int i = 0; i < QT_CHILDREN_CNT; i++) {
