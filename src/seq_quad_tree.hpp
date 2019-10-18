@@ -37,6 +37,12 @@ typedef struct qt_node {
     int child_idx[QT_CHILDREN_CNT];
 } qt_node_t;
 
+extern MPI_Datatype mpi_qt_mass_t;
+extern MPI_Datatype mpi_qt_node_t;
+
+void init_MPI_datatype_qt();
+void free_MPI_datatype_qt();
+
 // typedef struct {
 //     qt_node_t *arr;
 //     size_t size;

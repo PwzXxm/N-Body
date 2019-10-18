@@ -1,5 +1,42 @@
 #include "seq_quad_tree.hpp"
 
+MPI_Datatype mpi_qt_node_t;
+MPI_Datatype mpi_qt_mass_t;
+
+void init_MPI_datatype_qt() {
+    // qt_mass_t
+    {
+        const int nitems = 2;
+        int block_lengths[] = {1, 1};
+        MPI_Datatype types[] = {mpi_vector_t, MPI_FLOAT};
+        MPI_Aint offsets[nitems];
+        offsets[0] = offsetof(qt_mass_t, pos);
+        offsets[1] = offsetof(qt_mass_t, mass);
+        MPI_Type_create_struct(nitems, block_lengths, offsets, types, &mpi_qt_mass_t);
+        MPI_Type_commit(&mpi_qt_mass_t);
+    }
+    // mpi_qt_node_t
+    {
+        const int nitems = 5;
+        int block_lengths[] = {1, 1, 1, 1, QT_CHILDREN_CNT};
+        MPI_Datatype types[] = {mpi_qt_mass_t, mpi_vector_t, mpi_vector_t, MPI_INT, MPI_INT};
+        MPI_Aint offsets[nitems];
+        offsets[0] = offsetof(qt_node_t, mass_info);
+        offsets[1] = offsetof(qt_node_t, min_pos);
+        offsets[2] = offsetof(qt_node_t, len);
+        offsets[3] = offsetof(qt_node_t, particle_idx);
+        offsets[4] = offsetof(qt_node_t, child_idx);
+        MPI_Type_create_struct(nitems, block_lengths, offsets, types, &mpi_qt_node_t);
+        MPI_Type_commit(&mpi_qt_node_t);
+    }
+}
+
+void free_MPI_datatype_qt() {
+    MPI_Type_free(&mpi_qt_node_t);
+    MPI_Type_free(&mpi_qt_mass_t);
+}
+
+
 void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float grav, FILE *f_out, bool is_full_out) {
     float boundary = qt_find_boundary(n_particle, particles);
 
