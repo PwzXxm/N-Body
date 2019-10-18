@@ -21,7 +21,7 @@ typedef struct qt_ORB_node {
 
     struct qt_ORB_node *left, *right;
 
-    tree_vec_t tree_vec;
+    tree_vec_t *tree_vec;
 } qt_ORB_node_t;
 
 void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out);

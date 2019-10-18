@@ -62,8 +62,7 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
     // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
 
     // send/recv tree
-
-    qt_p_bcast(orb_root, m_rank);
+    // qt_p_bcast(orb_root, m_rank);
 
     // compute force
 
@@ -226,6 +225,8 @@ qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
 
     node->l = node->r = 0;
 
+    node->tree_vec = new tree_vec_t();
+
     node->left = NULL;
     node->right = NULL;
 
@@ -239,6 +240,11 @@ void qt_free_ORB_tree(qt_ORB_node_t *root) {
     if (root == NULL) return;
     if (root->left != NULL) qt_free_ORB_tree(root->left);
     if (root->right != NULL) qt_free_ORB_tree(root->right);
+
+    root->tree_vec->clear();
+    if (root->tree_vec != NULL) delete root->tree_vec;
+    root->tree_vec = NULL;
+
     free (root);
     root = NULL;
 }
@@ -276,14 +282,16 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
     if (node == NULL) return ;
     if (node->end_node && node->work_rank == rank) {
         // construct local BH
-        int root_node = qt_vec_append(node->tree_vec, node->min_pos, node->len);
+
+        // printf("rk: %d, pos: %f, %f, len: %f, %f, v_size: %d\n", rank, node->min_pos.x, node->min_pos.y, node->len.x, node->len.y, node->tree_vec->size());
+        int root_node = qt_vec_append(*(node->tree_vec), node->min_pos, node->len);
 
         for (int i = node->l; i <= node->r; i++) {
-            qt_insert(ps, idx[i], node->tree_vec, root_node);
+            qt_insert(ps, idx[i], *(node->tree_vec), root_node);
         }
 
         // compute mass for the tree
-        qt_compute_mass(ps, node->tree_vec, root_node);
+        qt_compute_mass(ps, *(node->tree_vec), root_node);
     } else {
         qt_p_construct_BH(ps, idx, node->left, rank);
         qt_p_construct_BH(ps, idx, node->right, rank);
@@ -328,13 +336,10 @@ void qt_p_bcast(qt_ORB_node_t *node, int rank) {
     if (node == NULL) return;
 
     if (node->end_node) {
-        if (node->work_rank == rank) {
-            // mpi send
-        } else {
-            // mpi recv length
-            // mpi recv array
-            // deserialization
-        }
+        int n = node->tree_vec->size();
+        MPI_Bcast(&n, 1, MPI_INT, node->work_rank, MPI_COMM_WORLD);
+        node->tree_vec->resize(n);
+        MPI_Bcast(node->tree_vec->data(), n, mpi_qt_node_t, node->work_rank, MPI_COMM_WORLD);
     } else {
         qt_p_bcast(node->left, rank);
         qt_p_bcast(node->right, rank);
