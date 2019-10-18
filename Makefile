@@ -1,12 +1,17 @@
 CXX = mpic++
-CXXFLAGS = -Wall -std=c++11 -O3 -MMD -fopenmp
+CXXFLAGS = -Wall -std=c++11 -O3 -MMD
 LDFLAGS =
 
 nbody-with-cuda: CXXFLAGS += -DWITH_CUDA
 
 ifeq ($(shell uname), Linux)
-	CXXFLAGS += -Wno-unused-result
+	CXXFLAGS += -Wno-unused-result -fopenmp
 	LDFLAGS += -lm
+endif
+
+ifeq ($(shell uname), Darwin)
+	CXXFLAGS += -Xpreprocessor -fopenmp
+	LDFLAGS += -lomp
 endif
 
 RM = /bin/rm
@@ -17,10 +22,10 @@ OBJS = $(subst .cpp,.o,$(SRCS))
 all: nbody
 
 nbody: $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LM)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS)
 
 nbody-with-cuda: $(OBJS) cuda
-	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) ./src/cuda.o $(LM) -lcudart -L/usr/local/cuda-10.1/lib64/
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) ./src/cuda.o $(LDFLAGS) -lcudart -L/usr/local/cuda-10.1/lib64/
 
 cuda: ./src/cuda.cu
 	nvcc -c ./src/cuda.cu -DHIDE_MPI -o ./src/cuda.o
