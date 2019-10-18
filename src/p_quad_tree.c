@@ -18,8 +18,8 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
     start = GetTimeStamp();
     int work_rank_assign = 0;
 
-    int orb_lvl = (int)pow(2, ceil(log2(m_size)));
     // int orb_lvl = 0;
+    int orb_lvl = (int)pow(2, ceil(log2(m_size)))-1;
     if (m_rank == ROOT_NODE) {
         printf("Using ORB level: %d\n", orb_lvl);
     }
