@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "utils.hpp"
 #include "nbody_cuda.hpp"
+#include "cuda_mpi_helper.hpp"
 
 __global__ void compute_acceleration_local(vector_t *d_l_acc_arr, vector_t *d_pos_arr, 
                     float *d_m_arr, int n, int local_n, int offset, float grav) {
@@ -47,8 +48,7 @@ __global__ void update_velocity_position_local(vector_t *d_l_acc_arr, vector_t *
 
 void nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
     int m_size, m_rank;
-    MPI_Comm_size(MPI_COMM_WORLD, &m_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+    get_mpi_size_rank(&m_size, &m_rank);
 
     if (m_rank == ROOT_NODE) {
         printf("MPI_size: %d\n", m_size);
@@ -115,7 +115,8 @@ void nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[], float grav
         for (int i = 0; i < m_size; ++i) {
             int l = interval_of_nodes[i];
             int r = interval_of_nodes[i + 1];
-            MPI_Bcast(pos_arr + l, r - l, mpi_vector_t, i, MPI_COMM_WORLD);
+            
+            sync_particle_positions(pos_arr + l, r - l, i);
         }
         cudaMemcpy(d_pos_arr, pos_arr, sizeof(vector_t) * n, cudaMemcpyHostToDevice);
 
@@ -142,12 +143,12 @@ void nbody_cuda_mpi_naive(int n, int m, float dt, particle_t parts[], float grav
 // ===============================================================================
 
 void nbody_cuda_single_naive(int n, int m, float dt, particle_t parts[], float grav, FILE* fp, bool full_output) {
+    
     int m_size, m_rank;
-    MPI_Comm_size(MPI_COMM_WORLD, &m_size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+    get_mpi_size_rank(&m_size, &m_rank);
+
     if (m_rank != ROOT_NODE) return;
 
-    // vector_t *acc_arr = (vector_t *) malloc(sizeof(vector_t) * n);
     vector_t *v_arr = (vector_t *) malloc(sizeof(vector_t) * n);
     vector_t *pos_arr = (vector_t *) malloc(sizeof(vector_t) * n);
     float *m_arr = (float *) malloc(sizeof(float) * n);

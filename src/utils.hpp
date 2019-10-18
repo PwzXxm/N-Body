@@ -2,7 +2,10 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+
+#ifndef HIDE_MPI
 #include <mpi.h>
+#endif
 
 #define ROOT_NODE 0
 
@@ -10,14 +13,15 @@ typedef struct vector {
     float x, y;
 } vector_t;
 
-extern MPI_Datatype mpi_vector_t;
-
 typedef struct particle {
     vector_t pos, v;
     float mass;
 } particle_t;
 
+#ifndef HIDE_MPI
+extern MPI_Datatype mpi_vector_t;
 extern MPI_Datatype mpi_particle_t;
+#endif
 
 // num of particles
 // num of steps
