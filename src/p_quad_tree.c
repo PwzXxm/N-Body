@@ -223,12 +223,13 @@ qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
     node->end_node = false;
 
     node->work_rank = 0;
-    node->qt_node = NULL;
 
     node->l = node->r = 0;
 
     node->left = NULL;
     node->right = NULL;
+
+    qt_array_init(&(node->bh_tree), INIT_CAPACITY);
 
     return node;
 }
@@ -240,7 +241,6 @@ void qt_free_ORB_tree(qt_ORB_node_t *root) {
     if (root == NULL) return;
     if (root->left != NULL) qt_free_ORB_tree(root->left);
     if (root->right != NULL) qt_free_ORB_tree(root->right);
-    if (root->qt_node != NULL) qt_free_tree(root->qt_node);
     free (root);
     root = NULL;
 }
@@ -278,14 +278,15 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
     if (node == NULL) return ;
     if (node->end_node && node->work_rank == rank) {
         // construct local BH
-        node->qt_node = qt_new_node(node->min_pos, node->len);
+        qt_array_t *bh_tree = &(node->bh_tree);
+        int root_node = qt_array_append(bh_tree, node->min_pos, node->len);
 
         for (int i = node->l; i <= node->r; i++) {
-            qt_insert(&ps[idx[i]], node->qt_node);
+            qt_insert(ps, idx[i], bh_tree, root_node);
         }
 
         // compute mass for the tree
-        qt_compute_mass(node->qt_node);
+        qt_compute_mass(ps, bh_tree, root_node);
     } else {
         qt_p_construct_BH(ps, idx, node->left, rank);
         qt_p_construct_BH(ps, idx, node->right, rank);
@@ -326,44 +327,11 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
 // }
 /******************************/
 
-/******************************/
-/*       Dynamic array        */
-/******************************/
-void qt_array_init(qt_array_t *a, int init_cap) {
-    a->arr = (char *)malloc(sizeof(char) * init_cap);
-    a->size = 0;
-    a->cap = init_cap;
-}
-
-void qt_array_append(qt_array_t *a, char c) {
-    if (a->size >= a->cap-1) {
-        a->cap *= 2;
-        a->arr = (char *)realloc(a->arr, sizeof(char) * a->cap);
-    }
-    a->arr[a->size++] = c;
-}
-
-void qt_array_reserve(qt_array_t *a, int size) {
-    while ((a->cap - a->size) < size) {
-        a->cap *= 2;
-        a->arr = (char *)realloc(a->arr, sizeof(char) * a->cap);
-    }
-}
-
-void qt_array_free(qt_array_t *a) {
-    free(a->arr);
-    a->arr = NULL;
-}
-/******************************/
-
 void qt_p_bcast(qt_ORB_node_t *node, int rank) {
     if (node == NULL) return;
 
     if (node->end_node) {
         if (node->work_rank == rank) {
-            qt_array_t a;
-            qt_array_init(&a, INIT_CAPACITY);
-
             // mpi send
         } else {
             // mpi recv length

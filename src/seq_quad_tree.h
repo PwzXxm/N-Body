@@ -11,6 +11,7 @@
 static const int QT_CHILDREN_CNT = 4;
 static const float QT_SCALE_FACTOR = 1.5f;
 static const float QT_THETA = 0.6f;
+static const int INIT_CAPACITY = 1024;
 
 static const int QT_DX[] = {0, 1, 0, 1};
 static const int QT_DY[] = {0, 0, -1, -1};
@@ -28,32 +29,43 @@ typedef struct qt_node {
     vector_t min_pos;
     vector_t len;
 
-    particle_t *particle;
+    int particle_idx;
 
     // top-left, top-right, bot-left, bot-right
-    struct qt_node **children;
+    int child_idx[QT_CHILDREN_CNT];
 } qt_node_t;
+
+typedef struct {
+    qt_node_t *arr;
+    size_t size;
+    size_t cap;
+} qt_array_t;
 
 void qt_sim(int n_particle, int n_steps, float time_step, particle_t *particles, float grav, FILE *f_out, bool is_full_out);
 
 void qt_init(qt_node_t *root);
 
-void qt_insert(particle_t *particle, qt_node_t *node);
+void qt_insert(particle_t *ps, int p_idx, qt_array_t *bh_tree, int node_idx);
 
-size_t qt_find_ind(particle_t *p, qt_node_t *node);
+size_t qt_find_ind(particle_t *ps, int p_idx, qt_node_t *node);
 
 qt_node_t *qt_new_node(vector_t pos, vector_t len);
 
 float qt_find_boundary(int n_particle, particle_t *particles);
 
-void qt_print_tree(qt_node_t *root, int level);
+void qt_print_tree(particle_t *ps, qt_array_t *bh_tree, int node_idx, int level);
 
-qt_mass_t qt_compute_mass(qt_node_t *root);
+qt_mass_t qt_compute_mass(particle_t *ps, qt_array_t *bh_tree, int node_idx);
 
-vector_t qt_compute_force(particle_t *particle, qt_node_t *root, float grav);
+vector_t qt_compute_force(particle_t *ps, int idx, qt_array_t *bh_tree, int node_idx, float grav);
 
 float qt_dist(vector_t a, vector_t b);
 
-void qt_free_tree(qt_node_t *root);
+void qt_reset_tree(qt_array_t *bh_tree);
 
 bool qt_is_out_of_boundary(particle_t *p, float boundary);
+
+void qt_array_init(qt_array_t *a, int init_cap);
+int qt_array_append(qt_array_t *a, vector_t pos, vector_t len);
+void qt_array_reserve(qt_array_t *a, int size);
+void qt_array_free(qt_array_t *a);

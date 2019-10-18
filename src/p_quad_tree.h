@@ -10,7 +10,6 @@
 
 #define QT_SWAP_INT(a,b) {int t;t=(a);(a)=(b);(b)=t;}
 
-static const int INIT_CAPACITY = 1024;
 
 typedef struct qt_ORB_node {
     vector_t min_pos;
@@ -21,14 +20,9 @@ typedef struct qt_ORB_node {
     int l, r;
 
     struct qt_ORB_node *left, *right;
-    qt_node_t *qt_node;
-} qt_ORB_node_t;
 
-typedef struct {
-    char *arr;
-    size_t size;
-    size_t cap;
-} qt_array_t;
+    qt_array_t bh_tree;
+} qt_ORB_node_t;
 
 void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out);
 
@@ -56,12 +50,6 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *orb_root, int ra
 // void qt_serialize_int(qt_array_t *a, int *x);
 // void qt_serialize_float(qt_array_t *a, float *x);
 // void qt_serialize_vector_t(qt_array_t *a, vector_t * v);
-
-
-void qt_array_init(qt_array_t *a, int init_cap);
-void qt_array_append(qt_array_t *a, char c);
-void qt_array_reserve(qt_array_t *a, int size);
-void qt_array_free(qt_array_t *a);
 
 
 void qt_p_bcast(qt_ORB_node_t *node, int rank);
