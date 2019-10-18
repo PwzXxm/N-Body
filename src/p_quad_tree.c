@@ -63,6 +63,8 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
 
     // send/recv tree
 
+    qt_p_bcast(orb_root, m_rank);
+
     // compute force
 
     if (m_rank == ROOT_NODE) {
@@ -281,10 +283,95 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
         for (int i = node->l; i <= node->r; i++) {
             qt_insert(&ps[idx[i]], node->qt_node);
         }
+
+        // compute mass for the tree
+        qt_compute_mass(node->qt_node);
     } else {
         qt_p_construct_BH(ps, idx, node->left, rank);
         qt_p_construct_BH(ps, idx, node->right, rank);
     }
 }
 
+// /******************************/
+// /*       Serialization        */
+// /******************************/
+// void qt_serialize(qt_array_t *a, qt_node_t *root) {
+//     int x = 111111;
+//     qt_serialize_int(a, &x);
+
+//     printf("size: %d, cap: %d\n", a->size, a->cap);
+//     for (int i = 0; i < a->size; i++) {
+//         printf("%X ", a->arr[i]);
+//     }
+//     printf("\n");
+// }
+
+// qt_node_t *qt_deserialize(qt_array_t *a) {
+// }
+
+// void qt_serialize_int(qt_array_t *a, int *x) {
+//     qt_array_reserve(a, sizeof(*x));
+//     memcpy(a->arr+a->size, x, sizeof(*x));
+//     a->size += sizeof(*x);
+// }
+
+
+// void qt_serialize_float(qt_array_t *a, float *x) {
+//     qt_array_reserve(a, sizeof(*x));
+//     memcpy(a->arr+a->size, x, sizeof(*x));
+//     a->size += sizeof(*x);
+// }
+
+// void qt_serialize_vector_t(qt_array_t *a, vector_t * v) {
+// }
+/******************************/
+
+/******************************/
+/*       Dynamic array        */
+/******************************/
+void qt_array_init(qt_array_t *a, int init_cap) {
+    a->arr = (char *)malloc(sizeof(char) * init_cap);
+    a->size = 0;
+    a->cap = init_cap;
+}
+
+void qt_array_append(qt_array_t *a, char c) {
+    if (a->size >= a->cap-1) {
+        a->cap *= 2;
+        a->arr = (char *)realloc(a->arr, sizeof(char) * a->cap);
+    }
+    a->arr[a->size++] = c;
+}
+
+void qt_array_reserve(qt_array_t *a, int size) {
+    while ((a->cap - a->size) < size) {
+        a->cap *= 2;
+        a->arr = (char *)realloc(a->arr, sizeof(char) * a->cap);
+    }
+}
+
+void qt_array_free(qt_array_t *a) {
+    free(a->arr);
+    a->arr = NULL;
+}
+/******************************/
+
+void qt_p_bcast(qt_ORB_node_t *node, int rank) {
+    if (node == NULL) return;
+
+    if (node->end_node) {
+        if (node->work_rank == rank) {
+            qt_array_t a;
+            qt_array_init(&a, INIT_CAPACITY);
+
+            // mpi send
+        } else {
+            // mpi recv length
+            // mpi recv array
+            // deserialization
+        }
+    } else {
+        qt_p_bcast(node->left, rank);
+        qt_p_bcast(node->right, rank);
+    }
 }
