@@ -56,4 +56,4 @@ float qt_dist(vector_t a, vector_t b);
 
 void qt_free_tree(qt_node_t *root);
 
-bool qt_is_out_of_boundary(particle_t p, float boundary);
+bool qt_is_out_of_boundary(particle_t *p, float boundary);

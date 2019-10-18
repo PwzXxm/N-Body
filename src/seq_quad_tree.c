@@ -28,7 +28,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
         printf("******************************\n");
 #endif
         for (int i = 0; i < n_particle; i++) {
-            if (qt_is_out_of_boundary(particles[i], boundary)) {
+            if (qt_is_out_of_boundary(&(particles[i]), boundary)) {
                 boundary_flags[i] = true;
             }
 
@@ -319,11 +319,15 @@ void qt_free_tree(qt_node_t *root) {
     free(root);
 }
 
-inline bool qt_is_out_of_boundary(particle_t p, float boundary) {
+inline bool qt_is_out_of_boundary(particle_t *p, float boundary) {
+    // printf("--- %f < %f\n", p->pos.x, -boundary);
+    // printf("--- %f >= %f\n", p->pos.x, boundary);
+    // printf("--- %f < %f\n", p->pos.y, -boundary);
+    // printf("--- %f >= %f\n", p->pos.y, boundary);
     return (
-        p.pos.x < -boundary ||
-        p.pos.x >= boundary ||
-        p.pos.y < -boundary ||
-        p.pos.y >= boundary
+        p->pos.x < -boundary ||
+        p->pos.x >= boundary ||
+        p->pos.y < -boundary ||
+        p->pos.y >= boundary
     );
 }
