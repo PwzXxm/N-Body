@@ -149,7 +149,23 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
            tree_vec.at(node_idx).min_pos.x,
            tree_vec.at(node_idx).min_pos.y);
 #endif
-    printf("a\n");
+    
+    auto& pos = ps[p_idx].pos;
+    auto& node = tree_vec.at(node_idx);
+    if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
+        assert(false);
+    }
+    if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
+        printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
+                pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
+        assert(false);
+    }
+
+
+
+
+
+
     if (tree_vec.at(node_idx).particle_idx == -1) {
         printf("b\n");
         if (tree_vec.at(node_idx).child_idx[0] == -1) {
@@ -172,6 +188,7 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
         printf("lx, ly: %f, %f \n", tree_vec.at(node_idx).len.x, tree_vec.at(node_idx).len.y);
         printf("xl_2, yl_2: %f, %f\n", xl_2, yl_2);
         assert(xl_2 > 0.00001);
+
         for (int i = 0; i < QT_CHILDREN_CNT; i++) {
             tree_vec.at(node_idx).child_idx[i] = qt_vec_append(tree_vec,
                 (vector_t){
@@ -187,7 +204,7 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
         printf("==========\n");
         int  p_idx_t =tree_vec.at(node_idx).particle_idx; 
         printf("%d: %f %f\n", p_idx, ps[p_idx].pos.x, ps[p_idx].pos.y);
-        printf("%d: %f %f\n", p_idx, ps[p_idx_t].pos.x, ps[p_idx_t].pos.y);
+        printf("%d: %f %f\n", p_idx_t, ps[p_idx_t].pos.x, ps[p_idx_t].pos.y);
         printf("==========\n");
 
         int tmp_particle_idx = tree_vec.at(node_idx).particle_idx;

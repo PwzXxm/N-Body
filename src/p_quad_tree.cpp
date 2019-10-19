@@ -53,7 +53,7 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
         int p_cnt = 0;
         for (int i = 0; i < n_particle; i++) {
             if (!qt_is_out_of_boundary(&(ps[i]), boundary)) {
-                printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
+                // printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
                 ps_idx[p_cnt++] = i;
             }
         }
@@ -146,42 +146,22 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
     int k = ((n & 1) ? (n+1)/2 : n/2);
 
     bool is_horizon = d&1;
-    size_t offset = is_horizon ? offsetof(vector_t, y) : offsetof(vector_t, x);
-    // size_t offset = offsetof(vector_t, x);
-
-    for (int i = l; i <= r; i++) {
-        auto v = get_v(ps[idx[i]], is_horizon);
-        printf("v = %f, id = %d \n", v, idx[i]);
-    }
-
-    printf("============\n");
-
 
     float median = qt_quick_select(ps, idx+l, n, is_horizon, k);
+    
+    
 
-    for (int i = l; i <= r; i++) {
-        auto v = get_v(ps[idx[i]], is_horizon);
-        printf("v = %f, id = %d \n", v, idx[i]);
-    }
+    // for (int i = l; i <= l+k-1; i++) {
+    //     auto v = get_v(ps[idx[i]], is_horizon);
+    //     assert(v <= median);
+    // }
+    // assert( get_v(ps[idx[l+k]], is_horizon) == median );
+    // for (int i = l+k+1; i <= r; i++) {
+    //     auto v = get_v(ps[idx[i]], is_horizon);
+    //     assert(v >= median);
+    // } 
 
-    for (int i = l; i <= l+k-1; i++) {
-        auto v = get_v(ps[idx[i]], is_horizon);
-        printf("v = %f, m = %f \n", v, median);
-        assert(v <= median);
-    }
-    assert( get_v(ps[idx[l+k]], is_horizon) == median );
-    assert(false);
-    for (int i = l+k+1; i <= r; i++) {
-        auto v = get_v(ps[idx[i]], is_horizon);
-        assert(v >= median);
-    } 
-
-    if (median == FLT_MAX) {
-        fprintf(stderr, "Unable to find median\n");
-        exit(1);
-    }
-
-    // printf("median: %f with %d\n", median, k);
+    printf("is_horizon: %d ,median: %f\n", is_horizon, median);
 
     d++;
 
@@ -201,6 +181,23 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
         new_node->r = l+k-1;
         node->left = new_node;
         qt_ORB_with_level(new_node, ps, idx, l, l+k-1, d, lvl, w_r, size);
+        {   
+            for (int i = l; i <= l+k-1; ++i) {
+                auto& pos = ps[idx[i]].pos;
+                auto& node = *new_node;
+
+                printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
+                        pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
+                if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
+                    assert(false);
+                }
+                if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
+                    assert(false);
+                }
+            }
+        }
+
+
     }
     if (l+k <= r) {
         if (is_horizon) {
@@ -214,6 +211,21 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
         new_node->r = r;
         node->right = new_node;
         qt_ORB_with_level(new_node, ps, idx, l+k, r, d, lvl, w_r, size);
+        {   
+            for (int i = l+k; i <= r; ++i) {
+                auto& pos = ps[idx[i]].pos;
+                auto& node = *new_node;
+
+                printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
+                        pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
+                if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
+                    assert(false);
+                }
+                if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
+                    assert(false);
+                }
+            }
+        }
     }
 }
 
@@ -225,7 +237,11 @@ class QtComparator {
         }
 
         bool operator () (const int &lhs, const int &rhs) {
-            return get_value(lhs) < get_value(rhs);
+            if (is_horizon) {
+                return get_value(lhs) > get_value(rhs);
+            } else {
+                return get_value(lhs) < get_value(rhs);
+            }
         }
 
         float get_value(int idx) {
@@ -345,7 +361,7 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
         // printf("rk: %d, pos: %f, %f, len: %f, %f, v_size: %d\n", rank, node->min_pos.x, node->min_pos.y, node->len.x, node->len.y, node->tree_vec->size());
         int root_node = qt_vec_append(*(node->tree_vec), node->min_pos, node->len);
         printf("node: %f %f len: %f %f\n", node->min_pos.x, node->min_pos.y, node->len.x, node->len.y);
-        assert(false);
+        // assert(false);
 
         for (int i = node->l; i <= node->r; i++) {
             printf("insert id: %d\n", idx[i]);
