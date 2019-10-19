@@ -2,6 +2,8 @@
 
 void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out) {
     int m_size, m_rank;
+    uint64_t start;
+
     MPI_Comm_size(MPI_COMM_WORLD, &m_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
 
@@ -14,65 +16,66 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
     const float boundary = qt_find_boundary(n_particle, ps);
 
     /* balance load using ORB */
-    uint64_t start;
-    // start = GetTimeStamp();
-    int work_rank_assign = 0;
 
-    int orb_lvl = (int)pow(2, ceil(log2(m_size)))-1;
-    // int orb_lvl = 4;
-    if (m_rank == ROOT_NODE) {
-        printf("Using ORB level: %d\n", orb_lvl);
-    }
+    for (int step = 0; step < n_steps; step++) {
 
-    // init an array of integers representing the index of the particle in 'ps'
-    // as the order in the original particle array needs to be preserved
-    int *ps_idx = (int *)malloc(sizeof(int) * n_particle);
-    if (ps_idx == NULL) {
-        fprintf(stderr, "Unable to allocate memory\n");
-        exit(1);
-    }
+        // start = GetTimeStamp();
+        int work_rank_assign = 0;
 
-    // counter for how many particles within the boundary
-    int p_cnt = 0;
-    for (int i = 0; i < n_particle; i++) {
-        if (!qt_is_out_of_boundary(&(ps[i]), boundary)) {
-            printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
-            ps_idx[p_cnt++] = i;
-        }
-    }
-
-    // for (int i = 0; i < n_particle; i++) {
-    //     printf("%d: %f\n", ps_idx[i], ps[ps_idx[i]].pos.x);
-    // }
-
-    // qt_test_find_medium(ps, n_particle);
-
-    qt_ORB_node_t *orb_root = qt_new_ORB_node(-boundary, boundary, boundary*2, boundary*2);
-    orb_root->l = 0;
-    orb_root->r = p_cnt-1;
-    qt_ORB_with_level(orb_root, ps, ps_idx, 0, p_cnt-1, 0, orb_lvl, &work_rank_assign, m_size);
-
-    // qt_print_ORB_tree(orb_root, 0);
-
-    // printf("rank %d: Load balancing: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
-
-    /* construct quad tree (BH) on each node */
-    // start = GetTimeStamp();
-    qt_p_construct_BH(ps, ps_idx, orb_root, m_rank);
-    // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
-
-    // send/recv tree
-    // qt_p_bcast(orb_root, m_rank);
-
-    // compute force
-
-    if (m_rank == ROOT_NODE) {
-        // if (step == (n_steps - 1) || is_full_out) {
-            output_particle_pos(n_particle, ps, f_out);
+        int orb_lvl = (int)pow(2, ceil(log2(m_size)))-1;
+        // if (m_rank == ROOT_NODE) {
+        //     printf("Using ORB level: %d\n", orb_lvl);
         // }
-    }
 
-    free(ps_idx);
+        // init an array of integers representing the index of the particle in 'ps'
+        // as the order in the original particle array needs to be preserved
+        int *ps_idx = (int *)malloc(sizeof(int) * n_particle);
+        if (ps_idx == NULL) {
+            fprintf(stderr, "Unable to allocate memory\n");
+            exit(1);
+        }
+
+        // counter for how many particles within the boundary
+        int p_cnt = 0;
+        for (int i = 0; i < n_particle; i++) {
+            if (!qt_is_out_of_boundary(&(ps[i]), boundary)) {
+                // printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
+                ps_idx[p_cnt++] = i;
+            }
+        }
+
+        // for (int i = 0; i < n_particle; i++) {
+        //     printf("%d: %f\n", ps_idx[i], ps[ps_idx[i]].pos.x);
+        // }
+
+        // qt_test_find_medium(ps, n_particle);
+
+        qt_ORB_node_t *orb_root = qt_new_ORB_node(-boundary, boundary, boundary*2, boundary*2);
+        orb_root->l = 0;
+        orb_root->r = p_cnt-1;
+        qt_ORB_with_level(orb_root, ps, ps_idx, 0, p_cnt-1, 0, orb_lvl, &work_rank_assign, m_size);
+
+        // qt_print_ORB_tree(orb_root, 0);
+
+        // printf("rank %d: Load balancing: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
+
+        /* construct quad tree (BH) on each node */
+        // start = GetTimeStamp();
+        qt_p_construct_BH(ps, ps_idx, orb_root, m_rank);
+        // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
+
+        // send/recv tree
+        // qt_p_bcast(orb_root, m_rank);
+
+        // compute force
+
+        if (m_rank == ROOT_NODE) {
+            // if (step == (n_steps - 1) || is_full_out) {
+                output_particle_pos(n_particle, ps, f_out);
+            // }
+        }
+        free(ps_idx);
+    }
 }
 
 void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int r, int d, int lvl, int *w_r, int size) {
@@ -97,7 +100,7 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
         exit(1);
     }
 
-    printf("median: %f with %d\n", median, k);
+    // printf("median: %f with %d\n", median, k);
 
     d++;
 
