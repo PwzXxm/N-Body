@@ -43,11 +43,11 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
 #endif
         int work_rank_assign = 0;
 
-        // int orb_lvl = (int)(ceil(log2(m_size)));
-        int orb_lvl = 2;
-        if (m_rank == ROOT_NODE) {
-            printf("Using ORB level: %d\n", orb_lvl);
-        }
+        int orb_lvl = (int)(ceil(log2(m_size)));
+        // int orb_lvl = 2;
+        // if (m_rank == ROOT_NODE) {
+        //     printf("Using ORB level: %d\n", orb_lvl);
+        // }
 
         // counter for how many particles within the boundary
         int p_cnt = 0;
@@ -161,7 +161,7 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
     //     assert(v >= median);
     // } 
 
-    printf("is_horizon: %d ,median: %f\n", is_horizon, median);
+    // printf("is_horizon: %d ,median: %f\n", is_horizon, median);
 
     d++;
 
@@ -181,21 +181,21 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
         new_node->r = l+k-1;
         node->left = new_node;
         qt_ORB_with_level(new_node, ps, idx, l, l+k-1, d, lvl, w_r, size);
-        {   
-            for (int i = l; i <= l+k-1; ++i) {
-                auto& pos = ps[idx[i]].pos;
-                auto& node = *new_node;
+        // {   
+        //     for (int i = l; i <= l+k-1; ++i) {
+        //         auto& pos = ps[idx[i]].pos;
+        //         auto& node = *new_node;
 
-                printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
-                        pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
-                if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
-                    assert(false);
-                }
-                if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
-                    assert(false);
-                }
-            }
-        }
+        //         printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
+        //                 pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
+        //         if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
+        //             assert(false);
+        //         }
+        //         if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
+        //             assert(false);
+        //         }
+        //     }
+        // }
 
 
     }
@@ -211,21 +211,21 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
         new_node->r = r;
         node->right = new_node;
         qt_ORB_with_level(new_node, ps, idx, l+k, r, d, lvl, w_r, size);
-        {   
-            for (int i = l+k; i <= r; ++i) {
-                auto& pos = ps[idx[i]].pos;
-                auto& node = *new_node;
+        // {   
+        //     for (int i = l+k; i <= r; ++i) {
+        //         auto& pos = ps[idx[i]].pos;
+        //         auto& node = *new_node;
 
-                printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
-                        pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
-                if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
-                    assert(false);
-                }
-                if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
-                    assert(false);
-                }
-            }
-        }
+        //         printf("pos.x = %f, pos.y = %f, node.x = %f, node.y = %f, node.len.x = %f, node.len.y = %f \n", 
+        //                 pos.x, pos.y, node.min_pos.x, node.min_pos.y, node.len.x, node.len.y);
+        //         if (pos.x < node.min_pos.x || pos.x >= node.min_pos.x + node.len.x) {
+        //             assert(false);
+        //         }
+        //         if (pos.y > node.min_pos.y || pos.y <= node.min_pos.y - node.len.y) {
+        //             assert(false);
+        //         }
+        //     }
+        // }
     }
 }
 
@@ -323,13 +323,13 @@ void qt_free_ORB_tree(qt_ORB_node_t *root) {
 void qt_print_ORB_tree(qt_ORB_node_t *root, int d, particle_t *ps, int *idx) {
     if (root == NULL) return ;
 
-    printf("Level: %d:\nmin_pos: %f, %f\nlen:%f, %f\nend_node: %d\nl, r: %d, %d\nwork_rank: %d\n\n",
-            d, root->min_pos.x, root->min_pos.y, root->len.x, root->len.y,
-            root->end_node, root->l, root->r, root->work_rank);
+    // printf("Level: %d:\nmin_pos: %f, %f\nlen:%f, %f\nend_node: %d\nl, r: %d, %d\nwork_rank: %d\n\n",
+    //         d, root->min_pos.x, root->min_pos.y, root->len.x, root->len.y,
+    //         root->end_node, root->l, root->r, root->work_rank);
 
-    for (int i = root->l; i <= root->r; i++) {
-        printf("%f %f\n", ps[idx[i]].pos.x, ps[idx[i]].pos.y);
-    }
+    // for (int i = root->l; i <= root->r; i++) {
+    //     printf("%f %f\n", ps[idx[i]].pos.x, ps[idx[i]].pos.y);
+    // }
 
     qt_print_ORB_tree(root->left, d+1, ps, idx);
     qt_print_ORB_tree(root->right, d+1, ps, idx);
@@ -360,11 +360,11 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
 
         // printf("rk: %d, pos: %f, %f, len: %f, %f, v_size: %d\n", rank, node->min_pos.x, node->min_pos.y, node->len.x, node->len.y, node->tree_vec->size());
         int root_node = qt_vec_append(*(node->tree_vec), node->min_pos, node->len);
-        printf("node: %f %f len: %f %f\n", node->min_pos.x, node->min_pos.y, node->len.x, node->len.y);
+        // printf("node: %f %f len: %f %f\n", node->min_pos.x, node->min_pos.y, node->len.x, node->len.y);
         // assert(false);
 
         for (int i = node->l; i <= node->r; i++) {
-            printf("insert id: %d\n", idx[i]);
+            // printf("insert id: %d\n", idx[i]);
             qt_insert(ps, idx[i], *(node->tree_vec), root_node);
         }
 
