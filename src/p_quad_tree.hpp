@@ -10,7 +10,6 @@
 
 #define QT_SWAP_INT(a,b) {int t;t=(a);(a)=(b);(b)=t;}
 
-
 typedef struct qt_ORB_node {
     vector_t min_pos;
     vector_t len;
@@ -28,7 +27,7 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
 
 void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int r, int d, int lvl, int *w_rank, int size);
 
-float qt_quick_select(particle_t *ps, int *idx, int l, int r, size_t offset, int k);
+float qt_quick_select(particle_t *ps, int *idx, int n, bool is_horizon, int k);
 
 float qt_ps_idx_to_xy(particle_t *ps, int i, size_t offset);
 
@@ -38,7 +37,7 @@ qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len);
 
 void qt_free_ORB_tree(qt_ORB_node_t *root);
 
-void qt_print_ORB_tree(qt_ORB_node_t *root, int d);
+void qt_print_ORB_tree(qt_ORB_node_t *root, int d, particle_t *ps, int *idx);
 
 void qt_test_find_medium(particle_t *ps, int n);
 
@@ -56,4 +55,4 @@ void qt_p_bcast(qt_ORB_node_t *node, int rank);
 
 void qt_p_compute_force(qt_ORB_node_t *orb_root, particle_t *ps, int *idx, float dt, float grav, int rank);
 
-void gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank);
+void qt_p_gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank);

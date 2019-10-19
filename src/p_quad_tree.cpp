@@ -1,11 +1,23 @@
+#include <algorithm>
 #include "p_quad_tree.hpp"
+
+#define TIMER
+static const int TIMER_CNT = 5;
+static const char* PHASE_STR[TIMER_CNT] = {"Load Balance", "Construct Tree", "Broadcast Tree", "Compute forces", "Send/Recv particles"};
 
 void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav, FILE *f_out, bool is_full_out) {
     int m_size, m_rank;
-    uint64_t start;
-
     MPI_Comm_size(MPI_COMM_WORLD, &m_size);
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
+
+#ifdef TIMER
+    // load balance, 
+    float durations[TIMER_CNT] = {0.0f};
+    uint64_t start;
+#endif
+    if (m_rank == ROOT_NODE) {
+        printf("MPI_size: %d, OPENMP_threads: %d\n", m_size, omp_get_max_threads());
+    }
 
     // the number of particles is small, switch to sequential
     // if (log2(n_particle) < m_size) {
@@ -17,7 +29,7 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
 
     // init an array of integers representing the index of the particle in 'ps'
     // as the order in the original particle array needs to be preserved
-    int *ps_idx = (int *)malloc(sizeof(int) * n_particle);
+    int *ps_idx = new int [n_particle];
     if (ps_idx == NULL) {
         fprintf(stderr, "Unable to allocate memory\n");
         exit(1);
@@ -26,19 +38,22 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
     for (int step = 0; step < n_steps; step++) {
 
         /* balance load using ORB */
-        // start = GetTimeStamp();
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) start = GetTimeStamp();
+#endif
         int work_rank_assign = 0;
 
-        int orb_lvl = (int)pow(2, ceil(log2(m_size)))-1;
-        // if (m_rank == ROOT_NODE) {
-        //     printf("Using ORB level: %d\n", orb_lvl);
-        // }
+        // int orb_lvl = (int)(ceil(log2(m_size)));
+        int orb_lvl = 2;
+        if (m_rank == ROOT_NODE) {
+            printf("Using ORB level: %d\n", orb_lvl);
+        }
 
         // counter for how many particles within the boundary
         int p_cnt = 0;
         for (int i = 0; i < n_particle; i++) {
             if (!qt_is_out_of_boundary(&(ps[i]), boundary)) {
-                // printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
+                printf("%d: \t%f\t%f\n", p_cnt, ps[i].pos.x, ps[i].pos.y);
                 ps_idx[p_cnt++] = i;
             }
         }
@@ -47,27 +62,51 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
         //     printf("%d: %f\n", ps_idx[i], ps[ps_idx[i]].pos.x);
         // }
 
-        // qt_test_find_medium(ps, n_particle);
-
         qt_ORB_node_t *orb_root = qt_new_ORB_node(-boundary, boundary, boundary*2, boundary*2);
         orb_root->l = 0;
         orb_root->r = p_cnt-1;
         qt_ORB_with_level(orb_root, ps, ps_idx, 0, p_cnt-1, 0, orb_lvl, &work_rank_assign, m_size);
 
-        // qt_print_ORB_tree(orb_root, 0);
+        qt_print_ORB_tree(orb_root, 0, ps, ps_idx);
 
-        // printf("rank %d: Load balancing: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) durations[0] += GetTimeSpentInSeconds(start);
+#endif
 
         /* construct quad tree (BH) on each node */
-        // start = GetTimeStamp();
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) start = GetTimeStamp();
+#endif
         qt_p_construct_BH(ps, ps_idx, orb_root, m_rank);
-        // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) durations[1] += GetTimeSpentInSeconds(start);
+#endif
 
-        // send/recv tree
+        /* send/recv tree */
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) start = GetTimeStamp();
+#endif
         qt_p_bcast(orb_root, m_rank);
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) durations[2] += GetTimeSpentInSeconds(start);
+#endif
 
-        // compute force
+        /* compute force */
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) start = GetTimeStamp();
+#endif
         qt_p_compute_force(orb_root, ps, ps_idx, dt, grav, m_rank);
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) durations[3] += GetTimeSpentInSeconds(start);
+#endif
+        /* gather all particles to root for output */
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) start = GetTimeStamp();
+#endif
+        qt_p_gather_particle(orb_root, ps, ps_idx, m_rank);
+#ifdef TIMER
+        if (m_rank == ROOT_NODE) durations[4] += GetTimeSpentInSeconds(start);
+#endif
 
         if (m_rank == ROOT_NODE) {
             if (step == (n_steps - 1) || is_full_out) {
@@ -75,7 +114,23 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
             }
         }
     }
-    free(ps_idx);
+
+#ifdef TIMER
+    // output all durations in average
+    if (m_rank == ROOT_NODE) {
+        for (int i = 0; i < TIMER_CNT; i++) {
+            printf("%s: %f sec\n", PHASE_STR[i], durations[i]/n_steps);
+        }
+
+    }
+#endif
+    
+    delete [] ps_idx;
+}
+
+
+float get_v(particle_t p, bool is_horizon) {
+    return is_horizon ? p.pos.y : p.pos.x;
 }
 
 void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int r, int d, int lvl, int *w_r, int size) {
@@ -93,7 +148,33 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
     bool is_horizon = d&1;
     size_t offset = is_horizon ? offsetof(vector_t, y) : offsetof(vector_t, x);
     // size_t offset = offsetof(vector_t, x);
-    float median = qt_quick_select(ps, idx, l, r, offset, k);
+
+    for (int i = l; i <= r; i++) {
+        auto v = get_v(ps[idx[i]], is_horizon);
+        printf("v = %f, id = %d \n", v, idx[i]);
+    }
+
+    printf("============\n");
+
+
+    float median = qt_quick_select(ps, idx+l, n, is_horizon, k);
+
+    for (int i = l; i <= r; i++) {
+        auto v = get_v(ps[idx[i]], is_horizon);
+        printf("v = %f, id = %d \n", v, idx[i]);
+    }
+
+    for (int i = l; i <= l+k-1; i++) {
+        auto v = get_v(ps[idx[i]], is_horizon);
+        printf("v = %f, m = %f \n", v, median);
+        assert(v <= median);
+    }
+    assert( get_v(ps[idx[l+k]], is_horizon) == median );
+    assert(false);
+    for (int i = l+k+1; i <= r; i++) {
+        auto v = get_v(ps[idx[i]], is_horizon);
+        assert(v >= median);
+    } 
 
     if (median == FLT_MAX) {
         fprintf(stderr, "Unable to find median\n");
@@ -136,63 +217,33 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
     }
 }
 
-/*
- * find the k-th smallest elem in the array
- * offset is used to switch between x and y coordinate
- * 
- * quickselect algorithm reference: https://www.stat.cmu.edu/~ryantibs/median/quickselect.c
- */
-float qt_quick_select(particle_t *ps, int *idx, int l, int r, size_t offset, int k) {
-    // printf("Start finding median\n");
-    // for (int i = 0; i < 10; i++) {
-    //     printf("%d ", idx[i]);
-    // }
-    // printf("\n");
-    // printf("l, r: %d, %d\n", l, r);
-    // printf("offset: %d\n", offset);
-    // printf("k: %d\n", k);
-    if (k > (r-l)) return FLT_MAX;
-
-    for (;;) {
-        if (r <= l+1) {
-            if (r == l+1 && qt_offset_gt(ps, idx, l, r, offset)) {
-                QT_SWAP_INT(idx[l], idx[r]);
-            }
-            return qt_ps_idx_to_xy(ps, idx[k], offset);
+class QtComparator {
+    public: 
+        QtComparator(particle_t *ps, bool is_horizon) {
+            this->ps = ps;
+            this->is_horizon = is_horizon;
         }
 
-        // choose middle item as the pivot
-        int mid = (l+r) >> 2, ll = l+1, rr=r;
-        QT_SWAP_INT(idx[mid], idx[l+1]);
-        
-        // sort element in l, l+1, r in ascending order
-        if (qt_offset_gt(ps, idx, l, r, offset)) { QT_SWAP_INT(idx[l], idx[r]); }
-        if (qt_offset_gt(ps, idx, l+1, r, offset)) { QT_SWAP_INT(idx[l+1], idx[r]); }
-        if (qt_offset_gt(ps, idx, l, l+1, offset)) { QT_SWAP_INT(idx[l], idx[l+1]); }
-
-        // put all elems smaller than mid in the left, others in the right
-        for (;;) {
-            // these two for loops are independent thus can be parallelized
-            #pragma omp parallel sections
-            {
-                #pragma omp section
-                {
-                    for (ll++;qt_offset_gt(ps, idx, l+1, ll, offset);ll++);
-                }
-                #pragma omp section
-                {
-                    for (rr--;qt_offset_gt(ps, idx, rr, l+1, offset);rr--);
-                }
-            }
-
-            if (rr < ll) break;
-            QT_SWAP_INT(idx[ll], idx[rr]);
+        bool operator () (const int &lhs, const int &rhs) {
+            return get_value(lhs) < get_value(rhs);
         }
-        // swap the pivot back
-        QT_SWAP_INT(idx[l+1], idx[rr]);
-        if (rr >= k) r = rr-1;
-        if (rr <= k) l = ll;
-    }
+
+        float get_value(int idx) {
+            auto& pos = ps[idx].pos;
+            return is_horizon ? pos.y : pos.x;
+        }
+
+    private:
+        particle_t *ps;
+        bool is_horizon;
+}; 
+
+
+
+float qt_quick_select(particle_t *ps, int *idx, int n, bool is_horizon, int k) {
+    QtComparator comp(ps, is_horizon);
+    std::nth_element(idx, idx + k, idx + n, comp);
+    return comp.get_value(idx[k]);
 }
 
 /*
@@ -217,7 +268,7 @@ bool qt_offset_gt(particle_t *ps, int *idx, int l, int r, size_t offset) {
  * Construct a new ORB node
  */
 qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
-    qt_ORB_node_t *node = (qt_ORB_node_t *)malloc(sizeof(qt_ORB_node_t));
+    qt_ORB_node_t *node = new qt_ORB_node_t;
 
     node->min_pos.x = x;
     node->min_pos.y = y;
@@ -250,19 +301,22 @@ void qt_free_ORB_tree(qt_ORB_node_t *root) {
     if (root->tree_vec != NULL) delete root->tree_vec;
     root->tree_vec = NULL;
 
-    free (root);
-    root = NULL;
+    delete root;
 }
 
-void qt_print_ORB_tree(qt_ORB_node_t *root, int d) {
+void qt_print_ORB_tree(qt_ORB_node_t *root, int d, particle_t *ps, int *idx) {
     if (root == NULL) return ;
 
-    printf("Level: %d:\nmin_pos: %f, %f\nlen:%f, %f\nend_node: %d\nl, r: %d, %d\nwork_rank: %d\n",
+    printf("Level: %d:\nmin_pos: %f, %f\nlen:%f, %f\nend_node: %d\nl, r: %d, %d\nwork_rank: %d\n\n",
             d, root->min_pos.x, root->min_pos.y, root->len.x, root->len.y,
             root->end_node, root->l, root->r, root->work_rank);
 
-    qt_print_ORB_tree(root->left, d+1);
-    qt_print_ORB_tree(root->right, d+1);
+    for (int i = root->l; i <= root->r; i++) {
+        printf("%f %f\n", ps[idx[i]].pos.x, ps[idx[i]].pos.y);
+    }
+
+    qt_print_ORB_tree(root->left, d+1, ps, idx);
+    qt_print_ORB_tree(root->right, d+1, ps, idx);
 }
 
 void qt_test_find_medium(particle_t *ps, int n) {
@@ -275,12 +329,12 @@ void qt_test_find_medium(particle_t *ps, int n) {
     printf("====== %f\n", *(float *)(((char *)&(v))+4));
 
 
-    float ans = qt_quick_select(ps, idx, 0, 4, offsetof(vector_t, y), (n&1)?(n+1)/2:n/2);
+    // float ans = qt_quick_select(ps, idx, 0, 4, offsetof(vector_t, y), (n&1)?(n+1)/2:n/2);
 
-    printf("med: %f\n", ans);
-    for (int i = 0; i < n; i++) {
-        printf("%d: %f\n", idx[i], ps[idx[i]].pos.x);
-    }
+    // printf("med: %f\n", ans);
+    // for (int i = 0; i < n; i++) {
+    //     printf("%d: %f\n", idx[i], ps[idx[i]].pos.x);
+    // }
 }
 
 void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) {
@@ -290,8 +344,11 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) 
 
         // printf("rk: %d, pos: %f, %f, len: %f, %f, v_size: %d\n", rank, node->min_pos.x, node->min_pos.y, node->len.x, node->len.y, node->tree_vec->size());
         int root_node = qt_vec_append(*(node->tree_vec), node->min_pos, node->len);
+        printf("node: %f %f len: %f %f\n", node->min_pos.x, node->min_pos.y, node->len.x, node->len.y);
+        assert(false);
 
         for (int i = node->l; i <= node->r; i++) {
+            printf("insert id: %d\n", idx[i]);
             qt_insert(ps, idx[i], *(node->tree_vec), root_node);
         }
 
@@ -375,24 +432,28 @@ void qt_p_compute_force(qt_ORB_node_t *node, particle_t *ps, int *idx, float dt,
     }
 }
 
-void gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank) {
+void qt_p_gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank) {
     if (node == NULL) return;
     if (node->end_node) {
-        if (rank == ROOT_NODE) {
-            if (node->work_rank != rank) {
-                for (int i = node->l; i <= node->r; i++) {
-                    MPI_Recv(&ps[idx[i]], 1, mpi_particle_t, node->work_rank, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                }
-            }
-        } else {
-            if (node->work_rank == rank) {
-                for (int i = node->l; i <= node->r; i++) {
-                    MPI_Send(&ps[idx[i]], 1, mpi_particle_t, ROOT_NODE, 0, MPI_COMM_WORLD);
-                }
-            }
+        for (int i = node->l; i <= node->r; i++) {
+            MPI_Bcast(&ps[idx[i]], 1, mpi_particle_t, node->work_rank, MPI_COMM_WORLD);
         }
+        // if (rank == ROOT_NODE) {
+        //     if (node->work_rank != rank) {
+        //         for (int i = node->l; i <= node->r; i++) {
+        //             // printf("Recv: %d\n", idx[i]);
+        //             MPI_Recv(&ps[idx[i]], 1, mpi_particle_t, node->work_rank, idx[i], MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        //         }
+        // } else {
+        //     if (node->work_rank == rank) {
+        //         for (int i = node->l; i <= node->r; i++) {
+        //             // printf("Send: %d\n", idx[i]);
+        //             MPI_Send(&ps[idx[i]], 1, mpi_particle_t, ROOT_NODE, idx[i], MPI_COMM_WORLD);
+        //         }
+        //     }
+        // }
     } else {
-        gather_particle(node->left, ps, idx, rank);
-        gather_particle(node->right, ps, idx, rank);
+        qt_p_gather_particle(node->left, ps, idx, rank);
+        qt_p_gather_particle(node->right, ps, idx, rank);
     }
 }

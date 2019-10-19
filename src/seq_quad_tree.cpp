@@ -140,6 +140,7 @@ void qt_init(qt_node_t *root) {}
 
 void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
     if (node_idx < 0) return;
+    printf("qt_insert %d\n", p_idx);
 
 #ifdef QT_SEQ_DEBUG
     printf("... trying to insert p at (%f, %f) into node with min_pos (%f, %f) ...\n",
@@ -148,23 +149,29 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
            tree_vec.at(node_idx).min_pos.x,
            tree_vec.at(node_idx).min_pos.y);
 #endif
-    tree_vec.at(node_idx);
-
+    printf("a\n");
     if (tree_vec.at(node_idx).particle_idx == -1) {
+        printf("b\n");
         if (tree_vec.at(node_idx).child_idx[0] == -1) {
+            printf("b1\n");
             // leaf node with no particle
             // add particle in this leaf
             tree_vec.at(node_idx).particle_idx = p_idx;
         } else {
+            printf("b2\n");
             // intermediate node, traverse down
             int index = qt_find_ind(ps, p_idx, tree_vec, node_idx);
             qt_insert(ps, p_idx, tree_vec, tree_vec.at(node_idx).child_idx[index]);
         }
     } else {
+        printf("c = %d\n", tree_vec.at(node_idx).particle_idx);
         // already has a particle in the node, move the particle into children
         float xl_2 = (tree_vec.at(node_idx).len.x) / 2;
         float yl_2 = (tree_vec.at(node_idx).len.y) / 2;
-
+        printf("minx, miny: %f, %f\n",tree_vec.at(node_idx).min_pos.x, tree_vec.at(node_idx).min_pos.y );
+        printf("lx, ly: %f, %f \n", tree_vec.at(node_idx).len.x, tree_vec.at(node_idx).len.y);
+        printf("xl_2, yl_2: %f, %f\n", xl_2, yl_2);
+        assert(xl_2 > 0.00001);
         for (int i = 0; i < QT_CHILDREN_CNT; i++) {
             tree_vec.at(node_idx).child_idx[i] = qt_vec_append(tree_vec,
                 (vector_t){
@@ -177,14 +184,22 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
                 }
                 );
         }
+        printf("==========\n");
+        int  p_idx_t =tree_vec.at(node_idx).particle_idx; 
+        printf("%d: %f %f\n", p_idx, ps[p_idx].pos.x, ps[p_idx].pos.y);
+        printf("%d: %f %f\n", p_idx, ps[p_idx_t].pos.x, ps[p_idx_t].pos.y);
+        printf("==========\n");
 
         int tmp_particle_idx = tree_vec.at(node_idx).particle_idx;
         tree_vec.at(node_idx).particle_idx = -1;
         int index = qt_find_ind(ps, tmp_particle_idx, tree_vec, node_idx);
+        printf("child idx = %d\n", index);
         qt_insert(ps, tmp_particle_idx, tree_vec, tree_vec.at(node_idx).child_idx[index]);
-
+        printf("XXXXXX\n");
         index = qt_find_ind(ps, p_idx, tree_vec, node_idx);
+        printf("child idx 2 = %d\n", index);
         qt_insert(ps, p_idx, tree_vec, tree_vec.at(node_idx).child_idx[index]);
+        
     }
 }
 
@@ -196,6 +211,7 @@ size_t qt_find_ind(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx
 
     float mid_x = tree_vec.at(node_idx).min_pos.x + ((tree_vec.at(node_idx).len.x)/2);
     float mid_y = tree_vec.at(node_idx).min_pos.y - ((tree_vec.at(node_idx).len.y)/2);
+    printf("qt_find_ind: %f, %f\n", mid_x, mid_y);
 
     if (ps[p_idx].pos.y > mid_y && ps[p_idx].pos.y <= tree_vec.at(node_idx).min_pos.y) {
         if (ps[p_idx].pos.x < mid_x && ps[p_idx].pos.x >= tree_vec.at(node_idx).min_pos.x) {
