@@ -1,6 +1,6 @@
 #include "p_quad_tree.hpp"
 
-void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, float grav, FILE *f_out, bool is_full_out) {
+void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav, FILE *f_out, bool is_full_out) {
     int m_size, m_rank;
     uint64_t start;
 
@@ -64,14 +64,15 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
         // printf("rank %d: constructing tree: %f sec\n", m_rank, GetTimeSpentInSeconds(start));
 
         // send/recv tree
-        // qt_p_bcast(orb_root, m_rank);
+        qt_p_bcast(orb_root, m_rank);
 
         // compute force
+        qt_p_compute_force(orb_root, ps, ps_idx, dt, grav, m_rank);
 
         if (m_rank == ROOT_NODE) {
-            // if (step == (n_steps - 1) || is_full_out) {
+            if (step == (n_steps - 1) || is_full_out) {
                 output_particle_pos(n_particle, ps, f_out);
-            // }
+            }
         }
     }
     free(ps_idx);
@@ -104,6 +105,8 @@ void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int
     d++;
 
     qt_ORB_node_t *new_node;
+
+    // TODO: openmp
     if (l <= l+k-1) {
         // divide the space horizontally, thus, the height, y_len shrinks
         if (is_horizon) {
@@ -345,5 +348,51 @@ void qt_p_bcast(qt_ORB_node_t *node, int rank) {
     } else {
         qt_p_bcast(node->left, rank);
         qt_p_bcast(node->right, rank);
+    }
+}
+
+void qt_p_compute_force(qt_ORB_node_t *node, particle_t *ps, int *idx, float dt, float grav, int rank) {
+    if (node == NULL) return;
+    if (node->end_node && node->work_rank == rank) {
+        for (int i = node->l; i <= node->r; i++) {
+            vector_t forces = qt_compute_force(ps, idx[i], *(node->tree_vec), 0, grav);
+            float acc_x = 0.0f, acc_y = 0.0f;
+
+            particle_t *p = &ps[idx[i]];
+
+            acc_x += forces.x / p->mass;
+            acc_y += forces.y / p->mass;
+
+            p->v.x += acc_x * dt;
+            p->v.y += acc_y * dt;
+
+            p->pos.x += p->v.x * dt;
+            p->pos.y += p->v.y * dt;
+        }
+    } else {
+        qt_p_compute_force(node->right, ps, idx, dt, grav, rank);
+        qt_p_compute_force(node->left, ps, idx, dt, grav, rank);
+    }
+}
+
+void gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank) {
+    if (node == NULL) return;
+    if (node->end_node) {
+        if (rank == ROOT_NODE) {
+            if (node->work_rank != rank) {
+                for (int i = node->l; i <= node->r; i++) {
+                    MPI_Recv(&ps[idx[i]], 1, mpi_particle_t, node->work_rank, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                }
+            }
+        } else {
+            if (node->work_rank == rank) {
+                for (int i = node->l; i <= node->r; i++) {
+                    MPI_Send(&ps[idx[i]], 1, mpi_particle_t, ROOT_NODE, 0, MPI_COMM_WORLD);
+                }
+            }
+        }
+    } else {
+        gather_particle(node->left, ps, idx, rank);
+        gather_particle(node->right, ps, idx, rank);
     }
 }

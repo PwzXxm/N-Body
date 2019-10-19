@@ -53,3 +53,7 @@ void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *orb_root, int ra
 
 
 void qt_p_bcast(qt_ORB_node_t *node, int rank);
+
+void qt_p_compute_force(qt_ORB_node_t *orb_root, particle_t *ps, int *idx, float dt, float grav, int rank);
+
+void gather_particle(qt_ORB_node_t *node, particle_t *ps, int *idx, int rank);
