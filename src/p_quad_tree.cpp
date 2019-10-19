@@ -15,10 +15,17 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
 
     const float boundary = qt_find_boundary(n_particle, ps);
 
-    /* balance load using ORB */
+    // init an array of integers representing the index of the particle in 'ps'
+    // as the order in the original particle array needs to be preserved
+    int *ps_idx = (int *)malloc(sizeof(int) * n_particle);
+    if (ps_idx == NULL) {
+        fprintf(stderr, "Unable to allocate memory\n");
+        exit(1);
+    }
 
     for (int step = 0; step < n_steps; step++) {
 
+        /* balance load using ORB */
         // start = GetTimeStamp();
         int work_rank_assign = 0;
 
@@ -26,14 +33,6 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
         // if (m_rank == ROOT_NODE) {
         //     printf("Using ORB level: %d\n", orb_lvl);
         // }
-
-        // init an array of integers representing the index of the particle in 'ps'
-        // as the order in the original particle array needs to be preserved
-        int *ps_idx = (int *)malloc(sizeof(int) * n_particle);
-        if (ps_idx == NULL) {
-            fprintf(stderr, "Unable to allocate memory\n");
-            exit(1);
-        }
 
         // counter for how many particles within the boundary
         int p_cnt = 0;
@@ -74,8 +73,8 @@ void qt_p_sim(int n_particle, int n_steps, float time_step, particle_t *ps, floa
                 output_particle_pos(n_particle, ps, f_out);
             // }
         }
-        free(ps_idx);
     }
+    free(ps_idx);
 }
 
 void qt_ORB_with_level(qt_ORB_node_t *node, particle_t *ps, int *idx, int l, int r, int d, int lvl, int *w_r, int size) {
