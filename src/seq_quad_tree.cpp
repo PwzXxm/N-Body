@@ -56,6 +56,7 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
     for (int step = 0; step < n_steps; step++) {
         //root = qt_new_node((vector_t){.x = -boundary, .y = boundary}, (vector_t){.x = boundary*2, .y = boundary*2});
         root_idx = qt_vec_append(tree_vec, (vector_t){.x = -boundary, .y = boundary}, (vector_t){.x = boundary*2, .y = boundary*2});
+        // printf("root: %d\n", root_idx);
 
 #ifdef QT_SEQ_DEBUG
         printf("step: %d\n", step);
@@ -187,7 +188,7 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
         // assert(xl_2 > 0.00001);
 
         for (int i = 0; i < QT_CHILDREN_CNT; i++) {
-            tree_vec.at(node_idx).child_idx[i] = qt_vec_append(tree_vec,
+            int x = qt_vec_append(tree_vec,
                 (vector_t){
                     .x = tree_vec.at(node_idx).min_pos.x + QT_DX[i] * xl_2,
                     .y = tree_vec.at(node_idx).min_pos.y + QT_DY[i] * yl_2,
@@ -197,6 +198,9 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
                     .y = yl_2,
                 }
                 );
+                // printf("append_returns: %d\n", x);
+            // printf("node_idx: %d, child idx: %d\n", node_idx, tree_vec.at(node_idx).child_idx[i]);
+            tree_vec.at(node_idx).child_idx[i] = x;
         }
         // printf("==========\n");
         // int  p_idx_t =tree_vec.at(node_idx).particle_idx; 
@@ -219,6 +223,7 @@ void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
 
 size_t qt_find_ind(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
     if (tree_vec.at(node_idx).child_idx[0] == -1) {
+        // printf("ps_idx: %d, node_idx: %d\n", p_idx, node_idx);
         fprintf(stderr, "The node does not have any child\n");
         exit(1);
     }
@@ -409,6 +414,7 @@ int qt_vec_append(std::vector<qt_node_t> &v, vector_t pos, vector_t len) {
     tmp.mass_info.pos.y = 0.0f;
 
     v.push_back(tmp);
+    // printf("size: %d\n", v.size());
 
     // printf("size: %d, cap: %d\n", a->size, a->cap);
     // printf("%f \t%f\n", tmp.min_pos.x, pos.x);
