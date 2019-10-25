@@ -1,5 +1,7 @@
 #include "seq_quad_tree.hpp"
 
+#include <stddef.h>
+
 MPI_Datatype mpi_qt_node_t;
 MPI_Datatype mpi_qt_mass_t;
 

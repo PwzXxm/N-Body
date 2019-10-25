@@ -6,7 +6,7 @@
 #include <string.h>
 
 #include "seq_quad_tree.hpp"
-#include "util.h"
+#include "utils.hpp"
 
 #define QT_SWAP_INT(a,b) {int t;t=(a);(a)=(b);(b)=t;}
 
