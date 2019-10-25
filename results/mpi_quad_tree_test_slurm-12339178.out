@@ -1,0 +1,279 @@
++ module load MPICH/3.2.1-GCC-6.2.0
+++ /usr/share/lmod/lmod/libexec/lmod sh load MPICH/3.2.1-GCC-6.2.0
++ eval '__LMOD_REF_COUNT_CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/include:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/include:1\;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/include:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/include:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/include:1\;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/include:1\;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/include:1\;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/include:1\;/usr/local/easybuild/software/GCC/6.2.0/include:1;' export '__LMOD_REF_COUNT_CPATH;' 'CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/include:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/include:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/include:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/include:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/include:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/include:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/include:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/include:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/include:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/include:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include;' export 'CPATH;' 'EBDEVELMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/easybuild/MPICH-3.2.1-GCC-6.2.0-easybuild-devel;' export 'EBDEVELMPICH;' 'EBROOTMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0;' export 'EBROOTMPICH;' 'EBVERSIONMPICH=3.2.1;' export 'EBVERSIONMPICH;' '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1\;/usr/local/slurm/latest/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib;' export 'LD_LIBRARY_PATH;' '__LMOD_REF_COUNT_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1;' export '__LMOD_REF_COUNT_LIBRARY_PATH;' 'LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib;' export 'LIBRARY_PATH;' '__LMOD_REF_COUNT_LOADEDMODULES=slurm/latest:1\;showq/0.15:1\;spartan/2016-03:1\;GCC/6.2.0:1\;bzip2/1.0.6-GCC-6.2.0:1\;ncurses/6.1-GCC-6.2.0:1\;libreadline/7.0-GCC-6.2.0:1\;zlib/1.2.8-GCC-6.2.0:1\;Tcl/8.6.5-GCC-6.2.0:1\;SQLite/3.25.3-GCC-6.2.0:1\;Tk/8.6.5-GCC-6.2.0:1\;GMP/6.1.1-GCC-6.2.0:1\;XZ/5.2.2-GCC-6.2.0:1\;libffi/3.2.1-GCC-6.2.0:1\;PROJ/6.0.0-GCC-6.2.0:1\;Python/3.7.1-GCC-6.2.0:1\;MPICH/3.2.1-GCC-6.2.0:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:bzip2/1.0.6-GCC-6.2.0:ncurses/6.1-GCC-6.2.0:libreadline/7.0-GCC-6.2.0:zlib/1.2.8-GCC-6.2.0:Tcl/8.6.5-GCC-6.2.0:SQLite/3.25.3-GCC-6.2.0:Tk/8.6.5-GCC-6.2.0:GMP/6.1.1-GCC-6.2.0:XZ/5.2.2-GCC-6.2.0:libffi/3.2.1-GCC-6.2.0:PROJ/6.0.0-GCC-6.2.0:Python/3.7.1-GCC-6.2.0:MPICH/3.2.1-GCC-6.2.0;' export 'LOADEDMODULES;' '__LMOD_REF_COUNT_MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/man:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/man:1\;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/man:1\;/usr/local/easybuild/software/GCC/6.2.0/share/man:1\;/usr/local/slurm/latest/share/man:1\;/usr/share/lmod/lmod/share/man:1\;/opt/puppetlabs/puppet/share/man:1;' export '__LMOD_REF_COUNT_MANPATH;' 'MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/share/man:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/man:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/man:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/share/man:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/share/man:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/man:/usr/local/easybuild/software/GCC/6.2.0/share/man:/usr/local/slurm/latest/share/man:/usr/share/lmod/lmod/share/man::/opt/puppetlabs/puppet/share/man;' export 'MANPATH;' 'MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core;' export 'MODULEPATH;' 'MPI_HOME=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0;' export 'MPI_HOME;' '__LMOD_REF_COUNT_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/GCC/6.2.0/bin:1\;/home/zijunc3/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/bin:2\;/usr/local/showq/0.15/bin:1\;/usr/local/slurm/latest/bin:2\;/usr/lib64/qt-3.3/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/opt/ibutils/bin:1\;/opt/puppetlabs/bin:1\;/opt/dell/srvadmin/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/home/zijunc3/.local/bin:1\;/home/zijunc3/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/bin:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/bin:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/bin:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/bin:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/bin:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/bin:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/bin:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/bin:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/home/zijunc3/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/usr/local/sbin:/usr/sbin:/home/zijunc3/.local/bin:/home/zijunc3/bin;' export 'PATH;' '__LMOD_REF_COUNT_PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib/pkgconfig:1\;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib/pkgconfig:1;' export '__LMOD_REF_COUNT_PKG_CONFIG_PATH;' 'PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib/pkgconfig;' export 'PKG_CONFIG_PATH;' '__LMOD_REF_COUNT__LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:1\;/usr/local/Modules/modulefiles/showq/0.15:1\;/usr/local/Modules/modulefiles/spartan/2016-03:1\;/usr/local/easybuild/modules/all/GCC/6.2.0:1\;/usr/local/easybuild/modules/all/bzip2/1.0.6-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/ncurses/6.1-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/libreadline/7.0-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/zlib/1.2.8-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/Tcl/8.6.5-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/SQLite/3.25.3-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/Tk/8.6.5-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/GMP/6.1.1-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/XZ/5.2.2-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/libffi/3.2.1-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/PROJ/6.0.0-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/Python/3.7.1-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/bzip2/1.0.6-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/ncurses/6.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/libreadline/7.0-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/zlib/1.2.8-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Tcl/8.6.5-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/SQLite/3.25.3-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Tk/8.6.5-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/GMP/6.1.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/XZ/5.2.2-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/libffi/3.2.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/PROJ/6.0.0-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Python/3.7.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDkzMjYyMTk1NTg3MTU4LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0dDQz17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HQ0MvNi4yLjAiLFsiZnVsbE5hbWUiXT0iR0NDLzYuMi4wIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iR0NDLzYuMi4wIix9LEdNUD17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HTVAvNi4xLjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJHTVAvNi4xLjEtR0NDLTYu;' export '_ModuleTable001_;' '_ModuleTable002_=Mi4wIixbImxvYWRPcmRlciJdPTEyLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkdNUC82LjEuMS1HQ0MtNi4yLjAiLH0sTVBJQ0g9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvTVBJQ0gvMy4yLjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJNUElDSC8zLjIuMS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09MTcscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LFBST0o9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvUFJPSi82LjAuMC1HQ0MtNi4y;' export '_ModuleTable002_;' '_ModuleTable003_=LjAubHVhIixbImZ1bGxOYW1lIl09IlBST0ovNi4wLjAtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTE1LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlBST0ovNi4wLjAtR0NDLTYuMi4wIix9LFB5dGhvbj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9QeXRob24vMy43LjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJQeXRob24vMy43LjEtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTE2LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlB5dGhvbi8zLjcuMS1HQ0MtNi4yLjAiLH0sU1FMaXRlPXtbImZuIl09Ii91c3Iv;' export '_ModuleTable003_;' '_ModuleTable004_=bG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL1NRTGl0ZS8zLjI1LjMtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJTUUxpdGUvMy4yNS4zLUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT0xMCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJTUUxpdGUvMy4yNS4zLUdDQy02LjIuMCIsfSxUY2w9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvVGNsLzguNi41LUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iVGNsLzguNi41LUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT05LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTIsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlRj;' export '_ModuleTable004_;' '_ModuleTable005_=bC84LjYuNS1HQ0MtNi4yLjAiLH0sVGs9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvVGsvOC42LjUtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJUay84LjYuNS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09MTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iVGsvOC42LjUtR0NDLTYuMi4wIix9LFhaPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL1haLzUuMi4yLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iWFovNS4yLjItR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTEzLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0;' export '_ModuleTable005_;' '_ModuleTable006_=aXZlIixbInVzZXJOYW1lIl09IlhaLzUuMi4yLUdDQy02LjIuMCIsfSxiemlwMj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9iemlwMi8xLjAuNi1HQ0MtNi4yLjAubHVhIixbImZ1bGxOYW1lIl09ImJ6aXAyLzEuMC42LUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT01LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImJ6aXAyLzEuMC42LUdDQy02LjIuMCIsfSxsaWJmZmk9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvbGliZmZpLzMuMi4xLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0ibGliZmZpLzMuMi4xLUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT0x;' export '_ModuleTable006_;' '_ModuleTable007_=NCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJsaWJmZmkvMy4yLjEtR0NDLTYuMi4wIix9LGxpYnJlYWRsaW5lPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL2xpYnJlYWRsaW5lLzcuMC1HQ0MtNi4yLjAubHVhIixbImZ1bGxOYW1lIl09ImxpYnJlYWRsaW5lLzcuMC1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09Nyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJsaWJyZWFkbGluZS83LjAtR0NDLTYuMi4wIix9LG5jdXJzZXM9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvbmN1cnNlcy82LjEtR0ND;' export '_ModuleTable007_;' '_ModuleTable008_=LTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJuY3Vyc2VzLzYuMS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09Nixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0yLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJuY3Vyc2VzLzYuMS1HQ0MtNi4yLjAiLH0sc2hvd3E9e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3Nob3dxLzAuMTUiLFsiZnVsbE5hbWUiXT0ic2hvd3EvMC4xNSIsWyJsb2FkT3JkZXIiXT0yLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNob3dxIix9LHNsdXJtPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zbHVybS9sYXRlc3QiLFsiZnVs;' export '_ModuleTable008_;' '_ModuleTable009_=bE5hbWUiXT0ic2x1cm0vbGF0ZXN0IixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0ic2x1cm0iLH0sc3BhcnRhbj17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc3BhcnRhbi8yMDE2LTAzIixbImZ1bGxOYW1lIl09InNwYXJ0YW4vMjAxNi0wMyIsWyJsb2FkT3JkZXIiXT0zLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwYXJ0YW4iLH0semxpYj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC96bGliLzEuMi44LUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iemxpYi8x;' export '_ModuleTable009_;' '_ModuleTable010_=LjIuOC1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09OCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0zLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJ6bGliLzEuMi44LUdDQy02LjIuMCIsfSx9LG1wYXRoQT17Ii9ob21lL3ppanVuYzMvLm1vZHVsZXMiLCIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbCIsIi91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcyIsIi9ldGMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzIiwiL3Vzci9zaGFyZS9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9MaW51eCIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvQ29yZSIsIi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVs;' export '_ModuleTable010_;' '_ModuleTable011_=ZWZpbGVzL0NvcmUiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGw6L3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzOi9ldGMvbW9kdWxlZmlsZXM6L3Vzci9zaGFyZS9tb2R1bGVmaWxlczovdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXM6L3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9MaW51eDovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0NvcmU6L3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfQ==;' export '_ModuleTable011_;' '_ModuleTable_Sz_=11;' export '_ModuleTable_Sz_;'
+++ __LMOD_REF_COUNT_CPATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/include:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/include:1;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/include:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/include:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/include:1;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/include:1;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/include:1;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/include:1;/usr/local/easybuild/software/GCC/6.2.0/include:1'
+++ export __LMOD_REF_COUNT_CPATH
+++ CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/include:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/include:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/include:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/include:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/include:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/include:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/include:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/include:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/include:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/include:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include
+++ export CPATH
+++ EBDEVELMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/easybuild/MPICH-3.2.1-GCC-6.2.0-easybuild-devel
+++ export EBDEVELMPICH
+++ EBROOTMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0
+++ export EBROOTMPICH
+++ EBVERSIONMPICH=3.2.1
+++ export EBVERSIONMPICH
+++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:1;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:1;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:1;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1;/usr/local/slurm/latest/lib:1'
+++ export __LMOD_REF_COUNT_LD_LIBRARY_PATH
+++ LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib
+++ export LD_LIBRARY_PATH
+++ __LMOD_REF_COUNT_LIBRARY_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:1;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:1;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:1;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1'
+++ export __LMOD_REF_COUNT_LIBRARY_PATH
+++ LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib64:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib:/usr/local/easybuild/software/GMP/6.1.1-GCC-6.2.0/lib:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/lib:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/lib:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib
+++ export LIBRARY_PATH
+++ __LMOD_REF_COUNT_LOADEDMODULES='slurm/latest:1;showq/0.15:1;spartan/2016-03:1;GCC/6.2.0:1;bzip2/1.0.6-GCC-6.2.0:1;ncurses/6.1-GCC-6.2.0:1;libreadline/7.0-GCC-6.2.0:1;zlib/1.2.8-GCC-6.2.0:1;Tcl/8.6.5-GCC-6.2.0:1;SQLite/3.25.3-GCC-6.2.0:1;Tk/8.6.5-GCC-6.2.0:1;GMP/6.1.1-GCC-6.2.0:1;XZ/5.2.2-GCC-6.2.0:1;libffi/3.2.1-GCC-6.2.0:1;PROJ/6.0.0-GCC-6.2.0:1;Python/3.7.1-GCC-6.2.0:1;MPICH/3.2.1-GCC-6.2.0:1'
+++ export __LMOD_REF_COUNT_LOADEDMODULES
+++ LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:bzip2/1.0.6-GCC-6.2.0:ncurses/6.1-GCC-6.2.0:libreadline/7.0-GCC-6.2.0:zlib/1.2.8-GCC-6.2.0:Tcl/8.6.5-GCC-6.2.0:SQLite/3.25.3-GCC-6.2.0:Tk/8.6.5-GCC-6.2.0:GMP/6.1.1-GCC-6.2.0:XZ/5.2.2-GCC-6.2.0:libffi/3.2.1-GCC-6.2.0:PROJ/6.0.0-GCC-6.2.0:Python/3.7.1-GCC-6.2.0:MPICH/3.2.1-GCC-6.2.0
+++ export LOADEDMODULES
+++ __LMOD_REF_COUNT_MANPATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/man:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/man:1;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/man:1;/usr/local/easybuild/software/GCC/6.2.0/share/man:1;/usr/local/slurm/latest/share/man:1;/usr/share/lmod/lmod/share/man:1;/opt/puppetlabs/puppet/share/man:1'
+++ export __LMOD_REF_COUNT_MANPATH
+++ MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/share/man:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/man:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/share/man:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/man:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/share/man:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/share/man:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/man:/usr/local/easybuild/software/GCC/6.2.0/share/man:/usr/local/slurm/latest/share/man:/usr/share/lmod/lmod/share/man::/opt/puppetlabs/puppet/share/man
+++ export MANPATH
+++ MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core
+++ export MODULEPATH
+++ MPI_HOME=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0
+++ export MPI_HOME
+++ __LMOD_REF_COUNT_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/bin:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/bin:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/bin:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/bin:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/bin:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/bin:1;/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/bin:1;/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/bin:1;/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/bin:1;/usr/local/easybuild/software/GCC/6.2.0/bin:1;/home/zijunc3/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/bin:2;/usr/local/showq/0.15/bin:1;/usr/local/slurm/latest/bin:2;/usr/lib64/qt-3.3/bin:1;/usr/local/bin:1;/usr/bin:1;/opt/ibutils/bin:1;/opt/puppetlabs/bin:1;/opt/dell/srvadmin/bin:1;/usr/local/sbin:1;/usr/sbin:1;/home/zijunc3/.local/bin:1;/home/zijunc3/bin:1'
+++ export __LMOD_REF_COUNT_PATH
+++ PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/bin:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/bin:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/bin:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/bin:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/bin:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/bin:/usr/local/easybuild/software/libreadline/7.0-GCC-6.2.0/bin:/usr/local/easybuild/software/ncurses/6.1-GCC-6.2.0/bin:/usr/local/easybuild/software/bzip2/1.0.6-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/home/zijunc3/.vscode-server/bin/6ab598523be7a800d7f3eb4d92d7ab9a66069390/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/usr/local/sbin:/usr/sbin:/home/zijunc3/.local/bin:/home/zijunc3/bin
+++ export PATH
+++ __LMOD_REF_COUNT_PKG_CONFIG_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib/pkgconfig:1;/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib/pkgconfig:1'
+++ export __LMOD_REF_COUNT_PKG_CONFIG_PATH
+++ PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Python/3.7.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/PROJ/6.0.0-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/libffi/3.2.1-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/XZ/5.2.2-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Tk/8.6.5-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/SQLite/3.25.3-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/Tcl/8.6.5-GCC-6.2.0/lib/pkgconfig:/usr/local/easybuild/software/zlib/1.2.8-GCC-6.2.0/lib/pkgconfig
+++ export PKG_CONFIG_PATH
+++ __LMOD_REF_COUNT__LMFILES_='/usr/local/Modules/modulefiles/slurm/latest:1;/usr/local/Modules/modulefiles/showq/0.15:1;/usr/local/Modules/modulefiles/spartan/2016-03:1;/usr/local/easybuild/modules/all/GCC/6.2.0:1;/usr/local/easybuild/modules/all/bzip2/1.0.6-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/ncurses/6.1-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/libreadline/7.0-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/zlib/1.2.8-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/Tcl/8.6.5-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/SQLite/3.25.3-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/Tk/8.6.5-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/GMP/6.1.1-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/XZ/5.2.2-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/libffi/3.2.1-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/PROJ/6.0.0-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/Python/3.7.1-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1'
+++ export __LMOD_REF_COUNT__LMFILES_
+++ _LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/bzip2/1.0.6-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/ncurses/6.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/libreadline/7.0-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/zlib/1.2.8-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Tcl/8.6.5-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/SQLite/3.25.3-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Tk/8.6.5-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/GMP/6.1.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/XZ/5.2.2-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/libffi/3.2.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/PROJ/6.0.0-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/Python/3.7.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua
+++ export _LMFILES_
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDkzMjYyMTk1NTg3MTU4LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0dDQz17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HQ0MvNi4yLjAiLFsiZnVsbE5hbWUiXT0iR0NDLzYuMi4wIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iR0NDLzYuMi4wIix9LEdNUD17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HTVAvNi4xLjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJHTVAvNi4xLjEtR0NDLTYu
+++ export _ModuleTable001_
+++ _ModuleTable002_=Mi4wIixbImxvYWRPcmRlciJdPTEyLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IkdNUC82LjEuMS1HQ0MtNi4yLjAiLH0sTVBJQ0g9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvTVBJQ0gvMy4yLjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJNUElDSC8zLjIuMS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09MTcscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LFBST0o9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvUFJPSi82LjAuMC1HQ0MtNi4y
+++ export _ModuleTable002_
+++ _ModuleTable003_=LjAubHVhIixbImZ1bGxOYW1lIl09IlBST0ovNi4wLjAtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTE1LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlBST0ovNi4wLjAtR0NDLTYuMi4wIix9LFB5dGhvbj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9QeXRob24vMy43LjEtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJQeXRob24vMy43LjEtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTE2LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlB5dGhvbi8zLjcuMS1HQ0MtNi4yLjAiLH0sU1FMaXRlPXtbImZuIl09Ii91c3Iv
+++ export _ModuleTable003_
+++ _ModuleTable004_=bG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL1NRTGl0ZS8zLjI1LjMtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJTUUxpdGUvMy4yNS4zLUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT0xMCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJTUUxpdGUvMy4yNS4zLUdDQy02LjIuMCIsfSxUY2w9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvVGNsLzguNi41LUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iVGNsLzguNi41LUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT05LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTIsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09IlRj
+++ export _ModuleTable004_
+++ _ModuleTable005_=bC84LjYuNS1HQ0MtNi4yLjAiLH0sVGs9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvVGsvOC42LjUtR0NDLTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJUay84LjYuNS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09MTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iVGsvOC42LjUtR0NDLTYuMi4wIix9LFhaPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL1haLzUuMi4yLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iWFovNS4yLjItR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTEzLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0
+++ export _ModuleTable005_
+++ _ModuleTable006_=aXZlIixbInVzZXJOYW1lIl09IlhaLzUuMi4yLUdDQy02LjIuMCIsfSxiemlwMj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9iemlwMi8xLjAuNi1HQ0MtNi4yLjAubHVhIixbImZ1bGxOYW1lIl09ImJ6aXAyLzEuMC42LUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT01LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09ImJ6aXAyLzEuMC42LUdDQy02LjIuMCIsfSxsaWJmZmk9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvbGliZmZpLzMuMi4xLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0ibGliZmZpLzMuMi4xLUdDQy02LjIuMCIsWyJsb2FkT3JkZXIiXT0x
+++ export _ModuleTable006_
+++ _ModuleTable007_=NCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJsaWJmZmkvMy4yLjEtR0NDLTYuMi4wIix9LGxpYnJlYWRsaW5lPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL2xpYnJlYWRsaW5lLzcuMC1HQ0MtNi4yLjAubHVhIixbImZ1bGxOYW1lIl09ImxpYnJlYWRsaW5lLzcuMC1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09Nyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJsaWJyZWFkbGluZS83LjAtR0NDLTYuMi4wIix9LG5jdXJzZXM9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvbmN1cnNlcy82LjEtR0ND
+++ export _ModuleTable007_
+++ _ModuleTable008_=LTYuMi4wLmx1YSIsWyJmdWxsTmFtZSJdPSJuY3Vyc2VzLzYuMS1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09Nixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0yLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJuY3Vyc2VzLzYuMS1HQ0MtNi4yLjAiLH0sc2hvd3E9e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3Nob3dxLzAuMTUiLFsiZnVsbE5hbWUiXT0ic2hvd3EvMC4xNSIsWyJsb2FkT3JkZXIiXT0yLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNob3dxIix9LHNsdXJtPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zbHVybS9sYXRlc3QiLFsiZnVs
+++ export _ModuleTable008_
+++ _ModuleTable009_=bE5hbWUiXT0ic2x1cm0vbGF0ZXN0IixbImxvYWRPcmRlciJdPTEscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0ic2x1cm0iLH0sc3BhcnRhbj17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc3BhcnRhbi8yMDE2LTAzIixbImZ1bGxOYW1lIl09InNwYXJ0YW4vMjAxNi0wMyIsWyJsb2FkT3JkZXIiXT0zLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTAsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNwYXJ0YW4iLH0semxpYj17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC96bGliLzEuMi44LUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iemxpYi8x
+++ export _ModuleTable009_
+++ _ModuleTable010_=LjIuOC1HQ0MtNi4yLjAiLFsibG9hZE9yZGVyIl09OCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0zLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJ6bGliLzEuMi44LUdDQy02LjIuMCIsfSx9LG1wYXRoQT17Ii9ob21lL3ppanVuYzMvLm1vZHVsZXMiLCIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbCIsIi91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcyIsIi9ldGMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzIiwiL3Vzci9zaGFyZS9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9MaW51eCIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvQ29yZSIsIi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVs
+++ export _ModuleTable010_
+++ _ModuleTable011_=ZWZpbGVzL0NvcmUiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGw6L3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzOi9ldGMvbW9kdWxlZmlsZXM6L3Vzci9zaGFyZS9tb2R1bGVmaWxlczovdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXM6L3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9MaW51eDovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0NvcmU6L3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfQ==
+++ export _ModuleTable011_
+++ _ModuleTable_Sz_=11
+++ export _ModuleTable_Sz_
++ make clean
+/bin/rm -f ./src/*.o ./src/*.d ./nbody ./nbody-with-cuda
++ make nbody
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/utils.o src/utils.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/seq_quad_tree.o src/seq_quad_tree.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/nbody_naive.o src/nbody_naive.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/p_quad_tree.o src/p_quad_tree.cpp
+src/p_quad_tree.cpp: In function ‘void qt_p_sim(int, int, float, particle_t*, float, FILE*, bool)’:
+src/p_quad_tree.cpp:72:71: warning: ‘start’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+         if (m_rank == ROOT_NODE) durations[0] += GetTimeSpentInSeconds(start);
+                                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/cuda_mpi_helper.o src/cuda_mpi_helper.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp   -c -o src/main.o src/main.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -o nbody ./src/utils.o ./src/cuda_mpi_helper.o ./src/p_quad_tree.o ./src/main.o ./src/seq_quad_tree.o ./src/nbody_naive.o  -lm
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody mpi_quad_tree 240 0.01 0 test_data/2500.in tmp.out
+MPI_size: 1, OPENMP_threads: 1
+Load Balance: 0.000008 sec
+Construct Tree: 0.000942 sec
+Broadcast Tree: 0.000001 sec
+Compute forces: 0.010552 sec
+Send/Recv particles: 0.000073 sec
+Time used: 2.778410 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody mpi_quad_tree 240 0.01 0 test_data/5000.in tmp.out
+MPI_size: 1, OPENMP_threads: 1
+Load Balance: 0.000017 sec
+Construct Tree: 0.001975 sec
+Broadcast Tree: 0.000001 sec
+Compute forces: 0.023868 sec
+Send/Recv particles: 0.000148 sec
+Time used: 6.242415 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody mpi_quad_tree 240 0.01 0 test_data/10000.in tmp.out
+MPI_size: 1, OPENMP_threads: 1
+Load Balance: 0.000035 sec
+Construct Tree: 0.004622 sec
+Broadcast Tree: 0.000001 sec
+Compute forces: 0.053968 sec
+Send/Recv particles: 0.000282 sec
+Time used: 14.138472 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody mpi_quad_tree 240 0.01 0 test_data/20000.in tmp.out
+MPI_size: 1, OPENMP_threads: 1
+Load Balance: 0.000076 sec
+Construct Tree: 0.009544 sec
+Broadcast Tree: 0.000001 sec
+Compute forces: 0.111645 sec
+Send/Recv particles: 0.000532 sec
+Time used: 29.232819 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody mpi_quad_tree 240 0.01 0 test_data/2500.in tmp.out
+MPI_size: 2, OPENMP_threads: 1
+Load Balance: 0.000045 sec
+Construct Tree: 0.000461 sec
+Broadcast Tree: 0.000676 sec
+Compute forces: 0.004715 sec
+Send/Recv particles: 0.003140 sec
+Time used: 2.169215 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody mpi_quad_tree 240 0.01 0 test_data/5000.in tmp.out
+MPI_size: 2, OPENMP_threads: 1
+Load Balance: 0.000088 sec
+Construct Tree: 0.001005 sec
+Broadcast Tree: 0.000989 sec
+Compute forces: 0.011252 sec
+Send/Recv particles: 0.005804 sec
+Time used: 4.593387 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody mpi_quad_tree 240 0.01 0 test_data/10000.in tmp.out
+MPI_size: 2, OPENMP_threads: 1
+Load Balance: 0.000191 sec
+Construct Tree: 0.002053 sec
+Broadcast Tree: 0.001530 sec
+Compute forces: 0.024044 sec
+Send/Recv particles: 0.010554 sec
+Time used: 9.209982 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody mpi_quad_tree 240 0.01 0 test_data/20000.in tmp.out
+MPI_size: 2, OPENMP_threads: 1
+Load Balance: 0.000336 sec
+Construct Tree: 0.004412 sec
+Broadcast Tree: 0.002866 sec
+Compute forces: 0.049922 sec
+Send/Recv particles: 0.021165 sec
+Time used: 18.889523 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody mpi_quad_tree 240 0.01 0 test_data/2500.in tmp.out
+MPI_size: 4, OPENMP_threads: 1
+Load Balance: 0.000075 sec
+Construct Tree: 0.000193 sec
+Broadcast Tree: 0.020002 sec
+Compute forces: 0.001572 sec
+Send/Recv particles: 0.028435 sec
+Time used: 12.067037 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody mpi_quad_tree 240 0.01 0 test_data/5000.in tmp.out
+MPI_size: 4, OPENMP_threads: 1
+Load Balance: 0.000149 sec
+Construct Tree: 0.000414 sec
+Broadcast Tree: 0.027585 sec
+Compute forces: 0.003783 sec
+Send/Recv particles: 0.017205 sec
+Time used: 11.792833 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody mpi_quad_tree 240 0.01 0 test_data/10000.in tmp.out
+MPI_size: 4, OPENMP_threads: 1
+Load Balance: 0.000318 sec
+Construct Tree: 0.000904 sec
+Broadcast Tree: 0.009990 sec
+Compute forces: 0.008782 sec
+Send/Recv particles: 0.067883 sec
+Time used: 21.091127 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody mpi_quad_tree 240 0.01 0 test_data/20000.in tmp.out
+MPI_size: 4, OPENMP_threads: 1
+Load Balance: 0.000642 sec
+Construct Tree: 0.001961 sec
+Broadcast Tree: 0.064835 sec
+Compute forces: 0.020458 sec
+Send/Recv particles: 0.075419 sec
+Time used: 39.196453 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 8 ./nbody mpi_quad_tree 240 0.01 0 test_data/2500.in tmp.out
+MPI_size: 8, OPENMP_threads: 1
+Load Balance: 0.000119 sec
+Construct Tree: 0.000111 sec
+Broadcast Tree: 0.003976 sec
+Compute forces: 0.000708 sec
+Send/Recv particles: 0.032017 sec
+Time used: 8.863951 sec
++ printf '\n\n'
+
+
++ mpirun -np 8 ./nbody mpi_quad_tree 240 0.01 0 test_data/5000.in tmp.out
+MPI_size: 8, OPENMP_threads: 1
+Load Balance: 0.000239 sec
+Construct Tree: 0.000222 sec
+Broadcast Tree: 0.006720 sec
+Compute forces: 0.001710 sec
+Send/Recv particles: 0.044587 sec
+Time used: 12.835435 sec
++ printf '\n\n'
+
+
++ mpirun -np 8 ./nbody mpi_quad_tree 240 0.01 0 test_data/10000.in tmp.out
+MPI_size: 8, OPENMP_threads: 1
+Load Balance: 0.000482 sec
+Construct Tree: 0.000449 sec
+Broadcast Tree: 0.033237 sec
+Compute forces: 0.003913 sec
+Send/Recv particles: 0.085501 sec
+Time used: 29.660437 sec
++ printf '\n\n'
+
+
++ mpirun -np 8 ./nbody mpi_quad_tree 240 0.01 0 test_data/20000.in tmp.out
+MPI_size: 8, OPENMP_threads: 1
+Load Balance: 0.000969 sec
+Construct Tree: 0.000971 sec
+Broadcast Tree: 0.222568 sec
+Compute forces: 0.009024 sec
+Send/Recv particles: 0.281512 sec
+Time used: 123.611961 sec
++ printf '\n\n'
+
+
