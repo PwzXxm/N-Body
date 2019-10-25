@@ -22,7 +22,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank);
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
 static const char SEQ_NAIVE[] = "seq_naive";
 static const char MPI_OPENMP_NAIVE[] = "mpi_openmp_naive";
-static const char MPI_OPENMP_QUAD_TREE[] = "mpi_openmp_quad_tree";
+static const char MPI_QUAD_TREE[] = "mpi_quad_tree";
 
 int main(int argc, char* argv[]) {
     MPI_Init(&argc, &argv);
@@ -76,7 +76,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         algorithm_fun_ptr = &nbody_seq_naive;
     } else if (strcmp(algo_name, MPI_OPENMP_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_mpi_openmp_naive;
-    } else if (strcmp(algo_name, MPI_OPENMP_QUAD_TREE) == 0) {
+    } else if (strcmp(algo_name, MPI_QUAD_TREE) == 0) {
         algorithm_fun_ptr = &qt_p_sim;
     #ifdef WITH_CUDA
     } else if (strcmp(algo_name, CUDA_SINGLE_NAIVE) == 0) {
@@ -155,7 +155,7 @@ void print_usage(const char msg[]) {
     printf("\tseq_naive\n");
     printf("\tseq_quad_tree\n");
     printf("\tmpi_openmp_naive\n");
-    printf("\tmpi_openmp_quad_tree\n");
+    printf("\tmpi_quad_tree\n");
     printf("\tcuda_single_naive\n");
     printf("\tcuda_mpi_naive\n");
 }
