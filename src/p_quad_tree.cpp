@@ -11,7 +11,6 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
     MPI_Comm_rank(MPI_COMM_WORLD, &m_rank);
 
 #ifdef TIMER
-    // load balance, 
     float durations[TIMER_CNT] = {0.0f};
     uint64_t start;
 #endif
@@ -127,7 +126,6 @@ void qt_p_sim(int n_particle, int n_steps, float dt, particle_t *ps, float grav,
     
     delete [] ps_idx;
 }
-
 
 float get_v(particle_t p, bool is_horizon) {
     return is_horizon ? p.pos.y : p.pos.x;
@@ -262,16 +260,10 @@ float qt_quick_select(particle_t *ps, int *idx, int n, bool is_horizon, int k) {
     return comp.get_value(idx[k]);
 }
 
-/*
- * Get x/y coordinate from the array using index
- */
 inline float qt_ps_idx_to_xy(particle_t *ps, int i, size_t offset) {
     return *(float *)(((char *)&(ps[i].pos))+offset);
 }
 
-/*
- * check if the particles position in x/y coordinate(depending on the offset)
- */
 bool qt_offset_gt(particle_t *ps, int *idx, int l, int r, size_t offset) {
     if (qt_ps_idx_to_xy(ps, idx[l], offset) > qt_ps_idx_to_xy(ps, idx[r], offset))  {
         return true;
@@ -280,9 +272,6 @@ bool qt_offset_gt(particle_t *ps, int *idx, int l, int r, size_t offset) {
     }
 }
 
-/*
- * Construct a new ORB node
- */
 qt_ORB_node_t *qt_new_ORB_node(float x, float y, float x_len, float y_len) {
     qt_ORB_node_t *node = new qt_ORB_node_t;
 
@@ -335,23 +324,23 @@ void qt_print_ORB_tree(qt_ORB_node_t *root, int d, particle_t *ps, int *idx) {
     qt_print_ORB_tree(root->right, d+1, ps, idx);
 }
 
-void qt_test_find_medium(particle_t *ps, int n) {
-    int idx[] = {2, 6, 1, 5, 0, 9, 3, 7, 8, 4};
+// void qt_test_find_medium(particle_t *ps, int n) {
+//     int idx[] = {2, 6, 1, 5, 0, 9, 3, 7, 8, 4};
     
-    n = 5;
+//     n = 5;
 
-    printf("offset of y: %lu\n", offsetof(vector_t, y));
-    vector_t v = {.x = 1.6f, .y = -2.4f};
-    printf("====== %f\n", *(float *)(((char *)&(v))+4));
+//     printf("offset of y: %lu\n", offsetof(vector_t, y));
+//     vector_t v = {.x = 1.6f, .y = -2.4f};
+//     printf("====== %f\n", *(float *)(((char *)&(v))+4));
 
 
-    // float ans = qt_quick_select(ps, idx, 0, 4, offsetof(vector_t, y), (n&1)?(n+1)/2:n/2);
+//     // float ans = qt_quick_select(ps, idx, 0, 4, offsetof(vector_t, y), (n&1)?(n+1)/2:n/2);
 
-    // printf("med: %f\n", ans);
-    // for (int i = 0; i < n; i++) {
-    //     printf("%d: %f\n", idx[i], ps[idx[i]].pos.x);
-    // }
-}
+//     // printf("med: %f\n", ans);
+//     // for (int i = 0; i < n; i++) {
+//     //     printf("%d: %f\n", idx[i], ps[idx[i]].pos.x);
+//     // }
+// }
 
 void qt_p_construct_BH(particle_t *ps, int *idx, qt_ORB_node_t *node, int rank) {
     if (node == NULL) return ;

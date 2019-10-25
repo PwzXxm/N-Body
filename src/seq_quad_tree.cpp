@@ -136,8 +136,6 @@ void qt_sim(int n_particle, int n_steps, float dt, particle_t *particles, float 
     free(boundary_flags);
 }
 
-void qt_init(qt_node_t *root) {}
-
 void qt_insert(particle_t *ps, int p_idx, tree_vec_t &tree_vec, int node_idx) {
     if (node_idx < 0) return;
     // printf("qt_insert %d\n", p_idx);
