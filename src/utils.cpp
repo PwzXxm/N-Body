@@ -2,6 +2,7 @@
 #include <stddef.h>
 
 #include "utils.hpp"
+#include "seq_quad_tree.hpp"
 
 static const int MAGIC_NUMBER = 9036;
 
@@ -32,11 +33,13 @@ void init_MPI_datatype() {
         MPI_Type_create_struct(nitems, block_lengths, offsets, types, &mpi_particle_t);
         MPI_Type_commit(&mpi_particle_t);
     }
+    init_MPI_datatype_qt();
 }
 
 void free_MPI_datatype() {
     MPI_Type_free(&mpi_particle_t);
     MPI_Type_free(&mpi_vector_t);
+    free_MPI_datatype_qt();
 }
 
 FILE* init_output_file(const char *output_file, int n, int m, float s_time) {
@@ -76,4 +79,14 @@ vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2
     fv.x = f * (pos2.x - pos1.x) / dis;
     fv.y = f * (pos2.y - pos1.y) / dis;
     return fv;
+}
+
+uint64_t GetTimeStamp() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return tv.tv_sec * (uint64_t)1000000 + tv.tv_usec;
+}
+
+double GetTimeSpentInSeconds(uint64_t start) {
+    return (double)((GetTimeStamp() - start) / 1000000.0f);
 }

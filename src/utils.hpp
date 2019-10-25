@@ -2,6 +2,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <sys/time.h>
+#include <inttypes.h>
 
 #ifndef HIDE_MPI
 #include <mpi.h>
@@ -41,3 +43,7 @@ void output_particle_pos(int n, particle_t parts[], FILE* fp);
 void output_particle_pos_v(int n, vector_t positions[], FILE* fp);
 
 vector_t force_between_particle(vector_t pos1, vector_t pos2, float m1, float m2, float grav);
+
+uint64_t GetTimeStamp();
+
+double GetTimeSpentInSeconds(uint64_t start);

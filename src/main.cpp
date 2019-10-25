@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include <sys/time.h>
 #include <mpi.h>
 
 #include "utils.hpp"
 #include "seq_quad_tree.hpp"
+#include "p_quad_tree.hpp"
 #include "nbody_naive.hpp"
 
 #ifdef WITH_CUDA
@@ -18,11 +18,11 @@ static const char CUDA_MPI_NAIVE[] = "cuda_mpi_naive";
 
 void print_usage(const char msg[]);
 int run_task(int argc, char* argv[], int m_size, int m_rank);
-uint64_t GetTimeStamp();
 
 static const char SEQ_QUAD_TREE[] = "seq_quad_tree";
 static const char SEQ_NAIVE[] = "seq_naive";
 static const char MPI_OPENMP_NAIVE[] = "mpi_openmp_naive";
+static const char MPI_OPENMP_QUAD_TREE[] = "mpi_openmp_quad_tree";
 
 int main(int argc, char* argv[]) {
     MPI_Init(&argc, &argv);
@@ -33,9 +33,12 @@ int main(int argc, char* argv[]) {
     init_MPI_datatype();
     
     int r = run_task(argc, argv, m_size, m_rank);
+
     MPI_Barrier(MPI_COMM_WORLD);
     free_MPI_datatype();
+
     MPI_Finalize();
+
     return r;
 }
 
@@ -73,6 +76,8 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
         algorithm_fun_ptr = &nbody_seq_naive;
     } else if (strcmp(algo_name, MPI_OPENMP_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_mpi_openmp_naive;
+    } else if (strcmp(algo_name, MPI_OPENMP_QUAD_TREE) == 0) {
+        algorithm_fun_ptr = &qt_p_sim;
     #ifdef WITH_CUDA
     } else if (strcmp(algo_name, CUDA_SINGLE_NAIVE) == 0) {
         algorithm_fun_ptr = &nbody_cuda_single_naive;
@@ -132,8 +137,7 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     (*algorithm_fun_ptr)(n, m, t, parts, grav, fp, full_output);
     
     if (m_rank == ROOT_NODE) {
-        double time_spent = (long double)(GetTimeStamp() - start) / 1000000;
-        printf("Time used: %f sec\n", time_spent);
+        printf("Time used: %f sec\n", GetTimeSpentInSeconds(start));
     }
 
 
@@ -143,20 +147,15 @@ int run_task(int argc, char* argv[], int m_size, int m_rank) {
     return 0;
 }
 
-uint64_t GetTimeStamp() {
-    struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return tv.tv_sec * (uint64_t)1000000 + tv.tv_usec;
-}
-
 void print_usage(const char msg[]) {
     puts(msg);
-    printf("Usage: nbody <algorithm name> <num of steps> <time of each step> <full output> <output file>\n");
-    printf("Example: nbody seq_naive 100 0.01\n");
+    printf("Usage: nbody <algorithm name> <num of steps> <time of each step> <full output> <input_file> <output file>\n");
+    printf("Example: nbody seq_naive 100 0.01 1 input.in output.out\n");
     printf("Supported algorithms:\n");
-    printf("\tseq_quad_tree\n");
     printf("\tseq_naive\n");
+    printf("\tseq_quad_tree\n");
     printf("\tmpi_openmp_naive\n");
+    printf("\tmpi_openmp_quad_tree\n");
     printf("\tcuda_single_naive\n");
     printf("\tcuda_mpi_naive\n");
 }
