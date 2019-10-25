@@ -1,0 +1,264 @@
++ module load MPICH/3.2.1-GCC-6.2.0
+++ /usr/share/lmod/lmod/libexec/lmod sh load MPICH/3.2.1-GCC-6.2.0
++ eval '__LMOD_REF_COUNT_CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/GCC/6.2.0/include:1;' export '__LMOD_REF_COUNT_CPATH;' 'CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include;' export 'CPATH;' 'EBDEVELGCC=/usr/local/easybuild/software/GCC/6.2.0/easybuild/GCC-6.2.0-easybuild-devel;' export 'EBDEVELGCC;' 'EBDEVELMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/easybuild/MPICH-3.2.1-GCC-6.2.0-easybuild-devel;' export 'EBDEVELMPICH;' 'EBROOTGCC=/usr/local/easybuild/software/GCC/6.2.0;' export 'EBROOTGCC;' 'EBROOTMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0;' export 'EBROOTMPICH;' 'EBVERSIONGCC=6.2.0;' export 'EBVERSIONGCC;' 'EBVERSIONMPICH=3.2.1;' export 'EBVERSIONMPICH;' '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1\;/usr/local/slurm/latest/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib;' export 'LD_LIBRARY_PATH;' '__LMOD_REF_COUNT_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1;' export '__LMOD_REF_COUNT_LIBRARY_PATH;' 'LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib;' export 'LIBRARY_PATH;' '__LMOD_REF_COUNT_LOADEDMODULES=slurm/latest:1\;showq/0.15:1\;spartan/2016-03:1\;GCC/6.2.0:1\;MPICH/3.2.1-GCC-6.2.0:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:MPICH/3.2.1-GCC-6.2.0;' export 'LOADEDMODULES;' '__LMOD_REF_COUNT_MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:1\;/usr/local/easybuild/software/GCC/6.2.0/share/man:1\;/usr/local/slurm/latest/share/man:1\;/usr/share/lmod/lmod/share/man:1\;/opt/puppetlabs/puppet/share/man:1;' export '__LMOD_REF_COUNT_MANPATH;' 'MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/GCC/6.2.0/share/man:/usr/local/slurm/latest/share/man:/usr/share/lmod/lmod/share/man::/opt/puppetlabs/puppet/share/man;' export 'MANPATH;' 'MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core;' export 'MODULEPATH;' 'MPI_HOME=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0;' export 'MPI_HOME;' '__LMOD_REF_COUNT_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/GCC/6.2.0/bin:1\;/usr/local/showq/0.15/bin:1\;/usr/local/slurm/latest/bin:2\;/usr/lib64/qt-3.3/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/opt/ibutils/bin:1\;/opt/puppetlabs/bin:1\;/opt/dell/srvadmin/bin:1\;/home/zijunc3/.local/bin:1\;/home/zijunc3/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/home/zijunc3/.local/bin:/home/zijunc3/bin;' export 'PATH;' '__LMOD_REF_COUNT_PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:1;' export '__LMOD_REF_COUNT_PKG_CONFIG_PATH;' 'PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig;' export 'PKG_CONFIG_PATH;' '__LMOD_REF_COUNT__LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:1\;/usr/local/Modules/modulefiles/showq/0.15:1\;/usr/local/Modules/modulefiles/spartan/2016-03:1\;/usr/local/easybuild/modules/all/GCC/6.2.0:1\;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDcyMDAzMTI2MTQ0NDA5LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0dDQz17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HQ0MvNi4yLjAiLFsiZnVsbE5hbWUiXT0iR0NDLzYuMi4wIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iR0NDLzYuMi4wIix9LE1QSUNIPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL01QSUNILzMuMi4xLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iTVBJQ0gvMy4yLjEt;' export '_ModuleTable001_;' '_ModuleTable002_=R0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTUscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LHNob3dxPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zaG93cS8wLjE1IixbImZ1bGxOYW1lIl09InNob3dxLzAuMTUiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzaG93cSIsfSxzbHVybT17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc2x1cm0vbGF0ZXN0IixbImZ1bGxOYW1lIl09InNsdXJtL2xhdGVzdCIsWyJsb2FkT3JkZXIiXT0x;' export '_ModuleTable002_;' '_ModuleTable003_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNsdXJtIix9LHNwYXJ0YW49e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3NwYXJ0YW4vMjAxNi0wMyIsWyJmdWxsTmFtZSJdPSJzcGFydGFuLzIwMTYtMDMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzcGFydGFuIix9LH0sbXBhdGhBPXsiL2hvbWUvemlqdW5jMy8ubW9kdWxlcyIsIi91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsIiwiL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hh;' export '_ModuleTable003_;' '_ModuleTable004_=cmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4IiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlIiwiL3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbDovdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXM6L2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvTW9kdWxlcy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4Oi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvQ29yZTovdXNyL3NoYXJlL2xtb2QvbG1v;' export '_ModuleTable004_;' '_ModuleTable005_=ZC9tb2R1bGVmaWxlcy9Db3JlIix9;' export '_ModuleTable005_;' '_ModuleTable_Sz_=5;' export '_ModuleTable_Sz_;'
+++ __LMOD_REF_COUNT_CPATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/GCC/6.2.0/include:1'
+++ export __LMOD_REF_COUNT_CPATH
+++ CPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include
+++ export CPATH
+++ EBDEVELGCC=/usr/local/easybuild/software/GCC/6.2.0/easybuild/GCC-6.2.0-easybuild-devel
+++ export EBDEVELGCC
+++ EBDEVELMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/easybuild/MPICH-3.2.1-GCC-6.2.0-easybuild-devel
+++ export EBDEVELMPICH
+++ EBROOTGCC=/usr/local/easybuild/software/GCC/6.2.0
+++ export EBROOTGCC
+++ EBROOTMPICH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0
+++ export EBROOTMPICH
+++ EBVERSIONGCC=6.2.0
+++ export EBVERSIONGCC
+++ EBVERSIONMPICH=3.2.1
+++ export EBVERSIONMPICH
+++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1;/usr/local/slurm/latest/lib:1'
+++ export __LMOD_REF_COUNT_LD_LIBRARY_PATH
+++ LD_LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib
+++ export LD_LIBRARY_PATH
+++ __LMOD_REF_COUNT_LIBRARY_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1'
+++ export __LMOD_REF_COUNT_LIBRARY_PATH
+++ LIBRARY_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib
+++ export LIBRARY_PATH
+++ __LMOD_REF_COUNT_LOADEDMODULES='slurm/latest:1;showq/0.15:1;spartan/2016-03:1;GCC/6.2.0:1;MPICH/3.2.1-GCC-6.2.0:1'
+++ export __LMOD_REF_COUNT_LOADEDMODULES
+++ LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:MPICH/3.2.1-GCC-6.2.0
+++ export LOADEDMODULES
+++ __LMOD_REF_COUNT_MANPATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:1;/usr/local/easybuild/software/GCC/6.2.0/share/man:1;/usr/local/slurm/latest/share/man:1;/usr/share/lmod/lmod/share/man:1;/opt/puppetlabs/puppet/share/man:1'
+++ export __LMOD_REF_COUNT_MANPATH
+++ MANPATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/share/man:/usr/local/easybuild/software/GCC/6.2.0/share/man:/usr/local/slurm/latest/share/man:/usr/share/lmod/lmod/share/man::/opt/puppetlabs/puppet/share/man
+++ export MANPATH
+++ MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core
+++ export MODULEPATH
+++ MPI_HOME=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0
+++ export MPI_HOME
+++ __LMOD_REF_COUNT_PATH='/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1;/usr/local/easybuild/software/GCC/6.2.0/bin:1;/usr/local/showq/0.15/bin:1;/usr/local/slurm/latest/bin:2;/usr/lib64/qt-3.3/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/opt/ibutils/bin:1;/opt/puppetlabs/bin:1;/opt/dell/srvadmin/bin:1;/home/zijunc3/.local/bin:1;/home/zijunc3/bin:1'
+++ export __LMOD_REF_COUNT_PATH
+++ PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/home/zijunc3/.local/bin:/home/zijunc3/bin
+++ export PATH
+++ __LMOD_REF_COUNT_PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig:1
+++ export __LMOD_REF_COUNT_PKG_CONFIG_PATH
+++ PKG_CONFIG_PATH=/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib/pkgconfig
+++ export PKG_CONFIG_PATH
+++ __LMOD_REF_COUNT__LMFILES_='/usr/local/Modules/modulefiles/slurm/latest:1;/usr/local/Modules/modulefiles/showq/0.15:1;/usr/local/Modules/modulefiles/spartan/2016-03:1;/usr/local/easybuild/modules/all/GCC/6.2.0:1;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1'
+++ export __LMOD_REF_COUNT__LMFILES_
+++ _LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua
+++ export _LMFILES_
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDcyMDAzMTI2MTQ0NDA5LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0dDQz17WyJmbiJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbC9HQ0MvNi4yLjAiLFsiZnVsbE5hbWUiXT0iR0NDLzYuMi4wIixbImxvYWRPcmRlciJdPTQscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MSxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iR0NDLzYuMi4wIix9LE1QSUNIPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL01QSUNILzMuMi4xLUdDQy02LjIuMC5sdWEiLFsiZnVsbE5hbWUiXT0iTVBJQ0gvMy4yLjEt
+++ export _ModuleTable001_
+++ _ModuleTable002_=R0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTUscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LHNob3dxPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zaG93cS8wLjE1IixbImZ1bGxOYW1lIl09InNob3dxLzAuMTUiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzaG93cSIsfSxzbHVybT17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc2x1cm0vbGF0ZXN0IixbImZ1bGxOYW1lIl09InNsdXJtL2xhdGVzdCIsWyJsb2FkT3JkZXIiXT0x
+++ export _ModuleTable002_
+++ _ModuleTable003_=LHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNsdXJtIix9LHNwYXJ0YW49e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3NwYXJ0YW4vMjAxNi0wMyIsWyJmdWxsTmFtZSJdPSJzcGFydGFuLzIwMTYtMDMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzcGFydGFuIix9LH0sbXBhdGhBPXsiL2hvbWUvemlqdW5jMy8ubW9kdWxlcyIsIi91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsIiwiL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hh
+++ export _ModuleTable003_
+++ _ModuleTable004_=cmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4IiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlIiwiL3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbDovdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXM6L2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvTW9kdWxlcy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4Oi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvQ29yZTovdXNyL3NoYXJlL2xtb2QvbG1v
+++ export _ModuleTable004_
+++ _ModuleTable005_=ZC9tb2R1bGVmaWxlcy9Db3JlIix9
+++ export _ModuleTable005_
+++ _ModuleTable_Sz_=5
+++ export _ModuleTable_Sz_
++ module load GCC-CUDA/6.2.0-9.0.176
+++ /usr/share/lmod/lmod/libexec/lmod sh load GCC-CUDA/6.2.0-9.0.176
++ eval '__LMOD_REF_COUNT_CPATH=/usr/local/easybuild/software/CUDA/9.0.176/include:1\;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1\;/usr/local/easybuild/software/GCC/6.2.0/include:1;' export '__LMOD_REF_COUNT_CPATH;' 'CPATH=/usr/local/easybuild/software/CUDA/9.0.176/include:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include;' export 'CPATH;' 'CUDA_HOME=/usr/local/easybuild/software/CUDA/9.0.176;' export 'CUDA_HOME;' '__LMOD_REF_COUNT_CUDA_PATH=/usr/local/easybuild/software/CUDA/9.0.176:1;' export '__LMOD_REF_COUNT_CUDA_PATH;' 'CUDA_PATH=/usr/local/easybuild/software/CUDA/9.0.176;' export 'CUDA_PATH;' 'EBDEVELCUDA=/usr/local/easybuild/software/CUDA/9.0.176/easybuild/CUDA-9.0.176-easybuild-devel;' export 'EBDEVELCUDA;' 'EBDEVELGCCMINCUDA=/usr/local/easybuild/software/GCC-CUDA/6.2.0-9.0.176/easybuild/GCC-CUDA-6.2.0-9.0.176-easybuild-devel;' export 'EBDEVELGCCMINCUDA;' 'EBROOTCUDA=/usr/local/easybuild/software/CUDA/9.0.176;' export 'EBROOTCUDA;' 'EBROOTGCCMINCUDA=/usr/local/easybuild/software/GCC-CUDA/6.2.0-9.0.176;' export 'EBROOTGCCMINCUDA;' 'EBVERSIONCUDA=9.0.176;' export 'EBVERSIONCUDA;' 'EBVERSIONGCCMINCUDA=6.2.0-9.0.176;' export 'EBVERSIONGCCMINCUDA;' '__LMOD_REF_COUNT_LD_LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:1\;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1\;/usr/local/slurm/latest/lib:1;' export '__LMOD_REF_COUNT_LD_LIBRARY_PATH;' 'LD_LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib;' export 'LD_LIBRARY_PATH;' '__LMOD_REF_COUNT_LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:1\;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1\;/usr/local/easybuild/software/GCC/6.2.0/lib64:1\;/usr/local/easybuild/software/GCC/6.2.0/lib:1;' export '__LMOD_REF_COUNT_LIBRARY_PATH;' 'LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib;' export 'LIBRARY_PATH;' '__LMOD_REF_COUNT_LOADEDMODULES=slurm/latest:1\;showq/0.15:1\;spartan/2016-03:1\;GCC/6.2.0:1\;MPICH/3.2.1-GCC-6.2.0:1\;CUDA/9.0.176:1\;GCC-CUDA/6.2.0-9.0.176:1;' export '__LMOD_REF_COUNT_LOADEDMODULES;' 'LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:MPICH/3.2.1-GCC-6.2.0:CUDA/9.0.176:GCC-CUDA/6.2.0-9.0.176;' export 'LOADEDMODULES;' 'MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core;' export 'MODULEPATH;' 'NVCC=nvcc;' export 'NVCC;' '__LMOD_REF_COUNT_PATH=/usr/local/easybuild/software/CUDA/9.0.176:1\;/usr/local/easybuild/software/CUDA/9.0.176/bin:1\;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1\;/usr/local/easybuild/software/GCC/6.2.0/bin:1\;/usr/local/showq/0.15/bin:1\;/usr/local/slurm/latest/bin:2\;/usr/lib64/qt-3.3/bin:1\;/usr/local/bin:1\;/usr/bin:1\;/usr/local/sbin:1\;/usr/sbin:1\;/opt/ibutils/bin:1\;/opt/puppetlabs/bin:1\;/opt/dell/srvadmin/bin:1\;/home/zijunc3/.local/bin:1\;/home/zijunc3/bin:1;' export '__LMOD_REF_COUNT_PATH;' 'PATH=/usr/local/easybuild/software/CUDA/9.0.176:/usr/local/easybuild/software/CUDA/9.0.176/bin:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/home/zijunc3/.local/bin:/home/zijunc3/bin;' export 'PATH;' '__LMOD_REF_COUNT__LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:1\;/usr/local/Modules/modulefiles/showq/0.15:1\;/usr/local/Modules/modulefiles/spartan/2016-03:1\;/usr/local/easybuild/modules/all/GCC/6.2.0:1\;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1\;/usr/local/easybuild/modules/all/CUDA/9.0.176.lua:1\;/usr/local/easybuild/modules/all/GCC-CUDA/6.2.0-9.0.176.lua:1;' export '__LMOD_REF_COUNT__LMFILES_;' '_LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/CUDA/9.0.176.lua:/usr/local/easybuild/modules/all/GCC-CUDA/6.2.0-9.0.176.lua;' export '_LMFILES_;' '_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDcyMDAzMTI2MTQ0NDA5LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0NVREE9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvQ1VEQS85LjAuMTc2Lmx1YSIsWyJmdWxsTmFtZSJdPSJDVURBLzkuMC4xNzYiLFsibG9hZE9yZGVyIl09Nixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJDVURBLzkuMC4xNzYiLH0sR0NDPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL0dDQy82LjIuMCIsWyJmdWxsTmFtZSJdPSJHQ0MvNi4yLjAiLFsibG9h;' export '_ModuleTable001_;' '_ModuleTable002_=ZE9yZGVyIl09NCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJHQ0MvNi4yLjAiLH0sWyJHQ0MtQ1VEQSJdPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL0dDQy1DVURBLzYuMi4wLTkuMC4xNzYubHVhIixbImZ1bGxOYW1lIl09IkdDQy1DVURBLzYuMi4wLTkuMC4xNzYiLFsibG9hZE9yZGVyIl09Nyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJHQ0MtQ1VEQS82LjIuMC05LjAuMTc2Iix9LE1QSUNIPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL01QSUNILzMuMi4xLUdDQy02LjIuMC5sdWEiLFsi;' export '_ModuleTable002_;' '_ModuleTable003_=ZnVsbE5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTUscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LHNob3dxPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zaG93cS8wLjE1IixbImZ1bGxOYW1lIl09InNob3dxLzAuMTUiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzaG93cSIsfSxzbHVybT17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc2x1cm0vbGF0ZXN0IixbImZ1bGxOYW1lIl09InNsdXJt;' export '_ModuleTable003_;' '_ModuleTable004_=L2xhdGVzdCIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNsdXJtIix9LHNwYXJ0YW49e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3NwYXJ0YW4vMjAxNi0wMyIsWyJmdWxsTmFtZSJdPSJzcGFydGFuLzIwMTYtMDMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzcGFydGFuIix9LH0sbXBhdGhBPXsiL2hvbWUvemlqdW5jMy8ubW9kdWxlcyIsIi91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsIiwiL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL2V0;' export '_ModuleTable004_;' '_ModuleTable005_=Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4IiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlIiwiL3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbDovdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXM6L2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvTW9kdWxlcy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4Oi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMv;' export '_ModuleTable005_;' '_ModuleTable006_=Q29yZTovdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIix9;' export '_ModuleTable006_;' '_ModuleTable_Sz_=6;' export '_ModuleTable_Sz_;'
+++ __LMOD_REF_COUNT_CPATH='/usr/local/easybuild/software/CUDA/9.0.176/include:1;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:1;/usr/local/easybuild/software/GCC/6.2.0/include:1'
+++ export __LMOD_REF_COUNT_CPATH
+++ CPATH=/usr/local/easybuild/software/CUDA/9.0.176/include:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/include:/usr/local/easybuild/software/GCC/6.2.0/include
+++ export CPATH
+++ CUDA_HOME=/usr/local/easybuild/software/CUDA/9.0.176
+++ export CUDA_HOME
+++ __LMOD_REF_COUNT_CUDA_PATH=/usr/local/easybuild/software/CUDA/9.0.176:1
+++ export __LMOD_REF_COUNT_CUDA_PATH
+++ CUDA_PATH=/usr/local/easybuild/software/CUDA/9.0.176
+++ export CUDA_PATH
+++ EBDEVELCUDA=/usr/local/easybuild/software/CUDA/9.0.176/easybuild/CUDA-9.0.176-easybuild-devel
+++ export EBDEVELCUDA
+++ EBDEVELGCCMINCUDA=/usr/local/easybuild/software/GCC-CUDA/6.2.0-9.0.176/easybuild/GCC-CUDA-6.2.0-9.0.176-easybuild-devel
+++ export EBDEVELGCCMINCUDA
+++ EBROOTCUDA=/usr/local/easybuild/software/CUDA/9.0.176
+++ export EBROOTCUDA
+++ EBROOTGCCMINCUDA=/usr/local/easybuild/software/GCC-CUDA/6.2.0-9.0.176
+++ export EBROOTGCCMINCUDA
+++ EBVERSIONCUDA=9.0.176
+++ export EBVERSIONCUDA
+++ EBVERSIONGCCMINCUDA=6.2.0-9.0.176
+++ export EBVERSIONGCCMINCUDA
+++ __LMOD_REF_COUNT_LD_LIBRARY_PATH='/usr/local/easybuild/software/CUDA/9.0.176/lib64:1;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1;/usr/local/slurm/latest/lib:1'
+++ export __LMOD_REF_COUNT_LD_LIBRARY_PATH
+++ LD_LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib/gcc/x86_64-pc-linux-gnu/6.2.0:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib:/usr/local/slurm/latest/lib
+++ export LD_LIBRARY_PATH
+++ __LMOD_REF_COUNT_LIBRARY_PATH='/usr/local/easybuild/software/CUDA/9.0.176/lib64:1;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:1;/usr/local/easybuild/software/GCC/6.2.0/lib64:1;/usr/local/easybuild/software/GCC/6.2.0/lib:1'
+++ export __LMOD_REF_COUNT_LIBRARY_PATH
+++ LIBRARY_PATH=/usr/local/easybuild/software/CUDA/9.0.176/lib64:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/lib:/usr/local/easybuild/software/GCC/6.2.0/lib64:/usr/local/easybuild/software/GCC/6.2.0/lib
+++ export LIBRARY_PATH
+++ __LMOD_REF_COUNT_LOADEDMODULES='slurm/latest:1;showq/0.15:1;spartan/2016-03:1;GCC/6.2.0:1;MPICH/3.2.1-GCC-6.2.0:1;CUDA/9.0.176:1;GCC-CUDA/6.2.0-9.0.176:1'
+++ export __LMOD_REF_COUNT_LOADEDMODULES
+++ LOADEDMODULES=slurm/latest:showq/0.15:spartan/2016-03:GCC/6.2.0:MPICH/3.2.1-GCC-6.2.0:CUDA/9.0.176:GCC-CUDA/6.2.0-9.0.176
+++ export LOADEDMODULES
+++ MODULEPATH=/home/zijunc3/.modules:/usr/local/easybuild/modules/all:/usr/local/Modules/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/Modules/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core
+++ export MODULEPATH
+++ NVCC=nvcc
+++ export NVCC
+++ __LMOD_REF_COUNT_PATH='/usr/local/easybuild/software/CUDA/9.0.176:1;/usr/local/easybuild/software/CUDA/9.0.176/bin:1;/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:1;/usr/local/easybuild/software/GCC/6.2.0/bin:1;/usr/local/showq/0.15/bin:1;/usr/local/slurm/latest/bin:2;/usr/lib64/qt-3.3/bin:1;/usr/local/bin:1;/usr/bin:1;/usr/local/sbin:1;/usr/sbin:1;/opt/ibutils/bin:1;/opt/puppetlabs/bin:1;/opt/dell/srvadmin/bin:1;/home/zijunc3/.local/bin:1;/home/zijunc3/bin:1'
+++ export __LMOD_REF_COUNT_PATH
+++ PATH=/usr/local/easybuild/software/CUDA/9.0.176:/usr/local/easybuild/software/CUDA/9.0.176/bin:/usr/local/easybuild/software/MPICH/3.2.1-GCC-6.2.0/bin:/usr/local/easybuild/software/GCC/6.2.0/bin:/usr/local/showq/0.15/bin:/usr/local/slurm/latest/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/ibutils/bin:/opt/puppetlabs/bin:/opt/dell/srvadmin/bin:/home/zijunc3/.local/bin:/home/zijunc3/bin
+++ export PATH
+++ __LMOD_REF_COUNT__LMFILES_='/usr/local/Modules/modulefiles/slurm/latest:1;/usr/local/Modules/modulefiles/showq/0.15:1;/usr/local/Modules/modulefiles/spartan/2016-03:1;/usr/local/easybuild/modules/all/GCC/6.2.0:1;/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:1;/usr/local/easybuild/modules/all/CUDA/9.0.176.lua:1;/usr/local/easybuild/modules/all/GCC-CUDA/6.2.0-9.0.176.lua:1'
+++ export __LMOD_REF_COUNT__LMFILES_
+++ _LMFILES_=/usr/local/Modules/modulefiles/slurm/latest:/usr/local/Modules/modulefiles/showq/0.15:/usr/local/Modules/modulefiles/spartan/2016-03:/usr/local/easybuild/modules/all/GCC/6.2.0:/usr/local/easybuild/modules/all/MPICH/3.2.1-GCC-6.2.0.lua:/usr/local/easybuild/modules/all/CUDA/9.0.176.lua:/usr/local/easybuild/modules/all/GCC-CUDA/6.2.0-9.0.176.lua
+++ export _LMFILES_
+++ _ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJNVHZlcnNpb24iXT0zLFsiY19yZWJ1aWxkVGltZSJdPTcyMDAsWyJjX3Nob3J0VGltZSJdPTAuMDcyMDAzMTI2MTQ0NDA5LGRlcHRoVD17fSxmYW1pbHk9e30sbVQ9e0NVREE9e1siZm4iXT0iL3Vzci9sb2NhbC9lYXN5YnVpbGQvbW9kdWxlcy9hbGwvQ1VEQS85LjAuMTc2Lmx1YSIsWyJmdWxsTmFtZSJdPSJDVURBLzkuMC4xNzYiLFsibG9hZE9yZGVyIl09Nixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJDVURBLzkuMC4xNzYiLH0sR0NDPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL0dDQy82LjIuMCIsWyJmdWxsTmFtZSJdPSJHQ0MvNi4yLjAiLFsibG9h
+++ export _ModuleTable001_
+++ _ModuleTable002_=ZE9yZGVyIl09NCxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJHQ0MvNi4yLjAiLH0sWyJHQ0MtQ1VEQSJdPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL0dDQy1DVURBLzYuMi4wLTkuMC4xNzYubHVhIixbImZ1bGxOYW1lIl09IkdDQy1DVURBLzYuMi4wLTkuMC4xNzYiLFsibG9hZE9yZGVyIl09Nyxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJHQ0MtQ1VEQS82LjIuMC05LjAuMTc2Iix9LE1QSUNIPXtbImZuIl09Ii91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsL01QSUNILzMuMi4xLUdDQy02LjIuMC5sdWEiLFsi
+++ export _ModuleTable002_
+++ _ModuleTable003_=ZnVsbE5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIixbImxvYWRPcmRlciJdPTUscHJvcFQ9e30sWyJzdGFja0RlcHRoIl09MCxbInN0YXR1cyJdPSJhY3RpdmUiLFsidXNlck5hbWUiXT0iTVBJQ0gvMy4yLjEtR0NDLTYuMi4wIix9LHNob3dxPXtbImZuIl09Ii91c3IvbG9jYWwvTW9kdWxlcy9tb2R1bGVmaWxlcy9zaG93cS8wLjE1IixbImZ1bGxOYW1lIl09InNob3dxLzAuMTUiLFsibG9hZE9yZGVyIl09Mixwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0xLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzaG93cSIsfSxzbHVybT17WyJmbiJdPSIvdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXMvc2x1cm0vbGF0ZXN0IixbImZ1bGxOYW1lIl09InNsdXJt
+++ export _ModuleTable003_
+++ _ModuleTable004_=L2xhdGVzdCIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic3RhY2tEZXB0aCJdPTEsWyJzdGF0dXMiXT0iYWN0aXZlIixbInVzZXJOYW1lIl09InNsdXJtIix9LHNwYXJ0YW49e1siZm4iXT0iL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzL3NwYXJ0YW4vMjAxNi0wMyIsWyJmdWxsTmFtZSJdPSJzcGFydGFuLzIwMTYtMDMiLFsibG9hZE9yZGVyIl09Myxwcm9wVD17fSxbInN0YWNrRGVwdGgiXT0wLFsic3RhdHVzIl09ImFjdGl2ZSIsWyJ1c2VyTmFtZSJdPSJzcGFydGFuIix9LH0sbXBhdGhBPXsiL2hvbWUvemlqdW5jMy8ubW9kdWxlcyIsIi91c3IvbG9jYWwvZWFzeWJ1aWxkL21vZHVsZXMvYWxsIiwiL3Vzci9sb2NhbC9Nb2R1bGVzL21vZHVsZWZpbGVzIiwiL2V0
+++ export _ModuleTable004_
+++ _ModuleTable005_=Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL01vZHVsZXMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4IiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlIiwiL3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfSxbInN5c3RlbUJhc2VNUEFUSCJdPSIvdXNyL2xvY2FsL2Vhc3lidWlsZC9tb2R1bGVzL2FsbDovdXNyL2xvY2FsL01vZHVsZXMvbW9kdWxlZmlsZXM6L2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvTW9kdWxlcy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4Oi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMv
+++ export _ModuleTable005_
+++ _ModuleTable006_=Q29yZTovdXNyL3NoYXJlL2xtb2QvbG1vZC9tb2R1bGVmaWxlcy9Db3JlIix9
+++ export _ModuleTable006_
+++ _ModuleTable_Sz_=6
+++ export _ModuleTable_Sz_
++ make clean
+/bin/rm -f ./src/*.o ./src/*.d ./nbody ./nbody-with-cuda
++ make nbody-with-cuda
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA   -c -o src/utils.o src/utils.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA   -c -o src/seq_quad_tree.o src/seq_quad_tree.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA   -c -o src/nbody_naive.o src/nbody_naive.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA   -c -o src/cuda_mpi_helper.o src/cuda_mpi_helper.cpp
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA   -c -o src/main.o src/main.cpp
+nvcc -c ./src/cuda.cu -DHIDE_MPI -o ./src/cuda.o
+mpic++ -Wall -std=c++11 -O3 -MMD -Wno-unused-result -fopenmp -DWITH_CUDA -o nbody-with-cuda ./src/utils.o ./src/cuda_mpi_helper.o ./src/main.o ./src/seq_quad_tree.o ./src/nbody_naive.o ./src/cuda.o  -lm -lcudart -L/usr/local/cuda-10.1/lib64/
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun ./nbody-with-cuda cuda_single_naive 240 0.01 0 test_data/10000.in tmp.out
+CUDA Enabled Version
+Time used: 4.228317 sec
++ printf '\n\n'
+
+
++ mpirun ./nbody-with-cuda cuda_single_naive 240 0.01 0 test_data/20000.in tmp.out
+CUDA Enabled Version
+Time used: 9.925583 sec
++ printf '\n\n'
+
+
++ mpirun ./nbody-with-cuda cuda_single_naive 240 0.01 0 test_data/40000.in tmp.out
+CUDA Enabled Version
+Time used: 29.000493 sec
++ printf '\n\n'
+
+
++ mpirun ./nbody-with-cuda cuda_single_naive 240 0.01 0 test_data/80000.in tmp.out
+CUDA Enabled Version
+Time used: 112.278761 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/10000.in tmp.out
+CUDA Enabled Version
+MPI_size: 1
+Time used: 4.140315 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/20000.in tmp.out
+CUDA Enabled Version
+MPI_size: 1
+Time used: 9.949832 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/40000.in tmp.out
+CUDA Enabled Version
+MPI_size: 1
+Time used: 29.045767 sec
++ printf '\n\n'
+
+
++ mpirun -np 1 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/80000.in tmp.out
+CUDA Enabled Version
+MPI_size: 1
+Time used: 112.330538 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/10000.in tmp.out
+CUDA Enabled Version
+MPI_size: 2
+Time used: 4.189904 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/20000.in tmp.out
+CUDA Enabled Version
+MPI_size: 2
+Time used: 8.088017 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/40000.in tmp.out
+CUDA Enabled Version
+MPI_size: 2
+Time used: 19.788570 sec
++ printf '\n\n'
+
+
++ mpirun -np 2 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/80000.in tmp.out
+CUDA Enabled Version
+MPI_size: 2
+Time used: 58.102376 sec
++ printf '\n\n'
+
+
++ printf '==========================\n'
+==========================
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/10000.in tmp.out
+CUDA Enabled Version
+MPI_size: 4
+Time used: 4.242760 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/20000.in tmp.out
+CUDA Enabled Version
+MPI_size: 4
+Time used: 8.107823 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/40000.in tmp.out
+CUDA Enabled Version
+MPI_size: 4
+Time used: 28.768256 sec
++ printf '\n\n'
+
+
++ mpirun -np 4 ./nbody-with-cuda cuda_mpi_naive 240 0.01 0 test_data/80000.in tmp.out
+CUDA Enabled Version
+MPI_size: 4
+Time used: 50.318205 sec
++ printf '\n\n'
+
+
