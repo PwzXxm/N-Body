@@ -1,3 +1,4 @@
+import sys
 import random
 
 def generate_data(n: int) -> None:
@@ -17,4 +18,4 @@ def generate_data(n: int) -> None:
         print(px, py, vx, vy, w)
 
 
-generate_data(100)
+generate_data(int(sys.argv[1]))
