@@ -1,3 +1,7 @@
+#Authors:
+#    - Weizhi Xu   (weizhix)  752454
+#    - Zijun Chen  (zijunc3)  813190
+
 CXX = mpic++
 CXXFLAGS = -Wall -std=c++11 -O3 -MMD
 LDFLAGS =

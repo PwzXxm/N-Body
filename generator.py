@@ -1,3 +1,6 @@
+# Authors:
+#     - Weizhi Xu   (weizhix)  752454
+#     - Zijun Chen  (zijunc3)  813190
 import sys
 import random
 
